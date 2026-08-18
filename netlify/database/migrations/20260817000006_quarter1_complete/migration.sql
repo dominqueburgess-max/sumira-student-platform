@@ -8,7 +8,7 @@ INSERT INTO units (course_id, title, position) VALUES
 ((SELECT id FROM courses WHERE slug='ela-2'), 'Character & Vocabulary', COALESCE((SELECT MAX(position) FROM units WHERE course_id=(SELECT id FROM courses WHERE slug='ela-2')), 0) + 1);
 
 INSERT INTO lessons (unit_id, title, position, content_type, content_body, standards_code, standards_description, estimated_minutes, video_caption) VALUES
-((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Counting to 10', 1, 'lesson',
+((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Counting to 10', 1, 'lesson',
 '# Counting to 10
 
 We counted to 5 — now let''s count all the way to 10!
@@ -19,7 +19,7 @@ We counted to 5 — now let''s count all the way to 10!
 
 **Wonder Quest:** Count your fingers and toes. How many are there altogether?',
 'NC ELDS – Cognitive Development', 'Extends counting sequence and one-to-one correspondence to 10.', 8, 'A teacher counting ten small toys out loud, touching each one.'),
-((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Matching Sets to Numbers', 2, 'lesson',
+((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Matching Sets to Numbers', 2, 'lesson',
 '# Matching Sets to Numbers
 
 Numbers tell us how many! The numeral "3" matches a group of 3 objects.
@@ -28,7 +28,7 @@ Numbers tell us how many! The numeral "3" matches a group of 3 objects.
 
 **Now try:** Ask a grown-up to show you a number. Make a group with that many objects.',
 'NC ELDS – Cognitive Development', 'Matches a written numeral to a set of objects of that quantity.', 8, 'Number cards being matched to groups of dots or objects of the same amount.'),
-((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Big and Small', 3, 'lesson',
+((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Big and Small', 3, 'lesson',
 '# Big and Small
 
 Some things are big. Some things are small. Let''s compare!
@@ -37,7 +37,7 @@ Some things are big. Some things are small. Let''s compare!
 
 **Talk about it:** Can you find something even bigger than your big toy?',
 'NC ELDS – Cognitive Development', 'Compares objects by size using descriptive vocabulary.', 8, 'Two toys of very different sizes being placed side by side and compared.'),
-((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Sorting by Color and Shape', 4, 'lesson',
+((SELECT id FROM units WHERE title='Counting Further' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Sorting by Color and Shape', 4, 'lesson',
 '# Sorting by Color and Shape
 
 We can put things into groups that are alike! Let''s sort by color, then by shape.
@@ -46,7 +46,7 @@ We can put things into groups that are alike! Let''s sort by color, then by shap
 
 **Talk about it:** What other ways could you sort your toys?',
 'NC ELDS – Cognitive Development', 'Sorts and classifies objects by one or more attributes.', 8, 'A pile of mixed toys being sorted into groups by color, then by shape.'),
-((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Rhyming Fun', 1, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Rhyming Fun', 1, 'lesson',
 '# Rhyming Fun
 
 Rhyming words end with the same sound! "Cat" and "hat" rhyme.
@@ -55,7 +55,7 @@ Rhyming words end with the same sound! "Cat" and "hat" rhyme.
 
 **Now try:** Say "bug." Can you think of a word that rhymes with it?',
 'NC ELDS – Language Development & Communication', 'Identifies and produces simple rhyming words in songs and play.', 8, 'Children singing a rhyming song and clapping when they hear rhyming word pairs.'),
-((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Clapping Syllables', 2, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Clapping Syllables', 2, 'lesson',
 '# Clapping Syllables
 
 Words are made of beats called syllables! "Dog" has 1 beat. "Ba-na-na" has 3 beats.
@@ -64,7 +64,7 @@ Words are made of beats called syllables! "Dog" has 1 beat. "Ba-na-na" has 3 bea
 
 **Now try:** Clap the beats in "el-e-phant" and "cat." ',
 'NC ELDS – Language Development & Communication', 'Claps and counts syllables in familiar words.', 8, 'A teacher clapping out the syllables in simple words like ''ba-na-na'' and ''dog.'''),
-((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'The Alphabet Song', 3, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'The Alphabet Song', 3, 'lesson',
 '# The Alphabet Song
 
 The alphabet has 26 letters, and we can sing them all in order!
@@ -73,7 +73,7 @@ The alphabet has 26 letters, and we can sing them all in order!
 
 **Now try:** Can you sing just the first 5 letters: A, B, C, D, E?',
 'NC ELDS – Language Development & Communication', 'Sings the alphabet song and recognizes it represents letter names in order.', 8, 'Children singing the alphabet song while pointing to letters on an alphabet chart.'),
-((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Retelling with Puppets', 4, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Songs' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Retelling with Puppets', 4, 'lesson',
 '# Retelling with Puppets
 
 Let''s bring a story to life using puppets or stuffed animals!
@@ -82,7 +82,7 @@ Let''s bring a story to life using puppets or stuffed animals!
 
 **Talk about it:** Which part was your favorite to act out?',
 'NC ELDS – Language Development & Communication', 'Uses props or puppets to retell a familiar story''s key events.', 10, 'A child using simple puppets or stuffed animals to act out a familiar story.'),
-((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Counting to 20', COALESCE((SELECT MAX(position) FROM lessons WHERE unit_id=(SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1)), 0) + 1, 'lesson',
+((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Counting to 20', COALESCE((SELECT MAX(position) FROM lessons WHERE unit_id=(SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k'))), 0) + 1, 'lesson',
 '# Counting to 20
 
 We can count even further now — all the way to 20!
@@ -91,7 +91,7 @@ We can count even further now — all the way to 20!
 
 **Wonder Quest:** Count how many steps it takes to walk from your bedroom to the kitchen.',
 'NC.K.CC.1', 'Counts to 20 by ones.', 10, 'A number line from 1 to 20 with numbers being pointed to and counted aloud.'),
-((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Which Number is Greater?', COALESCE((SELECT MAX(position) FROM lessons WHERE unit_id=(SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1)), 0) + 2, 'lesson',
+((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Which Number is Greater?', COALESCE((SELECT MAX(position) FROM lessons WHERE unit_id=(SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k'))), 0) + 2, 'lesson',
 '# Which Number is Greater?
 
 When we compare two numbers, one is greater (bigger) and one is less (smaller).
@@ -100,7 +100,7 @@ When we compare two numbers, one is greater (bigger) and one is less (smaller).
 
 **Practice:** Compare 6 and 3. Which is greater? How do you know?',
 'NC.K.CC.7', 'Compares two numbers between 1 and 10 presented as written numerals.', 10, 'Two number cards being compared side by side to decide which is greater.'),
-((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Positions: Above, Below, Beside', COALESCE((SELECT MAX(position) FROM lessons WHERE unit_id=(SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1)), 0) + 3, 'lesson',
+((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Positions: Above, Below, Beside', COALESCE((SELECT MAX(position) FROM lessons WHERE unit_id=(SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k'))), 0) + 3, 'lesson',
 '# Positions: Above, Below, Beside
 
 We use position words to tell where things are: above, below, and beside.
@@ -109,7 +109,7 @@ We use position words to tell where things are: above, below, and beside.
 
 **Talk about it:** What is above your head right now? What is beside you?',
 'NC.K.G.1', 'Describes the positions of objects using terms such as above, below, beside, in front of, behind, and next to.', 8, 'Toys being placed above, below, and beside a box to demonstrate position words.'),
-((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Counting to 120', 1, 'lesson',
+((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Counting to 120', 1, 'lesson',
 '# Counting to 120
 
 We can count way past 100 — all the way to 120!
@@ -118,7 +118,7 @@ We can count way past 100 — all the way to 120!
 
 **Practice:** Start counting at 45. Can you count 10 numbers forward?',
 'NC.1.NBT.1', 'Counts to 120, starting at any number, and reads and writes numerals to 120.', 10, 'A hundred chart being used to count and point to numbers up to 120.'),
-((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Comparing Two-Digit Numbers', 2, 'lesson',
+((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Comparing Two-Digit Numbers', 2, 'lesson',
 '# Comparing Two-Digit Numbers
 
 We use symbols to compare numbers: > means greater than, < means less than, = means equal to.
@@ -127,7 +127,7 @@ We use symbols to compare numbers: > means greater than, < means less than, = me
 
 **Practice:** Compare 78 and 45. Write the correct symbol.',
 'NC.1.NBT.3', 'Compares two two-digit numbers using the symbols >, =, and <.', 10, 'Two two-digit numbers being compared using greater-than and less-than symbols.'),
-((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Ten More, Ten Less', 3, 'lesson',
+((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Ten More, Ten Less', 3, 'lesson',
 '# Ten More, Ten Less
 
 We can find 10 more or 10 less than a number just by changing the tens digit!
@@ -136,7 +136,7 @@ We can find 10 more or 10 less than a number just by changing the tens digit!
 
 **Practice:** Find 10 more and 10 less than 58.',
 'NC.1.NBT.5', 'Given a two-digit number, finds ten more or ten less without counting.', 10, 'Base-ten blocks showing a group of ten being added or removed from a starting number.'),
-((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Fact Families', 4, 'lesson',
+((SELECT id FROM units WHERE title='Building Number Sense' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Fact Families', 4, 'lesson',
 '# Fact Families
 
 A fact family uses the same three numbers to make related addition and subtraction sentences! 4, 5, and 9 make: 4+5=9, 5+4=9, 9-4=5, 9-5=4.
@@ -145,7 +145,7 @@ A fact family uses the same three numbers to make related addition and subtracti
 
 **Practice:** Make a fact family with the numbers 2, 7, and 9.',
 'NC.1.OA.6', 'Uses the relationship between addition and subtraction to solve related fact families.', 10, 'Three numbers being arranged into related addition and subtraction sentences.'),
-((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Understanding Hundreds, Tens, and Ones', 1, 'lesson',
+((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Understanding Hundreds, Tens, and Ones', 1, 'lesson',
 '# Understanding Hundreds, Tens, and Ones
 
 A three-digit number has hundreds, tens, and ones. The number 342 has 3 hundreds, 4 tens, and 2 ones.
@@ -154,7 +154,7 @@ A three-digit number has hundreds, tens, and ones. The number 342 has 3 hundreds
 
 **Practice:** Break apart 178 into hundreds, tens, and ones.',
 'NC.2.NBT.1', 'Understands that a three-digit number represents amounts of hundreds, tens, and ones.', 10, 'Base-ten blocks (hundred flats, ten rods, unit cubes) building a three-digit number.'),
-((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Comparing Three-Digit Numbers', 2, 'lesson',
+((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Comparing Three-Digit Numbers', 2, 'lesson',
 '# Comparing Three-Digit Numbers
 
 To compare three-digit numbers, look at the hundreds digit first, then tens, then ones.
@@ -163,7 +163,7 @@ To compare three-digit numbers, look at the hundreds digit first, then tens, the
 
 **Practice:** Compare 267 and 271.',
 'NC.2.NBT.4', 'Compares two three-digit numbers using >, =, and < based on place value.', 10, 'Two three-digit numbers being compared by looking at their hundreds digits first.'),
-((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Skip Counting to 1000', 3, 'lesson',
+((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Skip Counting to 1000', 3, 'lesson',
 '# Skip Counting to 1000
 
 We can count faster by skipping! Count by 100s: 100, 200, 300... all the way to 1000.
@@ -172,7 +172,7 @@ We can count faster by skipping! Count by 100s: 100, 200, 300... all the way to 
 
 **Practice:** Count by 100s from 0 to 1000. How many jumps did it take?',
 'NC.2.NBT.2', 'Skip-counts by 5s, 10s, and 100s up to 1000.', 10, 'A number line showing skip counting jumps by 100 all the way to 1000.'),
-((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Adding Three-Digit Numbers', 4, 'lesson',
+((SELECT id FROM units WHERE title='Place Value to 1000' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Adding Three-Digit Numbers', 4, 'lesson',
 '# Adding Three-Digit Numbers
 
 We can add hundreds, tens, and ones separately, then put the answer together!
@@ -181,7 +181,7 @@ We can add hundreds, tens, and ones separately, then put the answer together!
 
 **Try it:** Solve 315 + 243 using this strategy.',
 'NC.2.NBT.7', 'Adds within 1000 using strategies based on place value.', 12, 'Hundreds, tens, and ones blocks from two numbers being combined to find a three-digit sum.'),
-((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Letter Sounds A-M Review', 1, 'lesson',
+((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Letter Sounds A-M Review', 1, 'lesson',
 '# Letter Sounds A-M Review
 
 Let''s review the sounds for letters A through M!
@@ -190,7 +190,7 @@ Let''s review the sounds for letters A through M!
 
 **Now try:** Pick 3 letters from A-M. Can you think of a word that starts with each one?',
 'NC.RF.K.3', 'Reviews and demonstrates knowledge of one-to-one letter-sound correspondences for letters A-M.', 10, 'Letter cards A through M being flipped one at a time with their sounds said aloud.'),
-((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Letter Sounds N-Z Review', 2, 'lesson',
+((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Letter Sounds N-Z Review', 2, 'lesson',
 '# Letter Sounds N-Z Review
 
 Now let''s review the sounds for letters N through Z!
@@ -199,7 +199,7 @@ Now let''s review the sounds for letters N through Z!
 
 **Now try:** Pick 3 letters from N-Z. Can you think of a word that starts with each one?',
 'NC.RF.K.3', 'Reviews and demonstrates knowledge of one-to-one letter-sound correspondences for letters N-Z.', 10, 'Letter cards N through Z being flipped one at a time with their sounds said aloud.'),
-((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Blending Onset and Rime', 3, 'lesson',
+((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Blending Onset and Rime', 3, 'lesson',
 '# Blending Onset and Rime
 
 Words can be split into two parts: the beginning sound (onset) and the rest (rime). /c/ + "at" = "cat"!
@@ -208,7 +208,7 @@ Words can be split into two parts: the beginning sound (onset) and the rest (rim
 
 **Practice:** Try /s/ + "un" and /m/ + "op." ',
 'NC.RF.K.2', 'Blends and segments onsets and rimes of single-syllable spoken words.', 10, 'The beginning sound of a word being joined to its ending chunk to form a whole word, like /c/ + ''at'' = cat.'),
-((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Writing the Alphabet', 4, 'lesson',
+((SELECT id FROM units WHERE title='Phonics Foundations' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Writing the Alphabet', 4, 'lesson',
 '# Writing the Alphabet
 
 Let''s practice writing our letters! Start at the top and follow the lines.
@@ -217,7 +217,7 @@ Let''s practice writing our letters! Start at the top and follow the lines.
 
 **Now try:** Write the first letter of your name three times.',
 'NC.L.K.1', 'Prints many upper- and lowercase letters.', 10, 'A hand tracing and writing letters of the alphabet on lined paper.'),
-((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Reading Sight Words Set 1', 1, 'lesson',
+((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Reading Sight Words Set 1', 1, 'lesson',
 '# Reading Sight Words Set 1
 
 Sight words are words we read so often we learn to recognize them right away: the, and, said, was.
@@ -226,7 +226,7 @@ Sight words are words we read so often we learn to recognize them right away: th
 
 **Now try:** Find one of these words in a book you''re reading.',
 'NC.RF.1.3', 'Reads common high-frequency words by sight.', 8, 'Flashcards of common sight words (the, and, said, was) being read quickly and confidently.'),
-((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Reading Sight Words Set 2', 2, 'lesson',
+((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Reading Sight Words Set 2', 2, 'lesson',
 '# Reading Sight Words Set 2
 
 Let''s learn more sight words: they, have, from, were, there.
@@ -235,7 +235,7 @@ Let''s learn more sight words: they, have, from, were, there.
 
 **Now try:** Use one of these words in a sentence you say out loud.',
 'NC.RF.1.3', 'Reads common high-frequency words by sight.', 8, 'More sight word flashcards (they, have, from, were) being read quickly.'),
-((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Understanding Story Problems and Solutions', 3, 'lesson',
+((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Understanding Story Problems and Solutions', 3, 'lesson',
 '# Understanding Story Problems and Solutions
 
 Most stories have a problem the character needs to solve!
@@ -244,7 +244,7 @@ Most stories have a problem the character needs to solve!
 
 **Talk about it:** Would you have solved the problem the same way?',
 'NC.RL.1.3', 'Describes characters, settings, and major events, including problems and solutions.', 10, 'A simple story being shown with the character''s problem highlighted, then the solution.'),
-((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Sequencing Events in a Story', 4, 'lesson',
+((SELECT id FROM units WHERE title='Words & Story Structure' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Sequencing Events in a Story', 4, 'lesson',
 '# Sequencing Events in a Story
 
 Stories happen in order! First this happened, then that happened, and finally...
@@ -253,7 +253,7 @@ Stories happen in order! First this happened, then that happened, and finally...
 
 **Now try:** Tell the story back to a grown-up using the words "first," "next," and "last." ',
 'NC.RL.1.2', 'Retells stories, including key details, and demonstrates understanding of their central message or lesson.', 8, 'Story picture cards being arranged in the correct order: first, next, then, last.'),
-((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Understanding Character Motivation', 1, 'lesson',
+((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Understanding Character Motivation', 1, 'lesson',
 '# Understanding Character Motivation
 
 Characters do things for reasons! Understanding "why" a character acts a certain way is called motivation.
@@ -262,7 +262,7 @@ Characters do things for reasons! Understanding "why" a character acts a certain
 
 **Talk about it:** Would you have made the same choice? Why or why not?',
 'NC.RL.2.3', 'Describes how characters in a story respond to major events and challenges.', 10, 'A story character shown making a choice, with the reasons behind that choice discussed.'),
-((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Identifying Theme', 2, 'lesson',
+((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Identifying Theme', 2, 'lesson',
 '# Identifying Theme
 
 The theme is the big lesson or message a story teaches us, like "be kind" or "never give up."
@@ -271,7 +271,7 @@ The theme is the big lesson or message a story teaches us, like "be kind" or "ne
 
 **Talk about it:** Can you think of a story you know with the theme "be kind to others"?',
 'NC.RL.2.2', 'Determines the central message, lesson, or moral of a story.', 10, 'A short fable being read with its lesson or moral highlighted at the end.'),
-((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Using Context Clues', 3, 'lesson',
+((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Using Context Clues', 3, 'lesson',
 '# Using Context Clues
 
 When we find a word we don''t know, the other words around it can give us clues!
@@ -280,7 +280,7 @@ When we find a word we don''t know, the other words around it can give us clues!
 
 **Practice:** Find a word you don''t know in a book and look for clues around it.',
 'NC.L.2.4', 'Uses sentence-level context as a clue to the meaning of an unknown word.', 10, 'A sentence with an unfamiliar word being examined for clues in the surrounding words.'),
-((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Reading Fluently with Expression', 4, 'lesson',
+((SELECT id FROM units WHERE title='Character & Vocabulary' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Reading Fluently with Expression', 4, 'lesson',
 '# Reading Fluently with Expression
 
 Good readers read smoothly and use their voice to show feeling — not too fast, not too slow.
