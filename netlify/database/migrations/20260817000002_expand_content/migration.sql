@@ -18,7 +18,7 @@ INSERT INTO units (course_id, title, position) VALUES
 ((SELECT id FROM courses WHERE slug='ela-2'), 'Writing With Detail', COALESCE((SELECT MAX(position) FROM units WHERE course_id=(SELECT id FROM courses WHERE slug='ela-2')), 0) + 1);
 
 INSERT INTO lessons (unit_id, title, position, content_type, content_body, standards_code, standards_description, estimated_minutes, video_caption) VALUES
-((SELECT id FROM units WHERE title='Numbers All Around' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Counting to 5', 1, 'lesson',
+((SELECT id FROM units WHERE title='Numbers All Around' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Counting to 5', 1, 'lesson',
 '# Counting to 5
 
 Let''s count together! Touch each object one time as you say its number.
@@ -29,7 +29,7 @@ Let''s count together! Touch each object one time as you say its number.
 
 **Wonder Quest:** Count 5 things you can find at snack time — crackers, grapes, or cups!',
 'NC ELDS – Cognitive Development', 'Uses one-to-one correspondence to count small sets of objects.', 8, 'A short clip of a teacher counting five everyday objects out loud with a child, touching each one.'),
-((SELECT id FROM units WHERE title='Numbers All Around' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'What Comes Next?', 2, 'lesson',
+((SELECT id FROM units WHERE title='Numbers All Around' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'What Comes Next?', 2, 'lesson',
 '# What Comes Next?
 
 Numbers have an order! After 1 comes 2. After 2 comes 3.
@@ -40,7 +40,7 @@ Numbers have an order! After 1 comes 2. After 2 comes 3.
 
 **Talk about it:** What number comes right after 3? What comes right before 5?',
 'NC ELDS – Cognitive Development', 'Recognizes and continues a simple counting sequence.', 8, 'Animated numbers 1-5 hopping into place one at a time, with a friendly voice counting along.'),
-((SELECT id FROM units WHERE title='Numbers All Around' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Same or Different', 3, 'lesson',
+((SELECT id FROM units WHERE title='Numbers All Around' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Same or Different', 3, 'lesson',
 '# Same or Different
 
 Let''s compare two groups of toys. Do they have the **same** number, or a **different** number?
@@ -49,7 +49,7 @@ Let''s compare two groups of toys. Do they have the **same** number, or a **diff
 
 **Now try:** Make a pile of 2 and a pile of 4. Are they the same or different?',
 'NC ELDS – Cognitive Development', 'Compares small sets of objects to determine ''same'' or ''different.''', 8, 'Two groups of blocks being compared side by side to show equal and unequal amounts.'),
-((SELECT id FROM units WHERE title='Shapes and Patterns' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Finding Shapes', 1, 'lesson',
+((SELECT id FROM units WHERE title='Shapes and Patterns' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Finding Shapes', 1, 'lesson',
 '# Finding Shapes
 
 Shapes are everywhere! A circle is round like a ball. A square has 4 same-size sides. A triangle has 3 sides.
@@ -58,7 +58,7 @@ Shapes are everywhere! A circle is round like a ball. A square has 4 same-size s
 
 **Wonder Quest:** Draw a circle, a square, and a triangle on paper.',
 'NC ELDS – Cognitive Development', 'Identifies and names basic shapes in the environment.', 8, 'A walk around a classroom pointing out circles, squares, and triangles in everyday objects.'),
-((SELECT id FROM units WHERE title='Shapes and Patterns' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Patterns All Around', 2, 'lesson',
+((SELECT id FROM units WHERE title='Shapes and Patterns' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Patterns All Around', 2, 'lesson',
 '# Patterns All Around
 
 A pattern repeats! Red, blue, red, blue, red, blue — what comes next?
@@ -67,7 +67,7 @@ A pattern repeats! Red, blue, red, blue, red, blue — what comes next?
 
 **Now you try:** Make your own pattern with two colors of blocks or two kinds of snacks!',
 'NC ELDS – Cognitive Development', 'Recognizes, extends, and creates simple AB patterns.', 8, 'Colorful blocks arranged in a red-blue-red-blue pattern, extended one piece at a time.'),
-((SELECT id FROM units WHERE title='Sounds and Stories' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Listening for Sounds', 1, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Stories' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Listening for Sounds', 1, 'lesson',
 '# Listening for Sounds
 
 Let''s use our listening ears! Every word starts with a sound.
@@ -76,7 +76,7 @@ Let''s use our listening ears! Every word starts with a sound.
 
 **Wonder Quest:** Find 3 things in your house that start with the same sound as your name.',
 'NC ELDS – Language Development & Communication', 'Develops phonological awareness by identifying environmental and beginning sounds.', 8, 'A teacher making the sounds of animals and everyday objects and asking children to guess them.'),
-((SELECT id FROM units WHERE title='Sounds and Stories' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'My Name Starts With...', 2, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Stories' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'My Name Starts With...', 2, 'lesson',
 '# My Name Starts With...
 
 Your name is special! It starts with a letter and a sound.
@@ -85,7 +85,7 @@ Your name is special! It starts with a letter and a sound.
 
 **Now try:** Find that same letter somewhere else — on a book, a sign, or a toy.',
 'NC ELDS – Language Development & Communication', 'Recognizes the first letter of one''s own name and its sound.', 8, 'Children pointing to the first letter of their name on a name card and saying its sound.'),
-((SELECT id FROM units WHERE title='Sounds and Stories' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Story Time Together', 3, 'lesson',
+((SELECT id FROM units WHERE title='Sounds and Stories' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Story Time Together', 3, 'lesson',
 '# Story Time Together
 
 Stories have a beginning, a middle, and an end.
@@ -94,7 +94,7 @@ Stories have a beginning, a middle, and an end.
 
 **Talk about it:** What happened first in the story? What happened at the end?',
 'NC ELDS – Language Development & Communication', 'Listens to and retells key events from a read-aloud story.', 10, 'A caregiver reading a picture book aloud with a child, pointing at pictures and asking questions.'),
-((SELECT id FROM units WHERE title='Letters Everywhere' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Finding Letters', 1, 'lesson',
+((SELECT id FROM units WHERE title='Letters Everywhere' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Finding Letters', 1, 'lesson',
 '# Finding Letters
 
 Letters are all around us — on cereal boxes, signs, and books!
@@ -103,7 +103,7 @@ Letters are all around us — on cereal boxes, signs, and books!
 
 **Wonder Quest:** Find the very first letter of your name somewhere in your house.',
 'NC ELDS – Language Development & Communication', 'Recognizes that letters are everywhere in print and carry meaning.', 8, 'A scavenger hunt around a room spotting letters on cereal boxes, signs, and books.'),
-((SELECT id FROM units WHERE title='Letters Everywhere' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Left to Right', 2, 'lesson',
+((SELECT id FROM units WHERE title='Letters Everywhere' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Left to Right', 2, 'lesson',
 '# Left to Right
 
 When we read, our eyes move from left to right, just like our finger!
@@ -112,7 +112,7 @@ When we read, our eyes move from left to right, just like our finger!
 
 **Now try:** Point to where you start reading on a page. Point to where you end.',
 'NC ELDS – Language Development & Communication', 'Demonstrates understanding of print directionality (left to right, top to bottom).', 8, 'A finger sliding under words on a page moving left to right, top to bottom.'),
-((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Sorting Shapes by Size', 1, 'lesson',
+((SELECT id FROM units WHERE title='Comparing Shapes' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Sorting Shapes by Size', 1, 'lesson',
 '# Sorting Shapes by Size
 
 Some shapes are big. Some shapes are small. Let''s sort them!
@@ -121,7 +121,7 @@ Some shapes are big. Some shapes are small. Let''s sort them!
 
 **Talk about it:** How did you decide which pile a shape belonged in?',
 'NC.K.MD.2', 'Directly compares two objects with a measurable attribute in common.', 10, 'Shapes of different sizes being sorted into ''big'' and ''small'' groups on a table.'),
-((SELECT id FROM units WHERE title='Numbers to 20' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Adding to 20', 1, 'lesson',
+((SELECT id FROM units WHERE title='Numbers to 20' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Adding to 20', 1, 'lesson',
 '# Adding to 20
 
 We can add bigger numbers now — all the way up to 20!
@@ -130,7 +130,7 @@ We can add bigger numbers now — all the way up to 20!
 
 **Practice:** Try 8 + 6. Use objects to help you count.',
 'NC.1.NBT.4', 'Adds within 20, including two-digit numbers and a one-digit number.', 10, 'Two groups of counters up to ten each being combined and recounted to find the total.'),
-((SELECT id FROM units WHERE title='Numbers to 20' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Subtraction Stories', 2, 'lesson',
+((SELECT id FROM units WHERE title='Numbers to 20' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Subtraction Stories', 2, 'lesson',
 '# Subtraction Stories
 
 Subtraction stories tell us when something goes away. "There were 9 birds. 3 flew away. How many are left?"
@@ -139,7 +139,7 @@ Subtraction stories tell us when something goes away. "There were 9 birds. 3 fle
 
 **Now try:** Make up your own subtraction story and act it out!',
 'NC.1.OA.1', 'Uses addition and subtraction within 20 to solve word problems.', 10, 'A short story about birds on a fence, some flying away, counted down with visuals.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction to 100' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Subtracting Two-Digit Numbers', 1, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction to 100' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Subtracting Two-Digit Numbers', 1, 'lesson',
 '# Subtracting Two-Digit Numbers
 
 We can subtract tens and ones separately, then put the answer together.
@@ -148,7 +148,7 @@ We can subtract tens and ones separately, then put the answer together.
 
 **Try it:** Use base-ten blocks or drawings of tens and ones to solve 56 - 21.',
 'NC.2.NBT.5', 'Fluently subtracts within 100 using strategies based on place value.', 12, 'Base-ten blocks (tens and ones) being taken away from a starting amount to show subtraction.'),
-((SELECT id FROM units WHERE title='Measurement & Time' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Measuring Length', 1, 'lesson',
+((SELECT id FROM units WHERE title='Measurement & Time' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Measuring Length', 1, 'lesson',
 '# Measuring Length
 
 We use a ruler to measure how long something is, in inches or centimeters.
@@ -157,7 +157,7 @@ We use a ruler to measure how long something is, in inches or centimeters.
 
 **Talk about it:** Why do you think we all need to measure the same way, using the same kind of ruler?',
 'NC.2.MD.1', 'Measures the length of an object using appropriate tools.', 10, 'A student measuring a pencil and a book with a ruler, counting the inch marks aloud.'),
-((SELECT id FROM units WHERE title='Measurement & Time' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Telling Time to the Hour', 2, 'lesson',
+((SELECT id FROM units WHERE title='Measurement & Time' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Telling Time to the Hour', 2, 'lesson',
 '# Telling Time to the Hour
 
 A clock has a short hand (hours) and a long hand (minutes). When the long hand points to 12, it''s exactly on the hour!
@@ -166,7 +166,7 @@ A clock has a short hand (hours) and a long hand (minutes). When the long hand p
 
 **Practice:** Draw a clock showing 7 o''clock.',
 'NC.2.MD.7', 'Tells and writes time to the nearest five minutes using analog and digital clocks.', 10, 'An analog clock face with hands moving to show different hours, one at a time.'),
-((SELECT id FROM units WHERE title='Reading Together' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Retelling a Story', 1, 'lesson',
+((SELECT id FROM units WHERE title='Reading Together' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Retelling a Story', 1, 'lesson',
 '# Retelling a Story
 
 After we read a story, we can tell it again in our own words!
@@ -175,7 +175,7 @@ After we read a story, we can tell it again in our own words!
 
 **Talk about it:** What happened at the beginning, middle, and end?',
 'NC.RL.K.2', 'With prompting and support, retells familiar stories including key details.', 10, 'A child retelling a familiar story to a stuffed animal, using pictures as prompts.'),
-((SELECT id FROM units WHERE title='Reading Together' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Asking Questions About a Book', 2, 'lesson',
+((SELECT id FROM units WHERE title='Reading Together' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Asking Questions About a Book', 2, 'lesson',
 '# Asking Questions About a Book
 
 Good readers ask questions! "Why did the character do that?" "What will happen next?"
@@ -184,7 +184,7 @@ Good readers ask questions! "Why did the character do that?" "What will happen n
 
 **Now try:** Ask a grown-up a question about the book after you finish it.',
 'NC.RL.K.1', 'With prompting and support, asks and answers questions about key details in a text.', 8, 'A caregiver and child pausing mid-story to ask ''what do you think happens next?'''),
-((SELECT id FROM units WHERE title='Reading with Expression' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Reading a Poem Aloud', 1, 'lesson',
+((SELECT id FROM units WHERE title='Reading with Expression' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Reading a Poem Aloud', 1, 'lesson',
 '# Reading a Poem Aloud
 
 Poems sound fun to read out loud, especially when they rhyme!
@@ -193,7 +193,7 @@ Poems sound fun to read out loud, especially when they rhyme!
 
 **Now try:** Read it with a happy voice. Then try a silly voice!',
 'NC.RF.1.4', 'Reads with sufficient accuracy and fluency to support comprehension.', 10, 'A child reading a short, rhyming poem aloud with expression and hand gestures.'),
-((SELECT id FROM units WHERE title='Reading with Expression' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Characters and Feelings', 2, 'lesson',
+((SELECT id FROM units WHERE title='Reading with Expression' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Characters and Feelings', 2, 'lesson',
 '# Characters and Feelings
 
 Characters in stories have feelings, just like we do! They can feel happy, sad, scared, or excited.
@@ -202,7 +202,7 @@ Characters in stories have feelings, just like we do! They can feel happy, sad, 
 
 **Talk about it:** How can you tell how a character feels? Look at the words and the pictures.',
 'NC.RL.1.3', 'Describes characters, settings, and major events in a story, using key details.', 10, 'Illustrated story characters showing different facial expressions: happy, sad, surprised.'),
-((SELECT id FROM units WHERE title='Writing Sentences' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Writing About My Day', 1, 'lesson',
+((SELECT id FROM units WHERE title='Writing Sentences' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Writing About My Day', 1, 'lesson',
 '# Writing About My Day
 
 Let''s write a sentence about something that happened today!
@@ -211,7 +211,7 @@ Let''s write a sentence about something that happened today!
 
 **Now try:** Draw a picture to go with your sentence!',
 'NC.W.1.3', 'Writes narratives recounting two or more sequenced events with details.', 10, 'A child drawing a picture of their day and writing a simple sentence underneath.'),
-((SELECT id FROM units WHERE title='Understanding What We Read' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Comparing Two Stories', 1, 'lesson',
+((SELECT id FROM units WHERE title='Understanding What We Read' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Comparing Two Stories', 1, 'lesson',
 '# Comparing Two Stories
 
 When we read two stories, we can compare how they are alike and different.
@@ -220,7 +220,7 @@ When we read two stories, we can compare how they are alike and different.
 
 **Talk about it:** Which story did you like better, and why?',
 'NC.RL.2.9', 'Compares and contrasts two or more versions of the same story by different authors or cultures.', 12, 'Two picture books placed side by side, comparing their characters and settings.'),
-((SELECT id FROM units WHERE title='Understanding What We Read' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Nonfiction Text Features', 2, 'lesson',
+((SELECT id FROM units WHERE title='Understanding What We Read' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Nonfiction Text Features', 2, 'lesson',
 '# Nonfiction Text Features
 
 Nonfiction books teach us true facts! They often have headings, photos, and captions to help us learn.
@@ -229,7 +229,7 @@ Nonfiction books teach us true facts! They often have headings, photos, and capt
 
 **Talk about it:** How do these features help you understand the book better?',
 'NC.RI.2.5', 'Knows and uses text features to locate key facts or information in a text.', 10, 'Pages from a nonfiction animal book showing headings, photos, and captions being pointed out.'),
-((SELECT id FROM units WHERE title='Writing With Detail' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Adding Details to My Writing', 1, 'lesson',
+((SELECT id FROM units WHERE title='Writing With Detail' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Adding Details to My Writing', 1, 'lesson',
 '# Adding Details to My Writing
 
 Good writers add details to help readers picture what''s happening!
