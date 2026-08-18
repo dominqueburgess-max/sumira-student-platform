@@ -56,7 +56,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
           )}
 
           <LessonAudioPlayer lessonId={lesson.id} />
-          <LessonVideo lessonId={lesson.id} videoCaption={lesson.video_caption ?? null} />
+          <LessonVideo videoCaption={lesson.video_caption ?? null} />
 
           <article className="prose prose-headings:font-serif prose-headings:text-plum prose-p:text-charcoal max-w-none">
             <ReactMarkdown>{lesson.content_body}</ReactMarkdown>
