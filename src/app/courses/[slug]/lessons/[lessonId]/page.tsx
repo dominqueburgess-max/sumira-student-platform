@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { StudentNav } from "@/components/StudentNav";
 import { MarkCompleteButton } from "@/components/MarkCompleteButton";
 import { LessonVideo } from "@/components/LessonVideo";
+import { LessonAudioPlayer } from "@/components/LessonAudioPlayer";
 import { LessonQuestions, LessonQuestion } from "@/components/LessonQuestions";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string; lessonId: string }> }) {
@@ -54,6 +55,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             </span>
           )}
 
+          <LessonAudioPlayer lessonId={lesson.id} />
           <LessonVideo videoUrl={lesson.video_url ?? null} videoCaption={lesson.video_caption ?? null} />
 
           <article className="prose prose-headings:font-serif prose-headings:text-plum prose-p:text-charcoal max-w-none">

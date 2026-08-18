@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { QuestionAudioButton } from "@/components/QuestionAudioButton";
 
 export type LessonQuestion = {
   id: number;
@@ -83,9 +84,12 @@ export function LessonQuestions({ lessonId, questions }: { lessonId: number; que
 
       {questions.map((q, idx) => (
         <div key={q.id} className="bg-cream rounded-xl p-5">
-          <p className="font-semibold text-charcoal mb-3">
-            {idx + 1}. {q.prompt}
-          </p>
+          <div className="flex items-start gap-3 mb-3">
+            <p className="font-semibold text-charcoal flex-1">
+              {idx + 1}. {q.prompt}
+            </p>
+            <QuestionAudioButton questionId={q.id} />
+          </div>
 
           {q.question_type === "multiple_choice" && q.options && (
             <div className="flex flex-col gap-2">
