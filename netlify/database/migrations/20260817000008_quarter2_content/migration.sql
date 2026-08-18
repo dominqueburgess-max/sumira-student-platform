@@ -9,7 +9,7 @@ INSERT INTO units (course_id, title, position) VALUES
 ((SELECT id FROM courses WHERE slug='ela-2'), 'Perspective & Persuasive Writing', COALESCE((SELECT MAX(position) FROM units WHERE course_id=(SELECT id FROM courses WHERE slug='ela-2')), 0) + 1);
 
 INSERT INTO lessons (unit_id, title, position, content_type, content_body, standards_code, standards_description, estimated_minutes, video_caption) VALUES
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'More and Less Comparisons', 1, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'More and Less Comparisons', 1, 'lesson',
 '# More and Less Comparisons
 
 Let''s compare two groups again! Which has **more**? Which has **less**?
@@ -18,7 +18,7 @@ Let''s compare two groups again! Which has **more**? Which has **less**?
 
 **Wonder Quest:** Find two snacks with different amounts. Which is more?',
 'NC ELDS – Cognitive Development', 'Compares two sets of objects to determine which has more or less.', 8, 'Two small groups of toys being compared to see which has more.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Number Recognition 1-5', 2, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Number Recognition 1-5', 2, 'lesson',
 '# Number Recognition 1-5
 
 Let''s learn to spot numbers 1, 2, 3, 4, and 5 when we see them written down!
@@ -27,7 +27,7 @@ Let''s learn to spot numbers 1, 2, 3, 4, and 5 when we see them written down!
 
 **Now try:** Can you find the numbers 1-5 somewhere in your house (a clock, a book, a calendar)?',
 'NC ELDS – Cognitive Development', 'Recognizes and names written numerals 1 through 5.', 8, 'Number cards 1 through 5 being shown and named one at a time.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Number Recognition 6-10', 3, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Number Recognition 6-10', 3, 'lesson',
 '# Number Recognition 6-10
 
 Now let''s learn to spot numbers 6, 7, 8, 9, and 10!
@@ -36,7 +36,7 @@ Now let''s learn to spot numbers 6, 7, 8, 9, and 10!
 
 **Now try:** Count 10 objects and place the number 10 card next to them.',
 'NC ELDS – Cognitive Development', 'Recognizes and names written numerals 6 through 10.', 8, 'Number cards 6 through 10 being shown and named one at a time.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Simple Puzzles and Spatial Awareness', 4, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Simple Puzzles and Spatial Awareness', 4, 'lesson',
 '# Simple Puzzles and Spatial Awareness
 
 Puzzles help our brains think about shapes and space!
@@ -45,7 +45,7 @@ Puzzles help our brains think about shapes and space!
 
 **Talk about it:** How did you decide where each piece should go?',
 'NC ELDS – Cognitive Development', 'Completes simple puzzles, developing spatial reasoning skills.', 10, 'A child fitting puzzle pieces together, turning and testing pieces to find the right fit.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Positional Words: Over, Under, Beside', 5, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Positional Words: Over, Under, Beside', 5, 'lesson',
 '# Positional Words: Over, Under, Beside
 
 Let''s practice more position words: over, under, and beside!
@@ -54,7 +54,7 @@ Let''s practice more position words: over, under, and beside!
 
 **Now try:** Ask a grown-up to hide a toy over, under, or beside something. Can you find it?',
 'NC ELDS – Cognitive Development', 'Uses positional vocabulary (over, under, beside) to describe object location.', 8, 'A ball being placed over, under, and beside a chair to demonstrate position words.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Counting Collections', 6, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Counting Collections', 6, 'lesson',
 '# Counting Collections
 
 Let''s practice counting a whole collection of things!
@@ -63,7 +63,7 @@ Let''s practice counting a whole collection of things!
 
 **Wonder Quest:** Count your collection again. Did you get the same number both times?',
 'NC ELDS – Cognitive Development', 'Counts a collection of objects accurately using one-to-one correspondence.', 8, 'A collection of mixed small objects being counted one at a time.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'One More, One Less', 7, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'One More, One Less', 7, 'lesson',
 '# One More, One Less
 
 If you have 5 toys and get 1 more, how many do you have? If you take 1 away, how many are left?
@@ -72,7 +72,7 @@ If you have 5 toys and get 1 more, how many do you have? If you take 1 away, how
 
 **Practice:** Try this with 3 objects, then with 8 objects.',
 'NC ELDS – Cognitive Development', 'Determines one more or one less than a given quantity.', 8, 'A group of 5 objects having one added, then one removed, to show one more and one less.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Exploring 3D Shapes', 8, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Exploring 3D Shapes', 8, 'lesson',
 '# Exploring 3D Shapes
 
 Some shapes are round like a ball (sphere) and some are boxy like a block (cube)!
@@ -81,7 +81,7 @@ Some shapes are round like a ball (sphere) and some are boxy like a block (cube)
 
 **Wonder Quest:** Find 3 round things and 3 boxy things around your house.',
 'NC ELDS – Cognitive Development', 'Identifies simple 3D shapes (sphere, cube) in the environment.', 8, 'A ball (sphere) and a box (cube) being rolled and stacked to show their properties.'),
-((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek')), 'Building with Blocks', 9, 'lesson',
+((SELECT id FROM units WHERE title='Comparing & Positions' AND course_id=(SELECT id FROM courses WHERE slug='math-prek') ORDER BY id LIMIT 1), 'Building with Blocks', 9, 'lesson',
 '# Building with Blocks
 
 Blocks let us build anything we imagine! Let''s build something today.
@@ -90,7 +90,7 @@ Blocks let us build anything we imagine! Let''s build something today.
 
 **Now try:** Build something new — a bridge, a house, or your own creation!',
 'NC ELDS – Cognitive Development', 'Uses blocks to build structures, developing spatial reasoning and creativity.', 10, 'A child stacking and arranging blocks to build a simple tower or structure.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Letter Recognition A-E', 1, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Letter Recognition A-E', 1, 'lesson',
 '# Letter Recognition A-E
 
 Let''s learn to spot the letters A, B, C, D, and E!
@@ -99,7 +99,7 @@ Let''s learn to spot the letters A, B, C, D, and E!
 
 **Now try:** Find one of these letters somewhere in your house.',
 'NC ELDS – Language Development & Communication', 'Recognizes and names the letters A through E.', 8, 'Letter cards A through E being shown and named one at a time.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Letter Recognition F-J', 2, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Letter Recognition F-J', 2, 'lesson',
 '# Letter Recognition F-J
 
 Now let''s learn F, G, H, I, and J!
@@ -108,7 +108,7 @@ Now let''s learn F, G, H, I, and J!
 
 **Now try:** Can you think of a word that starts with F?',
 'NC ELDS – Language Development & Communication', 'Recognizes and names the letters F through J.', 8, 'Letter cards F through J being shown and named one at a time.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Letter Sound Match Games', 3, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Letter Sound Match Games', 3, 'lesson',
 '# Letter Sound Match Games
 
 Let''s play a matching game! Each letter has a sound, and each sound matches a picture.
@@ -117,7 +117,7 @@ Let''s play a matching game! Each letter has a sound, and each sound matches a p
 
 **Now try:** Make up your own matching game with 3 letters and 3 pictures.',
 'NC ELDS – Language Development & Communication', 'Matches letters to their corresponding beginning sounds through games.', 10, 'A matching game pairing letter cards with pictures that start with that letter''s sound.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Beginning Sounds Sort', 4, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Beginning Sounds Sort', 4, 'lesson',
 '# Beginning Sounds Sort
 
 Let''s sort pictures by the sound they start with!
@@ -126,7 +126,7 @@ Let''s sort pictures by the sound they start with!
 
 **Talk about it:** How did you decide where each item belonged?',
 'NC ELDS – Language Development & Communication', 'Sorts pictures or objects by their beginning sound.', 8, 'Pictures of objects being sorted into groups by their beginning sound.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Story Sequencing: First, Next, Last', 5, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Story Sequencing: First, Next, Last', 5, 'lesson',
 '# Story Sequencing: First, Next, Last
 
 Stories happen in an order! Let''s practice telling what happened first, next, and last.
@@ -135,7 +135,7 @@ Stories happen in an order! Let''s practice telling what happened first, next, a
 
 **Now try:** Tell the story back using those three words.',
 'NC ELDS – Language Development & Communication', 'Sequences the events of a simple story using first, next, and last.', 10, 'Story picture cards being arranged in order using the words first, next, and last.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Predicting What Happens Next', 6, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Predicting What Happens Next', 6, 'lesson',
 '# Predicting What Happens Next
 
 Good listeners guess what might happen next in a story!
@@ -144,7 +144,7 @@ Good listeners guess what might happen next in a story!
 
 **Now try:** Check your guess — were you right?',
 'NC ELDS – Language Development & Communication', 'Makes predictions about story events based on pictures and context.', 8, 'A caregiver pausing mid-story and asking a child to guess what happens next.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Talking About Characters', 7, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Talking About Characters', 7, 'lesson',
 '# Talking About Characters
 
 Characters are the people or animals in a story. Let''s talk about them!
@@ -153,7 +153,7 @@ Characters are the people or animals in a story. Let''s talk about them!
 
 **Now try:** Draw your favorite character and describe them to a grown-up.',
 'NC ELDS – Language Development & Communication', 'Describes characters in a story using descriptive language.', 8, 'A child describing a favorite story character''s appearance and personality.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Drawing to Tell a Story', 8, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Drawing to Tell a Story', 8, 'lesson',
 '# Drawing to Tell a Story
 
 We can tell stories with pictures, even before we can write words!
@@ -162,7 +162,7 @@ We can tell stories with pictures, even before we can write words!
 
 **Now try:** Tell your story to a grown-up using your pictures.',
 'NC ELDS – Language Development & Communication', 'Uses drawing as an early form of storytelling and written expression.', 10, 'A child drawing a simple picture story with a beginning, middle, and end.'),
-((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek')), 'Sharing News: Show and Tell', 9, 'lesson',
+((SELECT id FROM units WHERE title='Letters A-J & Story Sense' AND course_id=(SELECT id FROM courses WHERE slug='ela-prek') ORDER BY id LIMIT 1), 'Sharing News: Show and Tell', 9, 'lesson',
 '# Sharing News: Show and Tell
 
 Let''s practice telling others about something exciting!
@@ -171,7 +171,7 @@ Let''s practice telling others about something exciting!
 
 **Talk about it:** What did you like about sharing your news?',
 'NC ELDS – Language Development & Communication', 'Shares personal experiences aloud in a clear, organized way.', 8, 'A child standing up and sharing about a favorite toy or a recent experience with a group.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Putting Groups Together', 1, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Putting Groups Together', 1, 'lesson',
 '# Putting Groups Together
 
 When we put two groups together, we are adding!
@@ -180,7 +180,7 @@ When we put two groups together, we are adding!
 
 **Practice:** Try putting together a group of 4 and a group of 1.',
 'NC.K.OA.1', 'Represents addition with objects, fingers, and drawings.', 10, 'Two small groups of objects being pushed together and recounted as one group.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Taking Numbers Apart', 2, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Taking Numbers Apart', 2, 'lesson',
 '# Taking Numbers Apart
 
 Numbers can be split into two smaller groups! 5 can be 2 and 3, or 4 and 1.
@@ -189,7 +189,7 @@ Numbers can be split into two smaller groups! 5 can be 2 and 3, or 4 and 1.
 
 **Practice:** Try splitting 6 objects into two groups a few different ways.',
 'NC.K.OA.3', 'Decomposes numbers less than or equal to 10 into pairs in more than one way.', 10, 'A group of 5 objects being split into two smaller groups in different ways.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Decomposing Numbers to 10', 3, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Decomposing Numbers to 10', 3, 'lesson',
 '# Decomposing Numbers to 10
 
 Let''s find all the pairs of numbers that make 10! 10 = 1+9, 2+8, 3+7...
@@ -198,7 +198,7 @@ Let''s find all the pairs of numbers that make 10! 10 = 1+9, 2+8, 3+7...
 
 **Practice:** How many different pairs can you find that make 10?',
 'NC.K.OA.3', 'Finds pairs of numbers that make a given total up to 10.', 10, 'Numbers being broken apart into pairs that add up to 10, shown with objects.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Making 10', 4, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Making 10', 4, 'lesson',
 '# Making 10
 
 If you have 7, how many more do you need to make 10?
@@ -207,7 +207,7 @@ If you have 7, how many more do you need to make 10?
 
 **Practice:** Try this with 4, then with 9.',
 'NC.K.OA.4', 'Finds the number that makes 10 when added to a given number 1-9.', 10, 'A group of objects being added to until it reaches exactly 10.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Addition Story Problems', 5, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Addition Story Problems', 5, 'lesson',
 '# Addition Story Problems
 
 Story problems tell us about numbers joining together! "There were 3 ducks. 2 more came. How many now?"
@@ -216,7 +216,7 @@ Story problems tell us about numbers joining together! "There were 3 ducks. 2 mo
 
 **Now try:** Make up your own addition story!',
 'NC.K.OA.2', 'Solves addition word problems using objects or drawings within 10.', 10, 'A short story about ducks joining a pond, being acted out and counted.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Subtraction Story Problems', 6, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Subtraction Story Problems', 6, 'lesson',
 '# Subtraction Story Problems
 
 "There were 6 birds. 2 flew away. How many are left?" Let''s solve subtraction stories!
@@ -225,7 +225,7 @@ Story problems tell us about numbers joining together! "There were 3 ducks. 2 mo
 
 **Now try:** Make up your own subtraction story!',
 'NC.K.OA.2', 'Solves subtraction word problems using objects or drawings within 10.', 10, 'A short story about birds flying away from a group, counted down.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Fluently Adding within 5', 7, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Fluently Adding within 5', 7, 'lesson',
 '# Fluently Adding within 5
 
 Let''s practice adding fast, without counting on our fingers every time!
@@ -234,7 +234,7 @@ Let''s practice adding fast, without counting on our fingers every time!
 
 **Practice:** Time yourself — how fast can you answer 5 addition problems within 5?',
 'NC.K.OA.5', 'Fluently adds within 5 without needing to count objects.', 8, 'Quick flashcard-style addition problems within 5 being solved rapidly.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Understanding Teen Numbers', 8, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Understanding Teen Numbers', 8, 'lesson',
 '# Understanding Teen Numbers
 
 Numbers 11-19 are made of a group of 10 plus some more! 14 is 10 and 4 more.
@@ -243,7 +243,7 @@ Numbers 11-19 are made of a group of 10 plus some more! 14 is 10 and 4 more.
 
 **Practice:** Try this with 17 and 12.',
 'NC.K.NBT.1', 'Composes and decomposes numbers 11-19 into ten ones and some more ones.', 10, 'Teen numbers being shown as a group of ten plus some extra ones using blocks.'),
-((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k')), 'Patterns in Numbers 11-19', 9, 'lesson',
+((SELECT id FROM units WHERE title='Addition & Subtraction Begins' AND course_id=(SELECT id FROM courses WHERE slug='math-k') ORDER BY id LIMIT 1), 'Patterns in Numbers 11-19', 9, 'lesson',
 '# Patterns in Numbers 11-19
 
 Did you notice a pattern? Every teen number starts with a group of 10!
@@ -252,7 +252,7 @@ Did you notice a pattern? Every teen number starts with a group of 10!
 
 **Practice:** Build the numbers 13, 15, and 18 using ten-groups and extra ones.',
 'NC.K.NBT.1', 'Recognizes the pattern of ten ones plus more ones in numbers 11-19.', 8, 'Numbers 11 through 19 shown in a row, highlighting the repeated ''ten and more'' pattern.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Understanding Place Value', 1, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Understanding Place Value', 1, 'lesson',
 '# Understanding Place Value
 
 Every two-digit number has a tens place and a ones place! In 42, there are 4 tens and 2 ones.
@@ -261,7 +261,7 @@ Every two-digit number has a tens place and a ones place! In 42, there are 4 ten
 
 **Practice:** Build 58 and 27 the same way.',
 'NC.1.NBT.2', 'Understands that the two digits of a two-digit number represent tens and ones.', 10, 'Base-ten blocks showing tens rods and ones cubes building a two-digit number.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Adding a Two-Digit and One-Digit Number', 2, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Adding a Two-Digit and One-Digit Number', 2, 'lesson',
 '# Adding a Two-Digit and One-Digit Number
 
 Let''s add a bigger number and a smaller number together!
@@ -270,7 +270,7 @@ Let''s add a bigger number and a smaller number together!
 
 **Try it:** Solve 27 + 6 and 41 + 8 using blocks or drawings.',
 'NC.1.NBT.4', 'Adds a two-digit number and a one-digit number within 100.', 10, 'A two-digit number having a small number added to it using base-ten blocks.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Adding Two Two-Digit Numbers', 3, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Adding Two Two-Digit Numbers', 3, 'lesson',
 '# Adding Two Two-Digit Numbers
 
 Now let''s add two bigger numbers together, tens with tens and ones with ones!
@@ -279,7 +279,7 @@ Now let''s add two bigger numbers together, tens with tens and ones with ones!
 
 **Try it:** Solve 31 + 26 the same way.',
 'NC.1.NBT.4', 'Adds two two-digit numbers using place value strategies.', 10, 'Two two-digit numbers'' tens and ones blocks being combined to find the sum.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Subtracting Multiples of 10', 4, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Subtracting Multiples of 10', 4, 'lesson',
 '# Subtracting Multiples of 10
 
 Let''s subtract whole groups of tens! 50 - 20 is like taking away 2 groups of 10 from 5 groups of 10.
@@ -288,7 +288,7 @@ Let''s subtract whole groups of tens! 50 - 20 is like taking away 2 groups of 10
 
 **Practice:** Try 90 - 40 and 60 - 20.',
 'NC.1.NBT.6', 'Subtracts multiples of 10 from multiples of 10 within 100.', 8, 'Tens rods being removed from a starting group to show subtracting multiples of ten.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Two-Step Word Problems', 5, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Two-Step Word Problems', 5, 'lesson',
 '# Two-Step Word Problems
 
 Some problems need two steps to solve! "You have 5 apples. You get 3 more. Then you eat 2. How many are left?"
@@ -297,7 +297,7 @@ Some problems need two steps to solve! "You have 5 apples. You get 3 more. Then 
 
 **Now try:** Make up your own two-step story!',
 'NC.1.OA.1', 'Solves word problems that require two steps using addition and subtraction.', 10, 'A two-part story problem being solved step by step with objects.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Doubles and Near Doubles', 6, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Doubles and Near Doubles', 6, 'lesson',
 '# Doubles and Near Doubles
 
 A "double" is adding a number to itself: 4+4=8. This can help solve close problems too, like 4+5!
@@ -306,7 +306,7 @@ A "double" is adding a number to itself: 4+4=8. This can help solve close proble
 
 **Now try:** If 4+4=8, what is 4+5? (Hint: it''s one more!)',
 'NC.1.OA.6', 'Uses doubles facts to solve related addition problems.', 8, 'Two equal groups of objects being combined to show a doubles fact, like 4+4.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Skip Counting by 2s', 7, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Skip Counting by 2s', 7, 'lesson',
 '# Skip Counting by 2s
 
 Counting by 2s is faster than counting by 1s! 2, 4, 6, 8, 10...
@@ -315,7 +315,7 @@ Counting by 2s is faster than counting by 1s! 2, 4, 6, 8, 10...
 
 **Practice:** Count pairs of shoes or socks by 2s!',
 'NC.1.NBT.1', 'Skip-counts by 2s to build number pattern fluency.', 8, 'A number line showing jumps of 2 from 0 to 20.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Skip Counting by 5s', 8, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Skip Counting by 5s', 8, 'lesson',
 '# Skip Counting by 5s
 
 Let''s count by 5s! 5, 10, 15, 20, 25...
@@ -324,7 +324,7 @@ Let''s count by 5s! 5, 10, 15, 20, 25...
 
 **Practice:** Count a handful of nickels by 5s, if you have any!',
 'NC.1.NBT.1', 'Skip-counts by 5s to build number pattern fluency.', 8, 'A number line showing jumps of 5 from 0 to 50.'),
-((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1')), 'Skip Counting by 10s', 9, 'lesson',
+((SELECT id FROM units WHERE title='Place Value & Fluency' AND course_id=(SELECT id FROM courses WHERE slug='math-1') ORDER BY id LIMIT 1), 'Skip Counting by 10s', 9, 'lesson',
 '# Skip Counting by 10s
 
 Counting by 10s is super fast! 10, 20, 30, 40...
@@ -333,7 +333,7 @@ Counting by 10s is super fast! 10, 20, 30, 40...
 
 **Practice:** Count a group of pennies by putting them in piles of 10.',
 'NC.1.NBT.1', 'Skip-counts by 10s to build number pattern fluency.', 8, 'A number line showing jumps of 10 from 0 to 100.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Subtracting Three-Digit Numbers', 1, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Subtracting Three-Digit Numbers', 1, 'lesson',
 '# Subtracting Three-Digit Numbers
 
 We can subtract hundreds, tens, and ones separately!
@@ -342,7 +342,7 @@ We can subtract hundreds, tens, and ones separately!
 
 **Try it:** Solve 578 - 345 using this strategy.',
 'NC.2.NBT.7', 'Subtracts within 1000 using strategies based on place value.', 12, 'Hundreds, tens, and ones blocks being taken away to solve a three-digit subtraction.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Regrouping in Addition', 2, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Regrouping in Addition', 2, 'lesson',
 '# Regrouping in Addition
 
 Sometimes when we add, the ones add up to more than 9 — we trade 10 ones for 1 ten! This is called regrouping.
@@ -351,7 +351,7 @@ Sometimes when we add, the ones add up to more than 9 — we trade 10 ones for 1
 
 **Try it:** Solve 38 + 26 using regrouping.',
 'NC.2.NBT.7', 'Adds within 1000 using regrouping when ones or tens exceed 9.', 12, 'Ten ones blocks being traded for one tens rod to demonstrate regrouping in addition.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Regrouping in Subtraction', 3, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Regrouping in Subtraction', 3, 'lesson',
 '# Regrouping in Subtraction
 
 Sometimes we don''t have enough ones to subtract — we trade 1 ten for 10 ones! This is regrouping too.
@@ -360,7 +360,7 @@ Sometimes we don''t have enough ones to subtract — we trade 1 ten for 10 ones!
 
 **Try it:** Solve 63 - 27 using regrouping.',
 'NC.2.NBT.7', 'Subtracts within 1000 using regrouping when needed.', 12, 'A tens rod being traded for ten ones cubes to demonstrate regrouping in subtraction.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Solving Two-Step Word Problems', 4, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Solving Two-Step Word Problems', 4, 'lesson',
 '# Solving Two-Step Word Problems
 
 Some problems take two steps! "You have 45 stickers. You get 20 more. Then you give away 15. How many now?"
@@ -369,7 +369,7 @@ Some problems take two steps! "You have 45 stickers. You get 20 more. Then you g
 
 **Now try:** Make up your own two-step problem!',
 'NC.2.OA.1', 'Solves two-step word problems using addition and subtraction within 100.', 10, 'A two-step story problem being solved with objects and drawings step by step.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Odd and Even Numbers', 5, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Odd and Even Numbers', 5, 'lesson',
 '# Odd and Even Numbers
 
 Even numbers can be split into two equal groups with nothing left over. Odd numbers always have one left over!
@@ -378,7 +378,7 @@ Even numbers can be split into two equal groups with nothing left over. Odd numb
 
 **Practice:** Try this with 7 and with 10.',
 'NC.2.OA.3', 'Determines whether a group of objects has an odd or even number using pairs.', 8, 'Objects being paired up to determine if a group has an odd or even amount.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Arrays and Repeated Addition', 6, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Arrays and Repeated Addition', 6, 'lesson',
 '# Arrays and Repeated Addition
 
 An array is objects arranged in equal rows! 3 rows of 4 is the same as 4+4+4.
@@ -387,7 +387,7 @@ An array is objects arranged in equal rows! 3 rows of 4 is the same as 4+4+4.
 
 **Practice:** Make an array with 2 rows of 5.',
 'NC.2.OA.4', 'Uses arrays to represent repeated addition, building a foundation for multiplication.', 10, 'Objects arranged in equal rows and columns (an array) being counted using repeated addition.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Equal Groups', 7, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Equal Groups', 7, 'lesson',
 '# Equal Groups
 
 Equal groups all have the same number of objects in them!
@@ -396,7 +396,7 @@ Equal groups all have the same number of objects in them!
 
 **Practice:** Try making 5 equal groups from 20 objects.',
 'NC.2.OA.4', 'Identifies and creates equal groups of objects.', 8, 'Objects being sorted into several equal-sized groups.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Money: Counting Coins and Bills', 8, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Money: Counting Coins and Bills', 8, 'lesson',
 '# Money: Counting Coins and Bills
 
 Let''s count money! A penny is 1 cent, a nickel is 5, a dime is 10, and a quarter is 25.
@@ -405,7 +405,7 @@ Let''s count money! A penny is 1 cent, a nickel is 5, a dime is 10, and a quarte
 
 **Practice:** Count 3 quarters. How much is that in cents?',
 'NC.2.MD.8', 'Counts a mix of coins and bills to find the total value.', 10, 'Coins and a dollar bill being counted and added together to find a total value.'),
-((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2')), 'Making Change', 9, 'lesson',
+((SELECT id FROM units WHERE title='Regrouping & Problem Solving' AND course_id=(SELECT id FROM courses WHERE slug='math-2') ORDER BY id LIMIT 1), 'Making Change', 9, 'lesson',
 '# Making Change
 
 If something costs 60 cents and you pay with a dollar, how much change do you get back?
@@ -414,7 +414,7 @@ If something costs 60 cents and you pay with a dollar, how much change do you ge
 
 **Practice:** Try figuring out change for something that costs 40 cents.',
 'NC.2.MD.8', 'Solves word problems involving making change from a dollar amount.', 10, 'Coins being counted out to make change from a purchase.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Identifying Story Characters', 1, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Identifying Story Characters', 1, 'lesson',
 '# Identifying Story Characters
 
 Every story has characters — the people or animals it''s about!
@@ -423,7 +423,7 @@ Every story has characters — the people or animals it''s about!
 
 **Now try:** Draw your favorite character from the story.',
 'NC.RL.K.3', 'With prompting and support, identifies characters in a story.', 8, 'A picture book''s characters being pointed out and named one by one.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Identifying Story Settings', 2, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Identifying Story Settings', 2, 'lesson',
 '# Identifying Story Settings
 
 The setting is where and when a story happens!
@@ -432,7 +432,7 @@ The setting is where and when a story happens!
 
 **Now try:** Draw the setting of your favorite story.',
 'NC.RL.K.3', 'With prompting and support, identifies the setting of a story.', 8, 'Different story settings (forest, beach, house) being shown from picture books.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Sequencing Story Events', 3, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Sequencing Story Events', 3, 'lesson',
 '# Sequencing Story Events
 
 Let''s put story events in order — what happened first, next, and last!
@@ -441,7 +441,7 @@ Let''s put story events in order — what happened first, next, and last!
 
 **Now try:** Tell the story back in order.',
 'NC.RL.K.2', 'Retells familiar stories, including key details, in the order they happened.', 8, 'Story events being arranged in order from beginning to end.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Comparing Two Characters', 4, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Comparing Two Characters', 4, 'lesson',
 '# Comparing Two Characters
 
 Let''s compare two characters! How are they the same? How are they different?
@@ -450,7 +450,7 @@ Let''s compare two characters! How are they the same? How are they different?
 
 **Talk about it:** Which character would you want to be friends with?',
 'NC.RL.K.9', 'With prompting and support, compares and contrasts characters in familiar stories.', 10, 'Two different story characters being compared side by side on their traits.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Making Predictions', 5, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Making Predictions', 5, 'lesson',
 '# Making Predictions
 
 Good readers guess what will happen next in a story!
@@ -459,7 +459,7 @@ Good readers guess what will happen next in a story!
 
 **Talk about it:** Were you right? What made you guess that?',
 'NC.RL.K.1', 'Makes predictions about upcoming story events using pictures and prior knowledge.', 8, 'A caregiver pausing before a story''s ending to ask what the child thinks will happen.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Connecting Text to Self', 6, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Connecting Text to Self', 6, 'lesson',
 '# Connecting Text to Self
 
 Sometimes a story reminds us of something that happened to us!
@@ -468,7 +468,7 @@ Sometimes a story reminds us of something that happened to us!
 
 **Talk about it:** Share your connection with a grown-up.',
 'NC.RL.K.1', 'Makes connections between story events and personal experiences.', 8, 'A child talking about how a story reminds them of something in their own life.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Understanding Story Problems and Solutions', 7, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Understanding Story Problems and Solutions', 7, 'lesson',
 '# Understanding Story Problems and Solutions
 
 Most stories have a problem the character solves!
@@ -477,7 +477,7 @@ Most stories have a problem the character solves!
 
 **Talk about it:** Would you have solved it a different way?',
 'NC.RL.K.3', 'Identifies the problem a character faces and how it is solved.', 8, 'A story character''s problem being shown, followed by how they solve it.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Writing About a Favorite Character', 8, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Writing About a Favorite Character', 8, 'lesson',
 '# Writing About a Favorite Character
 
 Let''s write about a character you love!
@@ -486,7 +486,7 @@ Let''s write about a character you love!
 
 **Now try:** Share your drawing and writing with someone.',
 'NC.W.K.1', 'Writes or draws opinions about a favorite story character with a reason.', 10, 'A child drawing their favorite character and writing or dictating why they like them.'),
-((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k')), 'Sharing Opinions About Books', 9, 'lesson',
+((SELECT id FROM units WHERE title='Story Elements' AND course_id=(SELECT id FROM courses WHERE slug='ela-k') ORDER BY id LIMIT 1), 'Sharing Opinions About Books', 9, 'lesson',
 '# Sharing Opinions About Books
 
 Did you like the book? Let''s talk about why!
@@ -495,7 +495,7 @@ Did you like the book? Let''s talk about why!
 
 **Now try:** Would you recommend this book to a friend? Why or why not?',
 'NC.W.K.1', 'Shares and supports an opinion about a book with a reason.', 8, 'Children discussing whether they liked a book and explaining why.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Identifying the Main Topic', 1, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Identifying the Main Topic', 1, 'lesson',
 '# Identifying the Main Topic
 
 The main topic is what a nonfiction book is mostly about!
@@ -504,7 +504,7 @@ The main topic is what a nonfiction book is mostly about!
 
 **Now try:** List 2 facts you learned about that topic.',
 'NC.RI.1.2', 'Identifies the main topic and retells key details of a nonfiction text.', 8, 'A nonfiction book about animals being read with its main topic highlighted.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Using Text Features in Nonfiction', 2, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Using Text Features in Nonfiction', 2, 'lesson',
 '# Using Text Features in Nonfiction
 
 Nonfiction books have special features to help us: headings, captions, and bold words!
@@ -513,7 +513,7 @@ Nonfiction books have special features to help us: headings, captions, and bold 
 
 **Talk about it:** How does each feature help you understand the book?',
 'NC.RI.1.5', 'Uses text features (headings, captions, bold words) to locate information.', 8, 'Nonfiction book pages showing headings, captions, and bold words being pointed out.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Comparing Two Texts on the Same Topic', 3, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Comparing Two Texts on the Same Topic', 3, 'lesson',
 '# Comparing Two Texts on the Same Topic
 
 Let''s read two books about the same thing and compare them!
@@ -522,7 +522,7 @@ Let''s read two books about the same thing and compare them!
 
 **Talk about it:** Which book did you like better and why?',
 'NC.RI.1.9', 'Identifies similarities and differences between two texts on the same topic.', 10, 'Two nonfiction books about the same animal being compared side by side.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Understanding Cause and Effect', 4, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Understanding Cause and Effect', 4, 'lesson',
 '# Understanding Cause and Effect
 
 A cause is why something happens. An effect is what happens because of it! "It rained (cause), so the ground got wet (effect)."
@@ -531,7 +531,7 @@ A cause is why something happens. An effect is what happens because of it! "It r
 
 **Now try:** Make up your own cause and effect example.',
 'NC.RI.1.3', 'Describes the connection between events, ideas, or facts in a text using cause and effect.', 8, 'A simple cause and effect example, like rain falling causing puddles to form.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Making Inferences from Pictures', 5, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Making Inferences from Pictures', 5, 'lesson',
 '# Making Inferences from Pictures
 
 Sometimes pictures tell us things the words don''t say!
@@ -540,7 +540,7 @@ Sometimes pictures tell us things the words don''t say!
 
 **Talk about it:** What clues in the picture helped you figure that out?',
 'NC.RL.1.7', 'Uses illustrations and details to describe characters, settings, or events.', 8, 'A picture book illustration being examined closely to infer what''s happening in the story.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Building Vocabulary from Context', 6, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Building Vocabulary from Context', 6, 'lesson',
 '# Building Vocabulary from Context
 
 When we see a word we don''t know, the sentence around it can give us clues!
@@ -549,7 +549,7 @@ When we see a word we don''t know, the sentence around it can give us clues!
 
 **Practice:** Find a new word in a book and guess its meaning using clues around it.',
 'NC.L.1.4', 'Uses sentence context to determine the meaning of unknown words.', 8, 'A sentence with a tricky word being examined for clues in the surrounding words.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Writing a Personal Narrative', 7, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Writing a Personal Narrative', 7, 'lesson',
 '# Writing a Personal Narrative
 
 Let''s write a true story about something that happened to you!
@@ -558,7 +558,7 @@ Let''s write a true story about something that happened to you!
 
 **Now try:** Draw a picture to go with your story.',
 'NC.W.1.3', 'Writes narratives recounting two or more sequenced events with details and a sense of closure.', 10, 'A child writing a short personal story about something that happened to them.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Writing an Opinion Piece', 8, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Writing an Opinion Piece', 8, 'lesson',
 '# Writing an Opinion Piece
 
 Let''s write about something you like and why!
@@ -567,7 +567,7 @@ Let''s write about something you like and why!
 
 **Now try:** Share your opinion piece with a grown-up.',
 'NC.W.1.1', 'Writes opinion pieces introducing a topic, stating an opinion, and giving a reason.', 10, 'A child writing about their favorite food and explaining why they like it.'),
-((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1')), 'Using Describing Words', 9, 'lesson',
+((SELECT id FROM units WHERE title='Nonfiction & Writing Craft' AND course_id=(SELECT id FROM courses WHERE slug='ela-1') ORDER BY id LIMIT 1), 'Using Describing Words', 9, 'lesson',
 '# Using Describing Words
 
 Describing words (adjectives) help readers picture what we mean! "A dog" becomes "a big, fluffy dog."
@@ -576,7 +576,7 @@ Describing words (adjectives) help readers picture what we mean! "A dog" becomes
 
 **Now try:** Describe your favorite toy using 3 describing words.',
 'NC.L.1.1', 'Uses adjectives to add detail and description to writing.', 8, 'A plain sentence being rewritten with descriptive adjectives added.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Comparing Points of View', 1, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Comparing Points of View', 1, 'lesson',
 '# Comparing Points of View
 
 Different characters can see the same event differently! This is called point of view.
@@ -585,7 +585,7 @@ Different characters can see the same event differently! This is called point of
 
 **Talk about it:** Whose point of view do you understand better, and why?',
 'NC.RL.2.6', 'Acknowledges differences in the points of view of characters.', 10, 'A story shown from two different characters'' points of view side by side.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Understanding Cause and Effect Relationships', 2, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Understanding Cause and Effect Relationships', 2, 'lesson',
 '# Understanding Cause and Effect Relationships
 
 Sometimes one cause leads to many effects, like dominoes falling!
@@ -594,7 +594,7 @@ Sometimes one cause leads to many effects, like dominoes falling!
 
 **Now try:** Create your own cause and effect chain with 3 steps.',
 'NC.RI.2.3', 'Describes the connection between a series of events, using cause and effect language.', 8, 'A chain of causes and effects being shown, like a domino toppling a series of events.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Making and Confirming Predictions', 3, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Making and Confirming Predictions', 3, 'lesson',
 '# Making and Confirming Predictions
 
 Let''s guess what happens, then check if we were right!
@@ -603,7 +603,7 @@ Let''s guess what happens, then check if we were right!
 
 **Talk about it:** What clues helped you make a good prediction?',
 'NC.RL.2.1', 'Asks and answers questions to demonstrate understanding, including making and checking predictions.', 8, 'A reader pausing to predict an outcome, then confirming it while finishing the story.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Summarizing a Story', 4, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Summarizing a Story', 4, 'lesson',
 '# Summarizing a Story
 
 A summary tells the most important parts of a story in just a few sentences!
@@ -612,7 +612,7 @@ A summary tells the most important parts of a story in just a few sentences!
 
 **Now try:** Share your summary with a grown-up. Did you include the important parts?',
 'NC.RL.2.2', 'Recounts stories and determines their central message, lesson, or moral.', 10, 'A story being condensed into a short 2-3 sentence summary.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Identifying Author''s Purpose', 5, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Identifying Author''s Purpose', 5, 'lesson',
 '# Identifying Author''s Purpose
 
 Authors write for different reasons: to entertain, to inform, or to persuade!
@@ -621,7 +621,7 @@ Authors write for different reasons: to entertain, to inform, or to persuade!
 
 **Talk about it:** How can you tell the difference?',
 'NC.RI.2.6', 'Identifies the main purpose of a text, including what the author wants to answer, explain, or describe.', 8, 'Different types of texts (a story, an ad, a how-to guide) being examined for their purpose.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Writing a Persuasive Piece', 6, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Writing a Persuasive Piece', 6, 'lesson',
 '# Writing a Persuasive Piece
 
 Let''s write to convince someone of our opinion!
@@ -630,7 +630,7 @@ Let''s write to convince someone of our opinion!
 
 **Now try:** Read your persuasive piece out loud. Was it convincing?',
 'NC.W.2.1', 'Writes opinion pieces that introduce a topic, state an opinion, and provide supporting reasons.', 10, 'A child writing a short persuasive paragraph trying to convince someone of an opinion.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Writing a Research Paragraph', 7, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Writing a Research Paragraph', 7, 'lesson',
 '# Writing a Research Paragraph
 
 Let''s gather facts about a topic and write about it!
@@ -639,7 +639,7 @@ Let''s gather facts about a topic and write about it!
 
 **Now try:** Share your research paragraph with someone.',
 'NC.W.2.7', 'Participates in shared research and writing projects to gather information on a topic.', 10, 'A child researching a topic in a book and writing down facts they learned.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Using Transition Words', 8, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Using Transition Words', 8, 'lesson',
 '# Using Transition Words
 
 Transition words help readers follow the order of events: first, then, next, finally!
@@ -648,7 +648,7 @@ Transition words help readers follow the order of events: first, then, next, fin
 
 **Now try:** Read your sentences out loud. Do the transition words help it make sense?',
 'NC.W.2.3', 'Uses temporal words to signal event order in writing.', 8, 'A story being read with transition words like first, then, next, and finally highlighted.'),
-((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2')), 'Revising for Clarity', 9, 'lesson',
+((SELECT id FROM units WHERE title='Perspective & Persuasive Writing' AND course_id=(SELECT id FROM courses WHERE slug='ela-2') ORDER BY id LIMIT 1), 'Revising for Clarity', 9, 'lesson',
 '# Revising for Clarity
 
 Good writers reread their work and make it clearer!
