@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingIncludes: {
+    "/api/lessons/[lessonId]/video": ["./node_modules/ffmpeg-static/ffmpeg", "./src/assets/**"],
+  },
 };
 
 export default nextConfig;

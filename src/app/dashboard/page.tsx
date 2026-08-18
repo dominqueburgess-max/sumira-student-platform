@@ -3,6 +3,8 @@ import Link from "next/link";
 import { getCurrentStudent } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { StudentNav } from "@/components/StudentNav";
+import { checkAndAwardAchievements, getAchievements } from "@/lib/achievements";
+import { getOrCreateParentToken } from "@/lib/parentAccess";
 
 async function ensureEnrollments(studentId: number, studio: string, gradeLevel: string) {
   const courseCount = await db().sql`SELECT COUNT(*)::int AS n FROM enrollments WHERE student_id = ${studentId}`;
@@ -26,6 +28,9 @@ export default async function DashboardPage() {
   if (!student) redirect("/login");
 
   await ensureEnrollments(student.id, student.studio, student.grade_level);
+  await checkAndAwardAchievements(student.id);
+  const achievements = await getAchievements(student.id);
+  const parentToken = await getOrCreateParentToken(student.id);
 
   const courses = await db().sql`
     SELECT c.id, c.slug, c.title, c.subject, c.description, c.color,
@@ -60,7 +65,16 @@ export default async function DashboardPage() {
       <StudentNav firstName={student.first_name} />
       <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-10">
         <h1 className="text-3xl mb-1">Hi, {student.first_name}! 👋</h1>
-        <p className="text-warm-gray mb-8">Here's what's on your learning path today.</p>
+        <p className="text-warm-gray mb-6">Here's what's on your learning path today.</p>
+
+        <div className="bg-plum/5 border border-plum/20 rounded-xl px-5 py-3 mb-8 flex items-center justify-between gap-4 flex-wrap">
+          <p className="text-sm text-plum">
+            <span className="font-semibold">Parent / Family View:</span> share this link so a parent can see progress and a standards report.
+          </p>
+          <a href={`/parent/${parentToken}`} target="_blank" className="text-sm font-semibold text-terracotta-dark underline shrink-0">
+            Open Parent View →
+          </a>
+        </div>
 
         <section className="mb-10">
           <h2 className="text-xl mb-4">Self-Paced Classes</h2>
@@ -85,6 +99,20 @@ export default async function DashboardPage() {
             })}
           </div>
         </section>
+
+        {achievements.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-xl mb-4">My Achievements</h2>
+            <div className="flex flex-wrap gap-3">
+              {achievements.map((a) => (
+                <div key={a.id} title={a.description} className="flex items-center gap-2 bg-amber/15 border border-amber/30 rounded-full pl-2 pr-4 py-2">
+                  <span className="text-2xl">{a.icon}</span>
+                  <span className="text-sm font-semibold text-plum">{a.title}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section>
           <h2 className="text-xl mb-4">Live Classes</h2>
