@@ -1,0 +1,187 @@
+export const metadata = {
+  title: 'Enroll — Su Mira Learning Studio',
+};
+
+export default function Page() {
+  return <div dangerouslySetInnerHTML={{ __html: `<div class="nav-wrap">
+  <nav class="nav">
+    <a href="/" class="logo">SU MIRA<span>LEARNING STUDIO</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown"><a href="/wonder-studio">Learning Studios</a>
+        <div class="dropdown-menu">
+          <a href="/wonder-studio">Wonder Studio &middot; PreK&ndash;2</a>
+          <a href="/discovery-studio">Discovery Studio &middot; Grades 3&ndash;5</a>
+          <a href="/venture-studio">Venture Studio &middot; Grades 6&ndash;12</a>
+          <a href="/how-it-works">Live Learning</a>
+          <a href="/meet-mira">Mira AI Guide</a>
+          <a href="/learning-blueprint">Learning Blueprint</a>
+        </div>
+      </li>
+      <li><a href="/how-it-works">How It Works</a></li>
+      <li class="has-dropdown"><a href="/community">Community</a>
+        <div class="dropdown-menu">
+          <a href="/community#clubs">Student Clubs</a>
+          <a href="/gatherings">Su Mira Gatherings</a>
+          <a href="/community#regional">Regional Experiences</a>
+          <a href="/community#family">Family Community</a>
+          <a href="/community#showcases">Student Showcases</a>
+        </div>
+      </li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/funding">Funding</a></li>
+      <li class="has-dropdown"><a href="/about">About</a>
+        <div class="dropdown-menu">
+          <a href="/about">Our Story</a>
+          <a href="/about#philosophy">Our Learning Philosophy</a>
+          <a href="/about#team">Our Team</a>
+          <a href="/about#burbrella">Our Organizations</a>
+        </div>
+      </li>
+      <li><a href="/resources">Resources</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/login" class="btn btn-ghost" style="margin-right:10px;">Student &amp; Parent Login</a>
+      <a href="/enroll" class="btn btn-primary">Start Your Journey</a>
+    </div>
+  </nav>
+</div>
+
+
+<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(59,31,61,0.86) 0%, rgba(42,21,48,0.92) 100%), url('https://images.pexels.com/photos/10071284/pexels-photo-10071284.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600');">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--amber);">Enroll</span>
+    <h1>Start building a learning experience around your child.</h1>
+    <p class="lede">Tell us about your family and we'll follow up with a recommended Learning Studio, plan and next steps.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <form class="enroll" action="#" method="post">
+      <h3 style="margin-bottom:24px;">Family &amp; Learner Information</h3>
+      <div class="form-grid">
+        <div class="field"><label>Parent or guardian name</label><input type="text" name="parent_name" required></div>
+        <div class="field"><label>Email</label><input type="email" name="email" required></div>
+        <div class="field"><label>Phone</label><input type="tel" name="phone"></div>
+        <div class="field"><label>State</label><input type="text" name="state" required></div>
+        <div class="field"><label>Student name</label><input type="text" name="student_name" required></div>
+        <div class="field"><label>Student age</label><input type="number" name="student_age" min="3" max="19"></div>
+        <div class="field"><label>Current grade</label><input type="text" name="current_grade"></div>
+        <div class="field"><label>Grade for upcoming year</label><input type="text" name="upcoming_grade"></div>
+        <div class="field"><label>Preferred Learning Studio</label>
+          <select name="studio">
+            <option>Wonder Studio (PreK&ndash;2)</option>
+            <option>Discovery Studio (Grades 3&ndash;5)</option>
+            <option>Venture Studio (Grades 6&ndash;12)</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field"><label>Enrollment plan of interest</label>
+          <select name="plan">
+            <option>Foundations</option>
+            <option>Flex (Most Popular)</option>
+            <option>Signature</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field"><label>Preferred start date</label><input type="date" name="start_date"></div>
+        <div class="field"><label>Does the learner currently homeschool?</label>
+          <div class="radio-row"><label><input type="radio" name="homeschool" value="yes">Yes</label><label><input type="radio" name="homeschool" value="no">No</label></div>
+        </div>
+        <div class="field"><label>Is the learner currently enrolled in another school?</label>
+          <div class="radio-row"><label><input type="radio" name="other_school" value="yes">Yes</label><label><input type="radio" name="other_school" value="no">No</label></div>
+        </div>
+        <div class="field"><label>Is the family using or applying for ESA funding?</label>
+          <div class="radio-row"><label><input type="radio" name="esa" value="yes">Yes</label><label><input type="radio" name="esa" value="no">No</label><label><input type="radio" name="esa" value="unsure">Not sure</label></div>
+        </div>
+        <div class="field full"><label>What are you looking for in a learning program?</label><textarea name="looking_for"></textarea></div>
+        <div class="field full"><label>Does the learner require specific accommodations?</label><textarea name="accommodations"></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; border:none; margin-top:8px;">Start Our Su Mira Journey</button>
+      <p style="font-size:0.8rem; color:var(--warm-gray-light); text-align:center; margin-top:14px;">Demo form &mdash; not yet connected to enrollment processing.</p>
+    </form>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="center" style="margin-bottom:36px;">
+      <span class="eyebrow">The Enrollment Journey</span>
+      <h2>From interest form to launch week.</h2>
+    </div>
+    <div class="journey">
+      <div class="journey-step"><div class="journey-num">1</div><div><h4>Family Interest Form</h4><p>Collect initial family and learner information.</p></div></div>
+      <div class="journey-step"><div class="journey-num">2</div><div><h4>Program Recommendation</h4><p>Recommended Learning Studio, plan, schedule, funding options and support level.</p></div></div>
+      <div class="journey-step"><div class="journey-num">3</div><div><h4>Application</h4><p>Student records, parent information, prior school history, accommodations, technology access and funding details.</p></div></div>
+      <div class="journey-step"><div class="journey-num">4</div><div><h4>Registration Payment</h4><p>The applicable grade-band registration fee.</p></div></div>
+      <div class="journey-step"><div class="journey-num">5</div><div><h4>Account Setup</h4><p>Parent account, student account, Mira profile, Learning Blueprint profile and platform access.</p></div></div>
+      <div class="journey-step"><div class="journey-num">6</div><div><h4>Family Orientation</h4><p>Platform tour, technology check, program expectations, Mira orientation and community guidelines.</p></div></div>
+      <div class="journey-step"><div class="journey-num">7</div><div><h4>Learning Blueprint</h4><p>Initial family questionnaire, academic review and learner profile.</p></div></div>
+      <div class="journey-step"><div class="journey-num">8</div><div><h4>Course &amp; Experience Selection</h4><p>Courses, projects, live sessions and social groups.</p></div></div>
+      <div class="journey-step"><div class="journey-num">9</div><div><h4>Launch Week</h4><p>A guided first week with platform practice, a live community welcome, a small project and check-ins.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-plum center">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--amber);">Not ready to enroll?</span>
+    <h2>Experience Su Mira for one week.</h2>
+    <p class="lede center">Try a complimentary Su Mira Discovery Week &mdash; self-paced lessons, a Mira-guided activity, a live studio experience and a sample Learning Blueprint.</p>
+    <a href="#" class="btn btn-primary">Start a Complimentary Discovery Week</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:var(--ivory);">SU MIRA<span style="color:var(--amber);">LEARNING STUDIO</span></div>
+        <p style="margin-top:14px; color:rgba(255,255,255,0.6); font-size:0.9rem;">Learning, designed around every learner. An educational program of Burbrella.</p>
+      </div>
+      <div>
+        <h5>Learning Studios</h5>
+        <ul>
+          <li><a href="/wonder-studio">Wonder Studio</a></li>
+          <li><a href="/discovery-studio">Discovery Studio</a></li>
+          <li><a href="/venture-studio">Venture Studio</a></li>
+          <li><a href="/meet-mira">Mira AI Guide</a></li>
+          <li><a href="/learning-blueprint">Learning Blueprint</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Community</h5>
+        <ul>
+          <li><a href="/community">Student Clubs</a></li>
+          <li><a href="/gatherings">Su Mira Gatherings</a></li>
+          <li><a href="/community#regional">Regional Experiences</a></li>
+          <li><a href="/community#showcases">Student Showcases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>About</h5>
+        <ul>
+          <li><a href="/about">Our Story</a></li>
+          <li><a href="/about#team">Our Team</a></li>
+          <li><a href="/about#burbrella">Our Organizations</a></li>
+          <li><a href="/about#partnerships">Partnerships</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get Started</h5>
+        <ul>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/funding">Funding by State</a></li>
+          <li><a href="/resources">Family Resources</a></li>
+          <li><a href="/enroll">Enrollment</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Su Mira Learning Studio. An educational program of Burbrella.</span>
+      <span>Concept prototype &mdash; not yet reflecting confirmed state approvals.</span>
+    </div>
+  </div>
+</footer>` }} />;
+}
