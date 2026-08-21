@@ -2,8 +2,11 @@ export const metadata = {
   title: 'Enroll — Su Mira Learning Studio',
 };
 
+import { EnrollForm } from "@/components/EnrollForm";
+
 export default function Page() {
-  return <div dangerouslySetInnerHTML={{ __html: `<div class="nav-wrap">
+  return <>
+    <div dangerouslySetInnerHTML={{ __html: `<div class="nav-wrap">
   <nav class="nav">
     <a href="/" class="logo">SU MIRA<span>LEARNING</span></a>
     <ul class="nav-links">
@@ -59,49 +62,9 @@ export default function Page() {
 
 <section>
   <div class="container">
-    <form class="enroll" action="#" method="post">
-      <h3 style="margin-bottom:24px;">Family &amp; Learner Information</h3>
-      <div class="form-grid">
-        <div class="field"><label>Parent or guardian name</label><input type="text" name="parent_name" required></div>
-        <div class="field"><label>Email</label><input type="email" name="email" required></div>
-        <div class="field"><label>Phone</label><input type="tel" name="phone"></div>
-        <div class="field"><label>State</label><input type="text" name="state" required></div>
-        <div class="field"><label>Student name</label><input type="text" name="student_name" required></div>
-        <div class="field"><label>Student age</label><input type="number" name="student_age" min="3" max="19"></div>
-        <div class="field"><label>Current grade</label><input type="text" name="current_grade"></div>
-        <div class="field"><label>Grade for upcoming year</label><input type="text" name="upcoming_grade"></div>
-        <div class="field"><label>Preferred Learning Studio</label>
-          <select name="studio">
-            <option>Wonder Studio (PreK&ndash;2)</option>
-            <option>Discovery Studio (Grades 3&ndash;5)</option>
-            <option>Venture Studio (Grades 6&ndash;12)</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="field"><label>Enrollment plan of interest</label>
-          <select name="plan">
-            <option>Foundations</option>
-            <option>Flex (Most Popular)</option>
-            <option>Signature</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="field"><label>Preferred start date</label><input type="date" name="start_date"></div>
-        <div class="field"><label>Does the learner currently homeschool?</label>
-          <div class="radio-row"><label><input type="radio" name="homeschool" value="yes">Yes</label><label><input type="radio" name="homeschool" value="no">No</label></div>
-        </div>
-        <div class="field"><label>Is the learner currently enrolled in another school?</label>
-          <div class="radio-row"><label><input type="radio" name="other_school" value="yes">Yes</label><label><input type="radio" name="other_school" value="no">No</label></div>
-        </div>
-        <div class="field"><label>Is the family using or applying for ESA funding?</label>
-          <div class="radio-row"><label><input type="radio" name="esa" value="yes">Yes</label><label><input type="radio" name="esa" value="no">No</label><label><input type="radio" name="esa" value="unsure">Not sure</label></div>
-        </div>
-        <div class="field full"><label>What are you looking for in a learning program?</label><textarea name="looking_for"></textarea></div>
-        <div class="field full"><label>Does the learner require specific accommodations?</label><textarea name="accommodations"></textarea></div>
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:100%; border:none; margin-top:8px;">Start Our Su Mira Journey</button>
-      <p style="font-size:0.8rem; color:var(--warm-gray-light); text-align:center; margin-top:14px;">Demo form &mdash; not yet connected to enrollment processing.</p>
-    </form>
+    ` }} />
+    <EnrollForm />
+    <div dangerouslySetInnerHTML={{ __html: `
   </div>
 </section>
 
@@ -185,5 +148,6 @@ export default function Page() {
       <span>Concept prototype &mdash; not yet reflecting confirmed state approvals.</span>
     </div>
   </div>
-</footer>` }} />;
+</footer>` }} />
+  </>;
 }
