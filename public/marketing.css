@@ -3,20 +3,20 @@
    ============================================ */
 
 :root {
-  --plum: #3B1F3D;
-  --plum-dark: #2A1530;
-  --plum-light: #5C3560;
-  --terracotta: #C97A5D;
-  --terracotta-dark: #B0654A;
-  --sage: #8FA687;
-  --sage-dark: #71886A;
-  --cream: #FBF6EE;
-  --ivory: #FFFDF9;
-  --charcoal: #2E2A2E;
-  --warm-gray: #6E6670;
-  --warm-gray-light: #A79FA5;
-  --amber: #E8A94A;
-  --border: #E7DCD0;
+  --plum: #3E5068;
+  --plum-dark: #2B3A4C;
+  --plum-light: #7189A8;
+  --terracotta: #E2916E;
+  --terracotta-dark: #C97050;
+  --sage: #96B78C;
+  --sage-dark: #729566;
+  --cream: #FCF7EF;
+  --ivory: #FFFEFA;
+  --charcoal: #33303A;
+  --warm-gray: #6B6470;
+  --warm-gray-light: #A89FA8;
+  --amber: #F0B85E;
+  --border: #E8DED2;
   --shadow: 0 12px 32px rgba(59, 31, 61, 0.10);
   --radius-lg: 28px;
   --radius-md: 18px;
@@ -550,7 +550,7 @@ footer {
 }
 .page-hero h1 { color: var(--ivory); max-width: 760px; }
 .page-hero p.lede { color: rgba(255,255,255,0.82); margin-left:0; }
-.page-hero.wonder { background: linear-gradient(160deg, #4a3a2e 0%, var(--plum-dark) 100%); }
+.page-hero.wonder { background: linear-gradient(160deg, #5C4438 0%, var(--plum-dark) 100%); }
 
 /* ---------- Feature list ---------- */
 .feature-list {
