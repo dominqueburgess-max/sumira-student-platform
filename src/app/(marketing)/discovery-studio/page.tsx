@@ -5,10 +5,11 @@ export const metadata = {
 export default function Page() {
   return <div dangerouslySetInnerHTML={{ __html: `<div class="nav-wrap">
   <nav class="nav">
-    <a href="/" class="logo">SU MIRA<span>LEARNING STUDIO</span></a>
+    <a href="/" class="logo">SU MIRA<span>LEARNING</span></a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li class="has-dropdown"><a href="/wonder-studio">Learning Studios</a>
+      <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
+      <li class="has-dropdown"><a href="/learning-studio">Learning Studio</a>
         <div class="dropdown-menu">
           <a href="/wonder-studio">Wonder Studio &middot; PreK&ndash;2</a>
           <a href="/discovery-studio">Discovery Studio &middot; Grades 3&ndash;5</a>
@@ -137,11 +138,11 @@ export default function Page() {
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="logo" style="color:var(--ivory);">SU MIRA<span style="color:var(--amber);">LEARNING STUDIO</span></div>
+        <div class="logo" style="color:var(--ivory);">SU MIRA<span style="color:var(--amber);">LEARNING</span></div>
         <p style="margin-top:14px; color:rgba(255,255,255,0.6); font-size:0.9rem;">Learning, designed around every learner. An educational program of Burbrella.</p>
       </div>
       <div>
-        <h5>Learning Studios</h5>
+        <h5>Learning Studio</h5>
         <ul>
           <li><a href="/wonder-studio">Wonder Studio</a></li>
           <li><a href="/discovery-studio">Discovery Studio</a></li>
@@ -171,6 +172,7 @@ export default function Page() {
       <div>
         <h5>Get Started</h5>
         <ul>
+          <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/funding">Funding by State</a></li>
           <li><a href="/resources">Family Resources</a></li>
@@ -179,7 +181,7 @@ export default function Page() {
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Su Mira Learning Studio. An educational program of Burbrella.</span>
+      <span>&copy; 2026 Su Mira Learning. An educational program of Burbrella.</span>
       <span>Concept prototype &mdash; not yet reflecting confirmed state approvals.</span>
     </div>
   </div>
