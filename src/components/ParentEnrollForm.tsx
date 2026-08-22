@@ -18,10 +18,22 @@ export function ParentEnrollForm() {
 
     const parent_name = String(data.get("parent_name") || "").trim();
     const student_name = String(data.get("student_name") || "").trim();
+    const student_login_email = String(data.get("student_login_email") || "").trim();
+    const student_login_password = String(data.get("student_login_password") || "").trim();
 
     if (!parent_name || !student_name) {
       setStatus("error");
       setErrorMessage("Please fill in your name and your student's name.");
+      return;
+    }
+    if (!student_login_email || !student_login_password) {
+      setStatus("error");
+      setErrorMessage("Please set up a login email and password for your student.");
+      return;
+    }
+    if (student_login_password.length < 8) {
+      setStatus("error");
+      setErrorMessage("Your student's password must be at least 8 characters.");
       return;
     }
 
@@ -34,6 +46,8 @@ export function ParentEnrollForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           parent_name,
+          student_login_email,
+          student_login_password,
           phone: data.get("phone"),
           state: data.get("state"),
           student_name,
@@ -78,6 +92,12 @@ export function ParentEnrollForm() {
         </label>
         <label className={labelClass}>Student name
           <input type="text" name="student_name" required className={inputClass} />
+        </label>
+        <label className={labelClass}>Student login email
+          <input type="email" name="student_login_email" required className={inputClass} />
+        </label>
+        <label className={labelClass}>Student login password
+          <input type="password" name="student_login_password" required minLength={8} className={inputClass} />
         </label>
         <label className={labelClass}>Student age
           <input type="number" name="student_age" min={3} max={19} className={inputClass} />

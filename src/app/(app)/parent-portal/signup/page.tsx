@@ -5,7 +5,7 @@ import { ParentSignupForm } from "@/components/ParentAuthForms";
 
 export default async function ParentSignupPage() {
   const parent = await getCurrentParent();
-  if (parent) redirect(parent.enrollment_completed ? "/parent-portal/dashboard" : "/parent-portal/enroll");
+  if (parent) redirect("/parent-portal");
 
   return (
     <main className="flex-1 flex items-center justify-center bg-gradient-to-br from-plum to-plum-dark px-6 py-16">

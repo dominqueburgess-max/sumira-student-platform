@@ -25,7 +25,7 @@ export function ParentSignupForm() {
       setError(data.error || "Something went wrong.");
       return;
     }
-    router.push("/parent-portal/enroll");
+    router.push("/parent-portal");
     router.refresh();
   }
 
@@ -72,7 +72,7 @@ export function ParentLoginForm() {
       setError(data.error || "Something went wrong.");
       return;
     }
-    router.push("/parent-portal/dashboard");
+    router.push("/parent-portal");
     router.refresh();
   }
 

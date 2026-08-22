@@ -51,6 +51,7 @@ export type CurrentParent = {
   id: number;
   email: string;
   enrollment_completed: boolean;
+  email_verified: boolean;
 };
 
 export async function getCurrentParent(): Promise<CurrentParent | null> {
@@ -60,7 +61,7 @@ export async function getCurrentParent(): Promise<CurrentParent | null> {
 
   const tokenHash = hashToken(token);
   const rows = await db().sql`
-    SELECT p.id, p.email, p.enrollment_completed
+    SELECT p.id, p.email, p.enrollment_completed, p.email_verified
     FROM parent_sessions ps
     JOIN parents p ON p.id = ps.parent_id
     WHERE ps.token_hash = ${tokenHash} AND ps.expires_at > NOW()
@@ -69,6 +70,15 @@ export async function getCurrentParent(): Promise<CurrentParent | null> {
 
   if (!rows.length) return null;
   return rows[0] as CurrentParent;
+}
+
+export function generateVerificationToken(): { token: string; tokenHash: string } {
+  const token = crypto.randomBytes(24).toString("hex");
+  return { token, tokenHash: hashToken(token) };
+}
+
+export function hashVerificationToken(token: string): string {
+  return hashToken(token);
 }
 
 export async function destroyParentSession() {
