@@ -49,7 +49,7 @@ export default function Page() {
 </div>
 
 
-<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(59,31,61,0.86) 0%, rgba(42,21,48,0.92) 100%), url('https://images.pexels.com/photos/6684552/pexels-photo-6684552.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600');">
+<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(59,31,61,0.86) 0%, rgba(42,21,48,0.92) 100%), url('/images/brand/live-studio-design-thinking.png');">
   <div class="container">
     <span class="eyebrow" style="color:var(--amber);">How It Works</span>
     <h1>A modern learning studio, built around six pillars.</h1>

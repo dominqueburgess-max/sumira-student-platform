@@ -57,14 +57,14 @@ export default function Page() {
       <a href="/how-it-works" class="btn btn-ghost">Explore How It Works</a>
     </div>
     <div class="hero-visual">
-      <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/6167619/pexels-photo-6167619.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">A young learner exploring outdoors</span></div>
-      <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/7868885/pexels-photo-7868885.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">A student building a project</span></div>
-      <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/6684552/pexels-photo-6684552.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">Teens collaborating on a venture</span></div>
-      <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/5905969/pexels-photo-5905969.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">A live virtual studio session</span></div>
+      <div class="hero-tile" style="background-image:url('/images/brand/wonder-outdoor-explorer.png')"><span class="cap">A young learner exploring outdoors</span></div>
+      <div class="hero-tile" style="background-image:url('/images/brand/venture-robotics-builder.png')"><span class="cap">A student building a project</span></div>
+      <div class="hero-tile" style="background-image:url('/images/brand/venture-team-planning.png')"><span class="cap">Teens collaborating on a venture</span></div>
+      <div class="hero-tile" style="background-image:url('/images/brand/homeschool-video-wave.png')"><span class="cap">A live virtual studio session</span></div>
       <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/7114175/pexels-photo-7114175.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">A parent and child learning together</span></div>
       <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/4260485/pexels-photo-4260485.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">Reviewing the Learning Blueprint</span></div>
-      <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/10071284/pexels-photo-10071284.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">A Su Mira Gathering</span></div>
-      <div class="hero-tile" style="background-image:url('https://images.pexels.com/photos/5553655/pexels-photo-5553655.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800')"><span class="cap">A student showcase</span></div>
+      <div class="hero-tile" style="background-image:url('/images/brand/gathering-friends.png')"><span class="cap">A Su Mira Gathering</span></div>
+      <div class="hero-tile" style="background-image:url('/images/brand/live-studio-entrepreneurial-mindset.png')"><span class="cap">A student showcase</span></div>
     </div>
   </div>
 </section>
