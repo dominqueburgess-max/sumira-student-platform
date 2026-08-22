@@ -125,9 +125,9 @@ export default function Page() {
 <section class="section-plum center">
   <div class="container">
     <span class="eyebrow" style="color:var(--amber);">Registration</span>
-    <h2>$349 registration fee for Wonder Studio</h2>
-    <p class="lede center">Registration reserves the learner's place and covers onboarding, account setup and initial access preparation — separate from annual tuition.</p>
-    <a href="/enroll" class="btn btn-primary">Start Your Journey</a>
+    <h2>$349 registration fee for Wonder Studio &mdash; opening October 2026</h2>
+    <p class="lede center">Registration reserves the learner's place and covers onboarding, account setup and initial access preparation — separate from annual tuition. In the meantime, PreK&ndash;2 families can start now with a Personalized Learning Plan.</p>
+    <a href="/enroll" class="btn btn-primary">Join the Wonder Studio Waitlist</a>
   </div>
 </section>
 
