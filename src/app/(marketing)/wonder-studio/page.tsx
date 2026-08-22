@@ -48,7 +48,7 @@ export default function Page() {
   </nav>
 </div>
 
-<section class="page-hero wonder photo-hero" style="background-image:linear-gradient(160deg, rgba(74,58,46,0.86) 0%, rgba(42,21,48,0.92) 100%), url('https://images.pexels.com/photos/29132351/pexels-photo-29132351.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600');">
+<section class="page-hero wonder photo-hero" style="background-image:linear-gradient(160deg, rgba(74,58,46,0.86) 0%, rgba(42,21,48,0.92) 100%), url('/images/brand/wonder-outdoor-bugs.png');">
   <div class="container">
     <span class="eyebrow" style="color:var(--amber);">Wonder Studio · Grades PreK–2</span>
     <h1>Learning begins with wonder.</h1>
@@ -67,7 +67,7 @@ export default function Page() {
       <h2>Play, nature, stories and foundational learning.</h2>
       <p>Su Mira Wonder Studio helps young learners build strong literacy, mathematics, curiosity and confidence through story-driven learning, play, exploration and family connection.</p>
     </div>
-    <img class="photo-card" src="https://images.pexels.com/photos/6437505/pexels-photo-6437505.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Two young learners reading a colorful storybook together" loading="lazy">
+    <img class="photo-card" src="/images/brand/wonder-reading-be-kind.png" alt="Two young learners reading a storybook together" loading="lazy">
   </div>
 </section>
 
@@ -79,9 +79,7 @@ export default function Page() {
   <div class="container" style="max-width:820px;">
     <div class="video-frame">
       <span class="video-tag">Wonder Studio</span>
-      <video class="media-video" style="height:460px;" autoplay muted loop playsinline poster="https://images.pexels.com/videos/3978636/pexels-photo-3978636.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">
-        <source src="https://videos.pexels.com/video-files/3978636/3978636-hd_1920_1080_24fps.mp4" type="video/mp4">
-      </video>
+      <img class="media-video" style="height:460px; object-fit:cover; width:100%;" src="/images/brand/wonder-tablet-storytime.png" alt="A parent and child using the Su Mira Wonder Studio platform together">
     </div>
   </div>
 </section>
