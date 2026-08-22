@@ -16,6 +16,10 @@ export default function LoginPage() {
           New to Su Mira?{" "}
           <Link href="/signup" className="text-terracotta-dark font-semibold">Create an account</Link>
         </p>
+        <p className="text-sm text-warm-gray mt-2">
+          Are you a parent?{" "}
+          <Link href="/parent-portal/login" className="text-terracotta-dark font-semibold">Parent portal</Link>
+        </p>
       </div>
     </main>
   );
