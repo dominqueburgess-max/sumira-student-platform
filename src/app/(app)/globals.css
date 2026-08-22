@@ -2,20 +2,20 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --plum: #3B1F3D;
-  --plum-dark: #2A1530;
-  --plum-light: #5C3560;
-  --terracotta: #C97A5D;
-  --terracotta-dark: #B0654A;
-  --sage: #8FA687;
-  --sage-dark: #5F7757;
-  --cream: #FBF6EE;
-  --ivory: #FFFDF9;
-  --charcoal: #2E2A2E;
-  --warm-gray: #6E6670;
-  --warm-gray-light: #A79FA5;
-  --amber: #E8A94A;
-  --border: #E7DCD0;
+  --plum: #3E5068;
+  --plum-dark: #2B3A4C;
+  --plum-light: #7189A8;
+  --terracotta: #E2916E;
+  --terracotta-dark: #C97050;
+  --sage: #96B78C;
+  --sage-dark: #729566;
+  --cream: #F2E9DB;
+  --ivory: #FFFEFA;
+  --charcoal: #33303A;
+  --warm-gray: #6B6470;
+  --warm-gray-light: #A89FA8;
+  --amber: #F0B85E;
+  --border: #D9CBB4;
 }
 
 @theme inline {
@@ -49,5 +49,5 @@ h1, h2, h3, h4 {
 }
 
 .card-shadow {
-  box-shadow: 0 12px 32px rgba(59, 31, 61, 0.10);
+  box-shadow: 0 12px 32px rgba(43, 58, 76, 0.14);
 }

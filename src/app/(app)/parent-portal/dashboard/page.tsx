@@ -17,7 +17,7 @@ export default async function ParentDashboardPage() {
           </div>
           <ParentLogoutButton />
         </div>
-        <div className="bg-ivory rounded-3xl card-shadow p-10 text-center">
+        <div className="bg-ivory rounded-3xl border border-border card-shadow p-10 text-center">
           <div className="w-14 h-14 rounded-full bg-terracotta/10 text-terracotta-dark flex items-center justify-center text-2xl mx-auto mb-4">✓</div>
           <h1 className="text-xl text-plum mb-2">Thanks, {parent.email}!</h1>
           <p className="text-warm-gray max-w-md mx-auto">
