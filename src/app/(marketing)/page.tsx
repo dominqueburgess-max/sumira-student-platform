@@ -74,6 +74,21 @@ export default async function Page() {
   </div>
 </section>
 
+<section class="tight">
+  <div class="container">
+    <div class="center" style="margin-bottom:28px;">
+      <span class="eyebrow">Welcome</span>
+      <h2>Hear it directly from Su Mira.</h2>
+    </div>
+    <div class="video-frame" style="max-width:820px; margin:0 auto; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); position:relative;">
+      <span class="video-tag">WELCOME VIDEO</span>
+      <video style="width:100%; display:block;" controls preload="metadata" poster="/images/brand/live-studio-design-thinking.png">
+        <source src="/videos/welcome-to-su-mira.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
 <section class="value-strip tight">
   <div class="container">
     <div class="value-grid">
