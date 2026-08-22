@@ -5,7 +5,6 @@ import { ParentLogoutButton } from "@/components/ParentLogoutButton";
 export default async function ParentDashboardPage() {
   const parent = await getCurrentParent();
   if (!parent) redirect("/parent-portal/login");
-  if (!parent.email_verified) redirect("/parent-portal/verify-email");
   if (!parent.enrollment_completed) redirect("/parent-portal/enroll");
 
   return (
@@ -31,6 +30,13 @@ export default async function ParentDashboardPage() {
             Your student can log in any time at <span className="font-semibold text-plum">sumirastudio.com/login</span> with
             the email and password you just created for them.
           </p>
+          {!parent.email_verified && (
+            <div className="mt-6 bg-cream border border-border rounded-xl px-5 py-3 inline-block">
+              <p className="text-sm text-warm-gray">
+                We&rsquo;ve also sent a verification email to {parent.email} — no rush, but it helps confirm this account is really yours.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </main>

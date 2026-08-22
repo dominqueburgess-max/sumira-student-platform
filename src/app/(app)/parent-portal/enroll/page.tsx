@@ -5,7 +5,6 @@ import { ParentEnrollForm } from "@/components/ParentEnrollForm";
 export default async function ParentEnrollPage() {
   const parent = await getCurrentParent();
   if (!parent) redirect("/parent-portal/login");
-  if (!parent.email_verified) redirect("/parent-portal/verify-email");
   if (parent.enrollment_completed) redirect("/parent-portal/dashboard");
 
   return (
