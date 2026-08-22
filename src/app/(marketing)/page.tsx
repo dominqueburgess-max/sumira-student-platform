@@ -47,7 +47,7 @@ export default async function Page() {
       <li><a href="/resources">Resources</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="/login" class="btn btn-ghost" style="margin-right:10px;">Student &amp; Parent Login</a>
+      <a href="/account" class="btn btn-ghost" style="margin-right:10px;">Log In / Sign Up</a>
       <a href="/enroll" class="btn btn-primary">Start Your Journey</a>
     </div>
   </nav>
