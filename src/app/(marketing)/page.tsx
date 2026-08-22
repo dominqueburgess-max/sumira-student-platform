@@ -17,7 +17,7 @@ export default async function Page() {
       <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
       <li class="has-dropdown"><a href="/learning-studio">Learning Studio</a>
         <div class="dropdown-menu">
-          <a href="/wonder-studio">Wonder Studio · PreK–2</a>
+          <a href="/wonder-studio">Wonder Studio · PreK–2 (Coming Oct 2026)</a>
           <a href="/discovery-studio">Discovery Studio · Grades 3–5</a>
           <a href="/venture-studio">Venture Studio · Grades 6–12</a>
           <a href="/how-it-works">Live Learning</a>

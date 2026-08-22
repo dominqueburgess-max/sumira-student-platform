@@ -154,12 +154,15 @@ export function EnrollForm() {
           <>
             <div className="field">
               <label>Preferred Learning Studio</label>
-              <select name="studio" defaultValue="Wonder Studio (PreK–2)">
-                <option>Wonder Studio (PreK–2)</option>
+              <select name="studio" defaultValue="Discovery Studio (Grades 3–5)">
                 <option>Discovery Studio (Grades 3–5)</option>
                 <option>Venture Studio (Grades 6–12)</option>
+                <option>Wonder Studio (PreK–2) — Coming Oct 2026, waitlist only</option>
                 <option>Not sure yet</option>
               </select>
+              <p style={{ fontSize: "0.8rem", color: "var(--warm-gray)", marginTop: 6 }}>
+                Wonder Studio (PreK&ndash;2) launches October 2026. PreK&ndash;2 families can enroll now for a Personalized Learning Plan and join the waitlist.
+              </p>
             </div>
             <div className="field">
               <label>Enrollment plan of interest</label>

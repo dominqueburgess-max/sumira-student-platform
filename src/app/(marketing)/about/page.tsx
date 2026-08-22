@@ -11,7 +11,7 @@ export default function Page() {
       <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
       <li class="has-dropdown"><a href="/learning-studio">Learning Studio</a>
         <div class="dropdown-menu">
-          <a href="/wonder-studio">Wonder Studio &middot; PreK&ndash;2</a>
+          <a href="/wonder-studio">Wonder Studio &middot; PreK&ndash;2 (Coming Oct 2026)</a>
           <a href="/discovery-studio">Discovery Studio &middot; Grades 3&ndash;5</a>
           <a href="/venture-studio">Venture Studio &middot; Grades 6&ndash;12</a>
           <a href="/how-it-works">Live Learning</a>

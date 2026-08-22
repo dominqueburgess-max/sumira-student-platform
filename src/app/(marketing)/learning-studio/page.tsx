@@ -11,7 +11,7 @@ export default function Page() {
       <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
       <li class="has-dropdown"><a href="/learning-studio">Learning Studio</a>
         <div class="dropdown-menu">
-          <a href="/wonder-studio">Wonder Studio · PreK–2</a>
+          <a href="/wonder-studio">Wonder Studio · PreK–2 (Coming Oct 2026)</a>
           <a href="/discovery-studio">Discovery Studio · Grades 3–5</a>
           <a href="/venture-studio">Venture Studio · Grades 6–12</a>
           <a href="/how-it-works">Live Learning</a>
@@ -108,9 +108,10 @@ export default function Page() {
     <div class="card-grid">
       <div class="card studio-card wonder">
         <span class="eyebrow">PreK–2</span>
+        <span style="display:inline-block; background:var(--amber); color:var(--charcoal); font-size:0.72rem; font-weight:700; padding:4px 12px; border-radius:100px; margin-left:8px;">Coming October 2026</span>
         <h3>Wonder Studio</h3>
-        <p>Play, nature, stories and foundational learning.</p>
-        <a href="/wonder-studio" class="btn btn-outline">Explore Wonder Studio</a>
+        <p>Play, nature, stories and foundational learning. Right now, PreK&ndash;2 families can start with a Personalized Learning Plan.</p>
+        <a href="/wonder-studio" class="btn btn-outline">Learn More &amp; Join the Waitlist</a>
       </div>
       <div class="card studio-card discovery">
         <span class="eyebrow">Grades 3–5</span>

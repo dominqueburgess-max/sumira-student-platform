@@ -11,7 +11,7 @@ export default function Page() {
       <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
       <li class="has-dropdown"><a href="/learning-studio">Learning Studio</a>
         <div class="dropdown-menu">
-          <a href="/wonder-studio">Wonder Studio · PreK–2</a>
+          <a href="/wonder-studio">Wonder Studio · PreK–2 (Coming Oct 2026)</a>
           <a href="/discovery-studio">Discovery Studio · Grades 3–5</a>
           <a href="/venture-studio">Venture Studio · Grades 6–12</a>
           <a href="/how-it-works">Live Learning</a>
@@ -51,11 +51,12 @@ export default function Page() {
 <section class="page-hero wonder photo-hero" style="background-image:linear-gradient(160deg, rgba(74,58,46,0.86) 0%, rgba(42,21,48,0.92) 100%), url('/images/brand/wonder-outdoor-bugs.png');">
   <div class="container">
     <span class="eyebrow" style="color:var(--amber);">Wonder Studio · Grades PreK–2</span>
+    <div class="hero-badge" style="background:var(--amber); color:var(--charcoal); font-weight:700; border:none;">Coming October 2026</div>
     <h1>Learning begins with wonder.</h1>
-    <p class="lede">Young learners explore literacy, mathematics, science, nature and creativity through stories, play and hands-on discovery.</p>
+    <p class="lede">Young learners explore literacy, mathematics, science, nature and creativity through stories, play and hands-on discovery. Wonder Studio launches October 2026 &mdash; right now, PreK&ndash;2 families can get started with a Personalized Learning Plan and join our launch waitlist.</p>
     <div class="btn-row">
-      <a href="/enroll" class="btn btn-primary">Start Your Journey</a>
-      <a href="/learning-blueprint" class="btn btn-ghost">See the Learning Blueprint</a>
+      <a href="/personalized-learning-plans" class="btn btn-primary">Get a Personalized Learning Plan Now</a>
+      <a href="/enroll" class="btn btn-ghost">Join the Wonder Studio Waitlist</a>
     </div>
   </div>
 </section>

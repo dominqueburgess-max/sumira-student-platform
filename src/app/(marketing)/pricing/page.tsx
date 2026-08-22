@@ -11,7 +11,7 @@ export default function Page() {
       <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
       <li class="has-dropdown"><a href="/learning-studio">Learning Studio</a>
         <div class="dropdown-menu">
-          <a href="/wonder-studio">Wonder Studio &middot; PreK&ndash;2</a>
+          <a href="/wonder-studio">Wonder Studio &middot; PreK&ndash;2 (Coming Oct 2026)</a>
           <a href="/discovery-studio">Discovery Studio &middot; Grades 3&ndash;5</a>
           <a href="/venture-studio">Venture Studio &middot; Grades 6&ndash;12</a>
           <a href="/how-it-works">Live Learning</a>
@@ -127,7 +127,7 @@ export default function Page() {
     </div>
     <table class="compare">
       <tr><th>Learning Studio</th><th>Grades</th><th>Registration Fee</th></tr>
-      <tr><td>Wonder Studio</td><td>PreK&ndash;2</td><td class="sumira">$349</td></tr>
+      <tr><td>Wonder Studio <span style="font-size:0.75rem; color:var(--terracotta); font-weight:600;">(Coming Oct 2026)</span></td><td>PreK&ndash;2</td><td class="sumira">$349</td></tr>
       <tr><td>Discovery Studio</td><td>Grades 3&ndash;5</td><td class="sumira">$449</td></tr>
       <tr><td>Venture Studio</td><td>Grades 6&ndash;12</td><td class="sumira">$599</td></tr>
     </table>
@@ -154,7 +154,7 @@ export default function Page() {
       <div>
         <h5>Learning Studio</h5>
         <ul>
-          <li><a href="/wonder-studio">Wonder Studio</a></li>
+          <li><a href="/wonder-studio">Wonder Studio (Coming Oct 2026)</a></li>
           <li><a href="/discovery-studio">Discovery Studio</a></li>
           <li><a href="/venture-studio">Venture Studio</a></li>
           <li><a href="/meet-mira">Mira AI Guide</a></li>
