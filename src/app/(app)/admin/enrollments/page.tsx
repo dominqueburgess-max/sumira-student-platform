@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 type Inquiry = {
   id: number;
+  enrollment_type: string;
   parent_name: string;
   email: string;
   phone: string | null;
@@ -55,6 +56,9 @@ export default async function AdminEnrollmentsPage() {
               <div key={inq.id} className="bg-ivory rounded-2xl border border-border p-6">
                 <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
                   <div>
+                    <span className={`inline-block text-xs font-semibold uppercase tracking-wide rounded-full px-3 py-1 mb-2 ${inq.enrollment_type === "personalized_plan" ? "bg-sage/20 text-sage-dark" : "bg-terracotta/15 text-terracotta-dark"}`}>
+                      {inq.enrollment_type === "personalized_plan" ? "Personalized Learning Plan" : "Learning Studio"}
+                    </span>
                     <p className="font-semibold text-plum">{inq.parent_name}</p>
                     <p className="text-sm text-warm-gray">
                       <a href={`mailto:${inq.email}`} className="text-terracotta-dark font-semibold">{inq.email}</a>

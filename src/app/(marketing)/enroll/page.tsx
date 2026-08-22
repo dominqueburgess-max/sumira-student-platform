@@ -52,11 +52,32 @@ export default function Page() {
 </div>
 
 
-<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(59,31,61,0.86) 0%, rgba(42,21,48,0.92) 100%), url('https://images.pexels.com/photos/10071284/pexels-photo-10071284.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600');">
+<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(43,58,76,0.82) 0%, rgba(30,41,54,0.9) 100%), url('/images/brand/gathering-friends.png');">
   <div class="container">
-    <span class="eyebrow" style="color:var(--amber);">Enroll</span>
-    <h1>Start building a learning experience around your child.</h1>
-    <p class="lede">Tell us about your family and we'll follow up with a recommended Learning Studio, plan and next steps.</p>
+    <span class="eyebrow" style="color:var(--amber);">Welcome</span>
+    <h1>We&rsquo;re so glad you&rsquo;re here.</h1>
+    <p class="lede">Whether you want the full Su Mira Learning Studio experience or just a personalized learning plan, tell us about your family below and we&rsquo;ll take it from there.</p>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="center" style="margin-bottom:36px;">
+      <span class="eyebrow">Two Ways to Get Started</span>
+      <h2>Which path fits your family?</h2>
+    </div>
+    <div class="card-grid" style="margin-bottom:8px;">
+      <div class="card studio-card venture">
+        <div class="hero-tile" style="background-image:url('/images/brand/live-studio-design-thinking.png'); height:180px; margin-bottom:16px; border-radius:12px;"></div>
+        <h3>Full Learning Studio</h3>
+        <p>Self-paced academics, live studios, Mira AI guide, real-world projects and community &mdash; the complete PreK&ndash;12 program.</p>
+      </div>
+      <div class="card studio-card wonder">
+        <div class="hero-tile" style="background-image:url('/images/brand/homeschool-headphones-girl.png'); height:180px; margin-bottom:16px; border-radius:12px;"></div>
+        <h3>Personalized Learning Plan only</h3>
+        <p>Just the AI-generated, standards-aligned learning plan &mdash; a great fit if you're not ready for a full Learning Studio yet.</p>
+      </div>
+    </div>
   </div>
 </section>
 

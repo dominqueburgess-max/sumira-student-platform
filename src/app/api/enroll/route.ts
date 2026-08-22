@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
-      parent_name, email, phone, state, student_name, student_age,
+      enrollment_type, parent_name, email, phone, state, student_name, student_age,
       current_grade, upcoming_grade, studio, plan, start_date,
       homeschool, other_school, esa, looking_for, accommodations,
     } = body;
@@ -16,10 +16,11 @@ export async function POST(req: NextRequest) {
 
     await db().sql`
       INSERT INTO enrollment_inquiries (
-        parent_name, email, phone, state, student_name, student_age,
+        enrollment_type, parent_name, email, phone, state, student_name, student_age,
         current_grade, upcoming_grade, studio, plan, start_date,
         homeschool, other_school, esa, looking_for, accommodations
       ) VALUES (
+        ${enrollment_type === "personalized_plan" ? "personalized_plan" : "learning_studio"},
         ${parent_name}, ${email}, ${phone || null}, ${state || null}, ${student_name},
         ${student_age ? Number(student_age) : null}, ${current_grade || null}, ${upcoming_grade || null},
         ${studio || null}, ${plan || null}, ${start_date || null},

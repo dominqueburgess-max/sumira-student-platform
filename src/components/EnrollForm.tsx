@@ -2,9 +2,12 @@
 
 import { useState, FormEvent } from "react";
 
+type EnrollmentType = "learning_studio" | "personalized_plan";
+
 export function EnrollForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [enrollmentType, setEnrollmentType] = useState<EnrollmentType>("learning_studio");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,6 +32,7 @@ export function EnrollForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          enrollment_type: enrollmentType,
           parent_name,
           email,
           phone: data.get("phone"),
@@ -37,8 +41,8 @@ export function EnrollForm() {
           student_age: data.get("student_age"),
           current_grade: data.get("current_grade"),
           upcoming_grade: data.get("upcoming_grade"),
-          studio: data.get("studio"),
-          plan: data.get("plan"),
+          studio: enrollmentType === "learning_studio" ? data.get("studio") : "Personalized Learning Plan only",
+          plan: enrollmentType === "learning_studio" ? data.get("plan") : "Personalized Learning Plan only",
           start_date: data.get("start_date"),
           homeschool: data.get("homeschool"),
           other_school: data.get("other_school"),
@@ -64,11 +68,11 @@ export function EnrollForm() {
   if (status === "success") {
     return (
       <div className="pillow" style={{ textAlign: "center" }}>
-        <h3 style={{ marginTop: 0 }}>Thank you!</h3>
+        <h3 style={{ marginTop: 0 }}>Welcome to the Su Mira family!</h3>
         <p style={{ marginBottom: 0 }}>
           We&rsquo;ve received your family&rsquo;s information. A Su Mira team member will follow up
-          by email within one to two business days with a recommended Learning Studio, plan and
-          next steps.
+          by email within one to two business days with next steps
+          {enrollmentType === "learning_studio" ? " and a recommended Learning Studio and plan." : " for your Personalized Learning Plan."}
         </p>
       </div>
     );
@@ -76,6 +80,66 @@ export function EnrollForm() {
 
   return (
     <form className="enroll" onSubmit={handleSubmit}>
+      <h3 style={{ marginBottom: 12 }}>What are you enrolling in?</h3>
+      <p style={{ marginTop: 0, marginBottom: 20, color: "var(--warm-gray)" }}>
+        Choose the option that fits your family. You can always add the other later.
+      </p>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 16,
+          marginBottom: 32,
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            cursor: "pointer",
+            border: `2px solid ${enrollmentType === "learning_studio" ? "var(--terracotta)" : "var(--border)"}`,
+            borderRadius: "var(--radius-md)",
+            padding: "18px 20px",
+            background: enrollmentType === "learning_studio" ? "rgba(226,145,110,0.08)" : "var(--ivory)",
+          }}
+        >
+          <input
+            type="radio"
+            name="enrollment_type_choice"
+            value="learning_studio"
+            checked={enrollmentType === "learning_studio"}
+            onChange={() => setEnrollmentType("learning_studio")}
+            style={{ marginRight: 8 }}
+          />
+          <strong style={{ color: "var(--plum)" }}>Full Learning Studio</strong>
+          <p style={{ margin: "6px 0 0", fontSize: "0.88rem" }}>
+            Self-paced academics, live studios, Mira AI guide, projects and community — the complete PreK&ndash;12 program.
+          </p>
+        </label>
+        <label
+          style={{
+            display: "block",
+            cursor: "pointer",
+            border: `2px solid ${enrollmentType === "personalized_plan" ? "var(--terracotta)" : "var(--border)"}`,
+            borderRadius: "var(--radius-md)",
+            padding: "18px 20px",
+            background: enrollmentType === "personalized_plan" ? "rgba(226,145,110,0.08)" : "var(--ivory)",
+          }}
+        >
+          <input
+            type="radio"
+            name="enrollment_type_choice"
+            value="personalized_plan"
+            checked={enrollmentType === "personalized_plan"}
+            onChange={() => setEnrollmentType("personalized_plan")}
+            style={{ marginRight: 8 }}
+          />
+          <strong style={{ color: "var(--plum)" }}>Personalized Learning Plan only</strong>
+          <p style={{ margin: "6px 0 0", fontSize: "0.88rem" }}>
+            Just the AI-generated, standards-aligned learning plan &mdash; no Learning Studio enrollment required.
+          </p>
+        </label>
+      </div>
+
       <h3 style={{ marginBottom: 24 }}>Family &amp; Learner Information</h3>
       <div className="form-grid">
         <div className="field"><label>Parent or guardian name</label><input type="text" name="parent_name" required /></div>
@@ -86,24 +150,28 @@ export function EnrollForm() {
         <div className="field"><label>Student age</label><input type="number" name="student_age" min={3} max={19} /></div>
         <div className="field"><label>Current grade</label><input type="text" name="current_grade" /></div>
         <div className="field"><label>Grade for upcoming year</label><input type="text" name="upcoming_grade" /></div>
-        <div className="field">
-          <label>Preferred Learning Studio</label>
-          <select name="studio" defaultValue="Wonder Studio (PreK–2)">
-            <option>Wonder Studio (PreK–2)</option>
-            <option>Discovery Studio (Grades 3–5)</option>
-            <option>Venture Studio (Grades 6–12)</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div className="field">
-          <label>Enrollment plan of interest</label>
-          <select name="plan" defaultValue="Foundations">
-            <option>Foundations</option>
-            <option>Flex (Most Popular)</option>
-            <option>Signature</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
+        {enrollmentType === "learning_studio" && (
+          <>
+            <div className="field">
+              <label>Preferred Learning Studio</label>
+              <select name="studio" defaultValue="Wonder Studio (PreK–2)">
+                <option>Wonder Studio (PreK–2)</option>
+                <option>Discovery Studio (Grades 3–5)</option>
+                <option>Venture Studio (Grades 6–12)</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div className="field">
+              <label>Enrollment plan of interest</label>
+              <select name="plan" defaultValue="Foundations">
+                <option>Foundations</option>
+                <option>Flex (Most Popular)</option>
+                <option>Signature</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </>
+        )}
         <div className="field"><label>Preferred start date</label><input type="date" name="start_date" /></div>
         <div className="field">
           <label>Does the learner currently homeschool?</label>
