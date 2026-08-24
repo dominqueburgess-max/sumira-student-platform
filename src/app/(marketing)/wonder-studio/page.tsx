@@ -77,10 +77,16 @@ export default function Page() {
     <span class="eyebrow">See It In Action</span>
     <h2>A glimpse of a Wonder Studio day.</h2>
   </div>
-  <div class="container" style="max-width:820px;">
-    <div class="video-frame">
-      <span class="video-tag">Wonder Studio</span>
-      <img class="media-video" style="height:460px; object-fit:cover; width:100%;" src="/images/brand/wonder-tablet-storytime.png" alt="A parent and child using the Su Mira Wonder Studio platform together">
+  <div class="container" style="max-width:1100px;">
+    <div class="card-grid" style="grid-template-columns:1fr 1fr; gap:24px;">
+      <div class="video-frame">
+        <span class="video-tag">Wonder Studio</span>
+        <img class="media-video" style="height:460px; object-fit:cover; width:100%;" src="/images/brand/wonder-tablet-storytime.png" alt="A parent and child using the Su Mira Wonder Studio platform together">
+      </div>
+      <div class="video-frame">
+        <span class="video-tag">Wonder Quest</span>
+        <img class="media-video" style="height:460px; object-fit:cover; width:100%;" src="/images/brand/wonder-craft-portfolio.png" alt="A parent and child completing a Wonder Quest nature craft together while using the Su Mira tablet app">
+      </div>
     </div>
   </div>
 </section>
