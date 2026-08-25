@@ -7,11 +7,17 @@ import { checkAndAwardAchievements, getAchievements } from "@/lib/achievements";
 import { getOrCreateParentToken } from "@/lib/parentAccess";
 
 async function ensureEnrollments(studentId: number, studio: string, gradeLevel: string) {
-  const courseCount = await db().sql`SELECT COUNT(*)::int AS n FROM enrollments WHERE student_id = ${studentId}`;
-  if (courseCount[0].n === 0) {
-    const courses = await db().sql`SELECT id FROM courses WHERE studio = ${studio} AND grade_level = ${gradeLevel}`;
-    for (const c of courses) {
-      await db().sql`INSERT INTO enrollments (student_id, course_id) VALUES (${studentId}, ${c.id}) ON CONFLICT DO NOTHING`;
+  // Venture Studio (grades 6-12) courses are assigned individually by an
+  // admin (see /admin/students) rather than auto-matched by grade level,
+  // since 6-12 students take different course levels (electives,
+  // acceleration, etc.) even within the same grade.
+  if (studio !== "venture") {
+    const courseCount = await db().sql`SELECT COUNT(*)::int AS n FROM enrollments WHERE student_id = ${studentId}`;
+    if (courseCount[0].n === 0) {
+      const courses = await db().sql`SELECT id FROM courses WHERE studio = ${studio} AND grade_level = ${gradeLevel}`;
+      for (const c of courses) {
+        await db().sql`INSERT INTO enrollments (student_id, course_id) VALUES (${studentId}, ${c.id}) ON CONFLICT DO NOTHING`;
+      }
     }
   }
   const liveCount = await db().sql`SELECT COUNT(*)::int AS n FROM live_class_enrollments WHERE student_id = ${studentId}`;
@@ -78,6 +84,11 @@ export default async function DashboardPage() {
 
         <section className="mb-10">
           <h2 className="text-xl mb-4">Self-Paced Classes</h2>
+          {courses.length === 0 && (
+            <div className="bg-ivory rounded-2xl card-shadow p-6 border border-border text-warm-gray text-sm">
+              Your classes haven&rsquo;t been assigned yet. Once your Su Mira team sets up your course schedule, they&rsquo;ll appear here.
+            </div>
+          )}
           <div className="grid sm:grid-cols-2 gap-5">
             {courses.map((c) => {
               const pct = c.total_lessons > 0 ? Math.round((c.completed_lessons / c.total_lessons) * 100) : 0;

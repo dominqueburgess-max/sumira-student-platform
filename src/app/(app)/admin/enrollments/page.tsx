@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { isAdminAuthenticated } from "@/lib/adminAuth";
 import { db } from "@/lib/db";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
@@ -44,6 +45,11 @@ export default async function AdminEnrollmentsPage() {
             <p className="text-warm-gray text-sm">{inquiries.length} submission{inquiries.length === 1 ? "" : "s"} from the /enroll form.</p>
           </div>
           <AdminLogoutButton />
+        </div>
+
+        <div className="flex gap-4 mb-8 text-sm font-semibold">
+          <span className="text-plum border-b-2 border-terracotta pb-1">Enrollment inquiries</span>
+          <Link href="/admin/students" className="text-warm-gray hover:text-plum">Venture Studio students</Link>
         </div>
 
         {inquiries.length === 0 ? (
