@@ -1,11 +1,12 @@
-import { redirect } from "next/navigation";
 import { getCurrentParent } from "@/lib/parentAuth";
+import { redirect } from "next/navigation";
 import { ParentEnrollForm } from "@/components/ParentEnrollForm";
 
 export default async function ParentEnrollPage() {
   const parent = await getCurrentParent();
   if (!parent) redirect("/parent-portal/login");
-  if (parent.enrollment_completed) redirect("/parent-portal/dashboard");
+
+  const addingAnother = parent.enrollment_completed;
 
   return (
     <main className="flex-1 bg-cream min-h-screen px-6 py-12">
@@ -15,12 +16,24 @@ export default async function ParentEnrollPage() {
           <div className="text-xs tracking-[0.3em] text-terracotta-dark font-semibold mt-1">PARENT PORTAL</div>
         </div>
         <div className="bg-ivory rounded-3xl border border-border card-shadow p-8 md:p-10">
-          <h1 className="text-xl text-plum mb-2">Tell us about your family</h1>
-          <p className="text-warm-gray text-sm mb-6">
-            Before you can access your parent dashboard, share a little about your learner &mdash; enrolling more than one child?
-            Add each of them below and let us know whether they&rsquo;re starting with a Personalized Learning Plan, a full
-            Learning Studio, or both. Our team will follow up with a recommended plan and next steps for each learner.
-          </p>
+          {addingAnother ? (
+            <>
+              <h1 className="text-xl text-plum mb-2">Add another learner</h1>
+              <p className="text-warm-gray text-sm mb-6">
+                Add a new child to your Su Mira family account below. Let us know whether they&rsquo;re starting with a
+                Personalized Learning Plan, a full Learning Studio, or both, and our team will follow up with next steps.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-xl text-plum mb-2">Tell us about your family</h1>
+              <p className="text-warm-gray text-sm mb-6">
+                Before you can access your parent dashboard, share a little about your learner &mdash; enrolling more than one child?
+                Add each of them below and let us know whether they&rsquo;re starting with a Personalized Learning Plan, a full
+                Learning Studio, or both. Our team will follow up with a recommended plan and next steps for each learner.
+              </p>
+            </>
+          )}
           <ParentEnrollForm />
         </div>
       </div>

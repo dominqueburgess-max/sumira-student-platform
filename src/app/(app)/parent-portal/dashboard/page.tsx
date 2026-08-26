@@ -37,6 +37,14 @@ export default async function ParentDashboardPage() {
               </p>
             </div>
           )}
+          <div className="mt-8 pt-6 border-t border-border">
+            <a
+              href="/parent-portal/enroll"
+              className="inline-block rounded-full bg-terracotta text-white font-semibold text-sm px-6 py-3 hover:bg-terracotta-dark transition"
+            >
+              + Add another learner
+            </a>
+          </div>
         </div>
       </div>
     </main>
