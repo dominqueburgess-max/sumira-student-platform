@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyAdminPassword, createAdminSession, setAdminSessionCookie } from "@/lib/adminAuth";
+import { verifyAdminCredentials, createAdminSession, setAdminSessionCookie } from "@/lib/adminAuth";
 
 export async function POST(req: NextRequest) {
-  const { password } = await req.json();
-  if (!password || !(await verifyAdminPassword(password))) {
-    return NextResponse.json({ error: "Incorrect password." }, { status: 401 });
+  const { email, password } = await req.json();
+  if (!email || !password) {
+    return NextResponse.json({ error: "Enter your email and password." }, { status: 400 });
   }
-  const token = await createAdminSession();
+  const admin = await verifyAdminCredentials(email, password);
+  if (!admin) {
+    return NextResponse.json({ error: "Incorrect email or password." }, { status: 401 });
+  }
+  const token = await createAdminSession(admin.id);
   await setAdminSessionCookie(token);
   return NextResponse.json({ ok: true });
 }

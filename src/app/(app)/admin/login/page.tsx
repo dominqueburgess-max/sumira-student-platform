@@ -9,7 +9,7 @@ export default function AdminLoginPage() {
           <div className="text-xs tracking-[0.3em] text-terracotta-dark font-semibold mt-1">ADMIN</div>
         </div>
         <h1 className="text-xl mb-1">Enrollment inquiries</h1>
-        <p className="text-warm-gray text-sm mb-6 text-center">Enter the admin password to view family submissions.</p>
+        <p className="text-warm-gray text-sm mb-6 text-center">Log in with your admin email and password to view family submissions.</p>
         <AdminLoginForm />
       </div>
     </main>

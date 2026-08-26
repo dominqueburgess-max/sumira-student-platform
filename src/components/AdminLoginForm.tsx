@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 export function AdminLoginForm() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -11,8 +12,8 @@ export function AdminLoginForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!password) {
-      setError("Enter the admin password.");
+    if (!email || !password) {
+      setError("Enter your email and password.");
       return;
     }
     setLoading(true);
@@ -20,11 +21,12 @@ export function AdminLoginForm() {
     const res = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify({ email, password }),
     });
     setLoading(false);
     if (!res.ok) {
-      setError("Incorrect password.");
+      const data = await res.json().catch(() => ({}));
+      setError(data.error || "Incorrect email or password.");
       return;
     }
     router.push("/admin/enrollments");
@@ -34,13 +36,22 @@ export function AdminLoginForm() {
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
       <div>
+        <label className="text-sm font-semibold text-plum block mb-1">Admin email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-xl border border-border px-4 py-3 text-sm"
+          autoFocus
+        />
+      </div>
+      <div>
         <label className="text-sm font-semibold text-plum block mb-1">Admin password</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-xl border border-border px-4 py-3 text-sm"
-          autoFocus
         />
       </div>
       {error && <p className="text-sm text-terracotta-dark font-semibold">{error}</p>}
