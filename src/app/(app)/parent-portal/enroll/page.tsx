@@ -17,8 +17,9 @@ export default async function ParentEnrollPage() {
         <div className="bg-ivory rounded-3xl border border-border card-shadow p-8 md:p-10">
           <h1 className="text-xl text-plum mb-2">Tell us about your family</h1>
           <p className="text-warm-gray text-sm mb-6">
-            Before you can access your parent dashboard, share a little about your learner. Our team will
-            follow up with a recommended Learning Studio, plan and next steps.
+            Before you can access your parent dashboard, share a little about your learner &mdash; enrolling more than one child?
+            Add each of them below and let us know whether they&rsquo;re starting with a Personalized Learning Plan, a full
+            Learning Studio, or both. Our team will follow up with a recommended plan and next steps for each learner.
           </p>
           <ParentEnrollForm />
         </div>

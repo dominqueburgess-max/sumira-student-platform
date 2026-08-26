@@ -62,8 +62,14 @@ export default async function AdminEnrollmentsPage() {
               <div key={inq.id} className="bg-ivory rounded-2xl border border-border p-6">
                 <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
                   <div>
-                    <span className={`inline-block text-xs font-semibold uppercase tracking-wide rounded-full px-3 py-1 mb-2 ${inq.enrollment_type === "personalized_plan" ? "bg-sage/20 text-sage-dark" : "bg-terracotta/15 text-terracotta-dark"}`}>
-                      {inq.enrollment_type === "personalized_plan" ? "Personalized Learning Plan" : "Learning Studio"}
+                    <span className={`inline-block text-xs font-semibold uppercase tracking-wide rounded-full px-3 py-1 mb-2 ${
+                      inq.enrollment_type === "personalized_plan" ? "bg-sage/20 text-sage-dark"
+                      : inq.enrollment_type === "both" ? "bg-plum/15 text-plum"
+                      : "bg-terracotta/15 text-terracotta-dark"
+                    }`}>
+                      {inq.enrollment_type === "personalized_plan" ? "Personalized Learning Plan"
+                        : inq.enrollment_type === "both" ? "PLP + Learning Studio"
+                        : "Learning Studio"}
                     </span>
                     <p className="font-semibold text-plum">{inq.parent_name}</p>
                     <p className="text-sm text-warm-gray">
