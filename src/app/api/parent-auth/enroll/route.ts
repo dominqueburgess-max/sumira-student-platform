@@ -124,10 +124,10 @@ export async function POST(req: NextRequest) {
       const avatarColor = colors[Math.floor(Math.random() * colors.length)];
 
       await db().sql`
-        INSERT INTO students (first_name, last_name, email, password_hash, studio, grade_level, parent_email, avatar_color, parent_id)
+        INSERT INTO students (first_name, last_name, email, password_hash, studio, grade_level, parent_email, avatar_color, parent_id, enrollment_type)
         VALUES (
           ${first || l.student_name}, ${last || ""}, ${String(l.student_login_email).toLowerCase().trim()}, ${passwordHash},
-          ${studioSlug(l.studio)}, ${gradeLevel}, ${parent.email}, ${avatarColor}, ${parent.id}
+          ${studioSlug(l.studio)}, ${gradeLevel}, ${parent.email}, ${avatarColor}, ${parent.id}, ${enrollmentType}
         )
       `;
     }

@@ -52,6 +52,13 @@ export type CurrentParent = {
   email: string;
   enrollment_completed: boolean;
   email_verified: boolean;
+  orientation_watched: boolean;
+  learning_blueprint_completed: boolean;
+  mailing_address_line1: string | null;
+  mailing_address_line2: string | null;
+  mailing_city: string | null;
+  mailing_state: string | null;
+  mailing_zip: string | null;
 };
 
 export async function getCurrentParent(): Promise<CurrentParent | null> {
@@ -61,7 +68,9 @@ export async function getCurrentParent(): Promise<CurrentParent | null> {
 
   const tokenHash = hashToken(token);
   const rows = await db().sql`
-    SELECT p.id, p.email, p.enrollment_completed, p.email_verified
+    SELECT p.id, p.email, p.enrollment_completed, p.email_verified,
+           p.orientation_watched, p.learning_blueprint_completed,
+           p.mailing_address_line1, p.mailing_address_line2, p.mailing_city, p.mailing_state, p.mailing_zip
     FROM parent_sessions ps
     JOIN parents p ON p.id = ps.parent_id
     WHERE ps.token_hash = ${tokenHash} AND ps.expires_at > NOW()
