@@ -124,6 +124,62 @@ export default function Page() {
   </div>
 </section>
 
+<section>
+  <div class="container center" style="margin-bottom:28px;">
+    <span class="eyebrow">Pricing</span>
+    <h2>Personalized Learning Plan pricing.</h2>
+    <p class="lede center">For families who want just the plan &mdash; no full Learning Studio enrollment required. Choose how often your Blueprint grows with your learner.</p>
+  </div>
+  <div class="container pricing-grid">
+    <div class="price-card">
+      <span class="eyebrow">Essentials Plan</span>
+      <div class="price-amount">$299<span>one-time</span></div>
+      <p class="price-note">One Blueprint, built for the full school year</p>
+      <p>For families who want a strong plan and are comfortable running with it on their own.</p>
+      <ul>
+        <li>One AI-generated, standards-aligned Learning Blueprint for the year</li>
+        <li>Recommended courses &amp; weekly learning schedule</li>
+        <li>Self-paced lessons matched to the plan</li>
+        <li>Audio narration &amp; voice-in answers</li>
+        <li>Mira AI Learning Guide</li>
+        <li>Digital portfolio &amp; parent dashboard</li>
+      </ul>
+      <a href="/enroll" class="btn btn-outline">Choose Essentials</a>
+    </div>
+    <div class="price-card popular">
+      <span class="price-tag">Most Popular</span>
+      <span class="eyebrow">Growing Plan</span>
+      <div class="price-amount">$599<span>/year</span></div>
+      <p class="price-note">Revised each semester or quarter &mdash; your choice</p>
+      <p>For families who want the plan to keep pace with their learner all year long.</p>
+      <ul>
+        <li>Everything in Essentials</li>
+        <li>Blueprint revised each semester or quarter as your learner grows</li>
+        <li>Updated course recommendations &amp; schedule at every revision</li>
+        <li>Priority email support from the Su Mira team</li>
+      </ul>
+      <a href="/enroll" class="btn btn-primary">Choose Growing</a>
+    </div>
+    <div class="price-card">
+      <span class="eyebrow">Guided Plan</span>
+      <div class="price-amount">$1,499<span>/year</span></div>
+      <p class="price-note">$125/month &middot; unlimited revisions + live coaching</p>
+      <p>For families who want hands-on guidance turning the plan into daily practice.</p>
+      <ul>
+        <li>Everything in Growing</li>
+        <li>Unlimited Blueprint revisions, any time</li>
+        <li>Monthly live 1:1 coaching session on implementing the plan at home</li>
+        <li>Direct implementation support &mdash; scheduling, pacing, troubleshooting</li>
+        <li>Priority scheduling for Su Mira Gatherings &amp; events</li>
+      </ul>
+      <a href="/enroll" class="btn btn-outline">Choose Guided</a>
+    </div>
+  </div>
+  <div class="container center" style="margin-top:20px;">
+    <p style="font-size:0.9rem; color:var(--warm-gray);">Ready for live studios, clubs and community too? <a href="/learning-studio" style="color:var(--terracotta-dark); font-weight:600;">Explore Learning Studio pricing</a> &mdash; you can upgrade anytime.</p>
+  </div>
+</section>
+
 <section class="section-plum">
   <div class="container center">
     <span class="eyebrow" style="color:var(--amber);">Begin the Journey</span>

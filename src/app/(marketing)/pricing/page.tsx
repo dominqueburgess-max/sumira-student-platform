@@ -54,6 +54,7 @@ export default function Page() {
     <span class="eyebrow" style="color:var(--amber);">Pricing</span>
     <h1>A plan built around your family.</h1>
     <p class="lede">Three membership plans, plus a one-time registration fee by Learning Studio. Eligible families may also qualify for state education funding.</p>
+    <p class="lede" style="margin-top:10px; font-size:0.95rem;">Just want a Personalized Learning Plan, no full Learning Studio enrollment? <a href="/personalized-learning-plans" style="color:var(--amber); font-weight:600;">See Personalized Learning Plan pricing</a>.</p>
   </div>
 </section>
 
