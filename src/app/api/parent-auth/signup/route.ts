@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { hashParentPassword, createParentSession, setParentSessionCookie, generateVerificationToken } from "@/lib/parentAuth";
 import { sendEmail } from "@/lib/email";
+import { emailShell, emailHeading, emailButton } from "@/lib/emailTemplates";
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,12 +39,13 @@ export async function POST(req: NextRequest) {
     await sendEmail({
       to: email.toLowerCase(),
       subject: "Verify your Su Mira Learning parent account",
-      html: `
-        <p>Hi there,</p>
-        <p>Thanks for creating a Su Mira Learning parent account. Please confirm your email address to continue:</p>
-        <p><a href="${verifyUrl}">Verify my email</a></p>
-        <p>This link expires in 24 hours. If you didn't request this, you can ignore this email.</p>
-      `,
+      html: emailShell(
+        `${emailHeading("Welcome to Su Mira Learning")}
+        <p>Thanks for creating a Su Mira Learning parent account. Please confirm your email address to finish setting things up.</p>
+        ${emailButton(verifyUrl, "Verify My Email")}
+        <p style="font-size:13px; color:#6B6470;">This link expires in 24 hours. If you didn't request this, you can safely ignore this email.</p>`,
+        { previewText: "Confirm your email to finish setting up your Su Mira parent account." }
+      ),
     });
 
     return NextResponse.json({ ok: true });

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCurrentParent, generateVerificationToken } from "@/lib/parentAuth";
 import { sendEmail } from "@/lib/email";
+import { emailShell, emailHeading, emailButton } from "@/lib/emailTemplates";
 
 export async function POST() {
   const parent = await getCurrentParent();
@@ -26,12 +27,13 @@ export async function POST() {
   await sendEmail({
     to: parent.email,
     subject: "Verify your Su Mira Learning parent account",
-    html: `
-      <p>Hi there,</p>
-      <p>Here's your new verification link:</p>
-      <p><a href="${verifyUrl}">Verify my email</a></p>
-      <p>This link expires in 24 hours.</p>
-    `,
+    html: emailShell(
+      `${emailHeading("Here's your new verification link")}
+      <p>Confirm your email address to finish setting up your Su Mira Learning parent account.</p>
+      ${emailButton(verifyUrl, "Verify My Email")}
+      <p style="font-size:13px; color:#6B6470;">This link expires in 24 hours.</p>`,
+      { previewText: "Confirm your email to finish setting up your Su Mira parent account." }
+    ),
   });
 
   return NextResponse.json({ ok: true });

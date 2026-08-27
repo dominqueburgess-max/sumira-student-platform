@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { sendEmail } from "@/lib/email";
+import { emailShell, emailHeading, enrollmentTypeLabel } from "@/lib/emailTemplates";
 
 type LearnerInput = {
   student_name?: string;
@@ -70,6 +72,26 @@ export async function POST(req: NextRequest) {
         )
       `;
     }
+
+    const learnerListHtml = learners.map((l) => {
+      const enrollmentType = l.enrollment_type === "personalized_plan" || l.enrollment_type === "both"
+        ? l.enrollment_type
+        : "learning_studio";
+      return `<li style="margin-bottom:6px;"><strong>${l.student_name}</strong> &mdash; ${enrollmentTypeLabel(enrollmentType)}</li>`;
+    }).join("");
+
+    await sendEmail({
+      to: String(email).trim(),
+      subject: "We've received your Su Mira Learning enrollment information",
+      html: emailShell(
+        `${emailHeading(`Thanks, ${parent_name}!`)}
+        <p>We've received your family's enrollment information for:</p>
+        <ul style="padding-left:20px; margin: 12px 0;">${learnerListHtml}</ul>
+        <p>A Su Mira team member will follow up by email within one to two business days with next steps and a recommended plan for ${learners.length > 1 ? "each learner" : "your learner"}.</p>
+        <p style="font-size:13px; color:#6B6470;">Questions in the meantime? Just reply to this email or reach out to connect@sumirastudio.com.</p>`,
+        { previewText: "We've received your family's enrollment information." }
+      ),
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

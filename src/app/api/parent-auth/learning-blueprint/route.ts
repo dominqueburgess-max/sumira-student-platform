@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCurrentParent } from "@/lib/parentAuth";
+import { sendEmail } from "@/lib/email";
+import { emailShell, emailHeading } from "@/lib/emailTemplates";
 
 type LearnerAnswers = {
   student_id: number;
@@ -91,6 +93,18 @@ export async function POST(req: NextRequest) {
           completed_at = NOW()
       `;
     }
+
+    await sendEmail({
+      to: email,
+      subject: "Your Su Mira Learning Family Profile & Learning Blueprint is complete",
+      html: emailShell(
+        `${emailHeading("You're all set!")}
+        <p>We've received your family's mailing address, contact confirmation, and Learning Blueprint answers for ${learners.length > 1 ? `${learners.length} learners` : "your learner"}.</p>
+        <p>Our team will use this to build a personalized plan and will follow up by email with next steps. If you haven't already, don't forget to watch the Parent Orientation video from your Parent Portal dashboard &mdash; it's the other half of your Getting Started Checklist.</p>
+        <p style="font-size:13px; color:#6B6470;">Questions in the meantime? Reach out to connect@sumirastudio.com.</p>`,
+        { previewText: "Your Family Profile and Learning Blueprint have been received." }
+      ),
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

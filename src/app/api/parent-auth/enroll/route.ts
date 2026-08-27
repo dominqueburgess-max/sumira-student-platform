@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCurrentParent } from "@/lib/parentAuth";
 import { hashPassword } from "@/lib/auth";
+import { sendEmail } from "@/lib/email";
+import { emailShell, emailHeading, enrollmentTypeLabel } from "@/lib/emailTemplates";
 
 function studioSlug(label: string | null | undefined): string {
   if (!label) return "wonder";
@@ -133,6 +135,26 @@ export async function POST(req: NextRequest) {
     }
 
     await db().sql`UPDATE parents SET enrollment_completed = TRUE WHERE id = ${parent.id}`;
+
+    const learnerListHtml = learners.map((l) => {
+      const enrollmentType = l.enrollment_type === "personalized_plan" || l.enrollment_type === "both"
+        ? l.enrollment_type
+        : "learning_studio";
+      return `<li style="margin-bottom:10px;"><strong>${l.student_name}</strong> &mdash; ${enrollmentTypeLabel(enrollmentType)}<br/><span style="font-size:13px; color:#6B6470;">Student login: ${l.student_login_email}</span></li>`;
+    }).join("");
+
+    await sendEmail({
+      to: parent.email,
+      subject: "We've received your Su Mira Learning enrollment information",
+      html: emailShell(
+        `${emailHeading(`Thanks, ${parent_name}!`)}
+        <p>We've received your family's enrollment information for:</p>
+        <ul style="padding-left:20px; margin: 12px 0;">${learnerListHtml}</ul>
+        <p>Your Getting Started Checklist is waiting on your Parent Portal dashboard &mdash; watch the Parent Orientation video and complete the Family Profile & Learning Blueprint to help us build ${learners.length > 1 ? "each learner's" : "your learner's"} personalized plan.</p>
+        <p style="font-size:13px; color:#6B6470;">Questions in the meantime? Reach out to connect@sumirastudio.com.</p>`,
+        { previewText: "We've received your family's enrollment information." }
+      ),
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {
