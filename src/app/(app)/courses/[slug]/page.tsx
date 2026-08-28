@@ -3,9 +3,11 @@ import Link from "next/link";
 import { getCurrentStudent } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { StudentNav } from "@/components/StudentNav";
+import { getCourseLessonSequence } from "@/lib/lessonSequence";
 
-export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CoursePage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ locked?: string }> }) {
   const { slug } = await params;
+  const { locked: lockedFlag } = await searchParams;
   const student = await getCurrentStudent();
   if (!student) redirect("/login");
 
@@ -22,6 +24,12 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
     ORDER BY l.position
   `;
 
+  const sequence = await getCourseLessonSequence(course.id, student.id);
+  const sequenceById = new Map(sequence.map((s) => [s.id, s]));
+  const totalLessons = sequence.length;
+  const completedLessons = sequence.filter((s) => s.completed).length;
+  const pct = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
   const roadmap = await db().sql`
     SELECT * FROM curriculum_roadmap WHERE course_id = ${course.id} ORDER BY week_number
   `;
@@ -35,31 +43,75 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         <Link href="/dashboard" className="text-sm text-terracotta-dark font-semibold">&larr; Back to My Classes</Link>
         <span className="block text-xs uppercase tracking-wider font-bold text-terracotta-dark mt-4">{course.subject}</span>
         <h1 className="text-3xl mb-2">{course.title}</h1>
-        <p className="text-warm-gray mb-8">{course.description}</p>
+        <p className="text-warm-gray mb-4">{course.description}</p>
+
+        {lockedFlag === "1" && (
+          <div className="bg-terracotta/10 border border-terracotta/30 text-terracotta-dark text-sm font-semibold rounded-xl px-5 py-3 mb-6">
+            🔒 That lesson isn&rsquo;t unlocked yet — finish the lesson before it first.
+          </div>
+        )}
+
+        {totalLessons > 0 && (
+          <div className="bg-ivory border border-border rounded-2xl px-5 py-4 mb-8">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold text-plum">Course Progress</span>
+              <span className="text-sm font-semibold text-terracotta-dark">{pct}% complete</span>
+            </div>
+            <div className="w-full bg-cream rounded-full h-3">
+              <div className="bg-terracotta h-3 rounded-full transition-all" style={{ width: `${pct}%` }} />
+            </div>
+            <span className="text-xs text-warm-gray-light mt-1 block">{completedLessons} of {totalLessons} lessons complete</span>
+          </div>
+        )}
 
         {units.map((unit) => (
           <div key={unit.id} className="mb-8">
             <h2 className="text-lg mb-3">{unit.title}</h2>
             <div className="flex flex-col gap-2">
-              {lessons.filter((l) => l.unit_id === unit.id).map((lesson) => (
-                <Link
-                  key={lesson.id}
-                  href={`/courses/${slug}/lessons/${lesson.id}`}
-                  className="flex items-center justify-between bg-ivory border border-border rounded-xl px-5 py-4 hover:border-terracotta transition"
-                >
-                  <div>
-                    <p className="font-semibold text-plum text-sm">{lesson.title}</p>
-                    <p className="text-xs text-warm-gray-light">{lesson.estimated_minutes} min &middot; {lesson.standards_code}</p>
-                  </div>
-                  <span className={`text-xs font-semibold rounded-full px-3 py-1 ${
-                    lesson.progress_status === "completed"
-                      ? "bg-sage/20 text-sage-dark"
-                      : "bg-cream text-warm-gray-light"
-                  }`}>
-                    {lesson.progress_status === "completed" ? "Complete" : "Start"}
-                  </span>
-                </Link>
-              ))}
+              {lessons.filter((l) => l.unit_id === unit.id).map((lesson) => {
+                const seq = sequenceById.get(lesson.id);
+                const locked = seq?.locked ?? false;
+                const completed = lesson.progress_status === "completed";
+
+                if (locked) {
+                  return (
+                    <div
+                      key={lesson.id}
+                      className="flex items-center justify-between bg-cream/60 border border-dashed border-border rounded-xl px-5 py-4 opacity-70"
+                    >
+                      <div>
+                        <p className="font-semibold text-warm-gray text-sm flex items-center gap-2">
+                          <span aria-hidden>🔒</span> {lesson.title}
+                        </p>
+                        <p className="text-xs text-warm-gray-light">{lesson.estimated_minutes} min &middot; {lesson.standards_code}</p>
+                      </div>
+                      <span className="text-xs font-semibold rounded-full px-3 py-1 bg-border/40 text-warm-gray-light">
+                        Locked
+                      </span>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={lesson.id}
+                    href={`/courses/${slug}/lessons/${lesson.id}`}
+                    className="flex items-center justify-between bg-ivory border border-border rounded-xl px-5 py-4 hover:border-terracotta transition"
+                  >
+                    <div>
+                      <p className="font-semibold text-plum text-sm">{lesson.title}</p>
+                      <p className="text-xs text-warm-gray-light">{lesson.estimated_minutes} min &middot; {lesson.standards_code}</p>
+                    </div>
+                    <span className={`text-xs font-semibold rounded-full px-3 py-1 ${
+                      completed
+                        ? "bg-sage/20 text-sage-dark"
+                        : "bg-cream text-warm-gray-light"
+                    }`}>
+                      {completed ? "Complete" : "Start"}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         ))}

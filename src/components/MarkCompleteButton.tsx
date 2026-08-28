@@ -7,14 +7,19 @@ export function MarkCompleteButton({ lessonId, initiallyComplete }: { lessonId: 
   const router = useRouter();
   const [done, setDone] = useState(initiallyComplete);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleClick() {
     setLoading(true);
+    setError("");
     const res = await fetch(`/api/lessons/${lessonId}/complete`, { method: "POST" });
     setLoading(false);
     if (res.ok) {
       setDone(true);
       router.refresh();
+    } else {
+      const body = await res.json().catch(() => ({}));
+      setError(body.error || "Something went wrong. Please try again.");
     }
   }
 
@@ -27,12 +32,15 @@ export function MarkCompleteButton({ lessonId, initiallyComplete }: { lessonId: 
   }
 
   return (
-    <button
-      onClick={handleClick}
-      disabled={loading}
-      className="bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold rounded-full px-6 py-3 transition disabled:opacity-60"
-    >
-      {loading ? "Saving..." : "Mark This Lesson Complete"}
-    </button>
+    <div>
+      <button
+        onClick={handleClick}
+        disabled={loading}
+        className="bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold rounded-full px-6 py-3 transition disabled:opacity-60"
+      >
+        {loading ? "Saving..." : "Mark This Lesson Complete"}
+      </button>
+      {error && <p className="text-sm text-terracotta-dark font-semibold mt-3">{error}</p>}
+    </div>
   );
 }

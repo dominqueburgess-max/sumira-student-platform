@@ -8,6 +8,7 @@ import { MarkCompleteButton } from "@/components/MarkCompleteButton";
 import { LessonVideo } from "@/components/LessonVideo";
 import { LessonAudioPlayer } from "@/components/LessonAudioPlayer";
 import { LessonQuestions, LessonQuestion } from "@/components/LessonQuestions";
+import { getLessonSequenceEntry } from "@/lib/lessonSequence";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string; lessonId: string }> }) {
   const { slug, lessonId } = await params;
@@ -22,6 +23,12 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   `;
   if (!rows.length) notFound();
   const lesson = rows[0];
+
+  // Sequential gating: block direct URL access to a lesson the student hasn't unlocked yet.
+  const { entry } = await getLessonSequenceEntry(Number(lessonId), student.id);
+  if (entry?.locked) {
+    redirect(`/courses/${slug}?locked=1`);
+  }
 
   const questionRows = await db().sql`
     SELECT q.id, q.question_type, q.prompt, q.options, q.position,
