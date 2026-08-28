@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import { AssignCoursesForm } from "@/components/AssignCoursesForm";
 import { ResetPasswordButton } from "@/components/ResetPasswordButton";
+import { EditStudentEmailButton } from "@/components/EditStudentEmailButton";
 
 export const dynamic = "force-dynamic";
 
@@ -67,7 +68,8 @@ export default async function AdminStudentDetailPage({
           <AdminLogoutButton />
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 flex flex-wrap gap-3">
+          <EditStudentEmailButton studentId={student.id} currentEmail={student.email} />
           <ResetPasswordButton studentId={student.id} studentEmail={student.email} />
         </div>
 
