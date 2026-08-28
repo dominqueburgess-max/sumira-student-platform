@@ -3,7 +3,19 @@ import Link from "next/link";
 import { getCurrentStudent } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { StudentNav } from "@/components/StudentNav";
-import { getCourseLessonSequence } from "@/lib/lessonSequence";
+import { getCourseLessonSequence, getEnrichmentForUnit } from "@/lib/lessonSequence";
+
+function formatUnlockDate(dateStr: string | null): string {
+  if (!dateStr) return "soon";
+  const d = new Date(dateStr + "T00:00:00");
+  return d.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+}
+
+const LOCKED_BANNER: Record<string, string> = {
+  prior_incomplete: "🔒 That lesson isn't unlocked yet — finish the lesson before it first.",
+  calendar: "🗓️ That lesson isn't scheduled to open yet — check its unlock date below.",
+  daily_cap: "✅ You've completed today's lesson! Come back tomorrow for the next one, or try today's enrichment challenge below.",
+};
 
 export default async function CoursePage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ locked?: string }> }) {
   const { slug } = await params;
@@ -30,6 +42,13 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
   const completedLessons = sequence.filter((s) => s.completed).length;
   const pct = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
+  // The next lesson that's paced (calendar- or cap-locked, not just behind an
+  // incomplete prior lesson) is where a fast finisher currently sits -- surface
+  // that unit's enrichment challenge for them right there.
+  const pacedEntry = sequence.find((s) => !s.completed && (s.lockReason === "calendar" || s.lockReason === "daily_cap"));
+  const pacedLesson = pacedEntry ? lessons.find((l) => l.id === pacedEntry.id) : null;
+  const enrichment = pacedLesson ? await getEnrichmentForUnit(pacedLesson.unit_id) : null;
+
   const roadmap = await db().sql`
     SELECT * FROM curriculum_roadmap WHERE course_id = ${course.id} ORDER BY week_number
   `;
@@ -45,14 +64,14 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
         <h1 className="text-3xl mb-2">{course.title}</h1>
         <p className="text-warm-gray mb-4">{course.description}</p>
 
-        {lockedFlag === "1" && (
+        {lockedFlag && LOCKED_BANNER[lockedFlag] && (
           <div className="bg-terracotta/10 border border-terracotta/30 text-terracotta-dark text-sm font-semibold rounded-xl px-5 py-3 mb-6">
-            🔒 That lesson isn&rsquo;t unlocked yet — finish the lesson before it first.
+            {LOCKED_BANNER[lockedFlag]}
           </div>
         )}
 
         {totalLessons > 0 && (
-          <div className="bg-ivory border border-border rounded-2xl px-5 py-4 mb-8">
+          <div className="bg-ivory border border-border rounded-2xl px-5 py-4 mb-6">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-semibold text-plum">Course Progress</span>
               <span className="text-sm font-semibold text-terracotta-dark">{pct}% complete</span>
@@ -61,6 +80,14 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
               <div className="bg-terracotta h-3 rounded-full transition-all" style={{ width: `${pct}%` }} />
             </div>
             <span className="text-xs text-warm-gray-light mt-1 block">{completedLessons} of {totalLessons} lessons complete</span>
+          </div>
+        )}
+
+        {enrichment && (
+          <div className="bg-sage/10 border border-sage/30 rounded-2xl px-5 py-4 mb-8">
+            <p className="text-xs font-bold uppercase tracking-wider text-sage-dark mb-1">🚀 Go Beyond — while you wait for your next lesson</p>
+            <p className="font-semibold text-plum text-sm mb-1">{enrichment.title}</p>
+            <p className="text-warm-gray text-sm">{enrichment.prompt}</p>
           </div>
         )}
 
@@ -74,6 +101,13 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
                 const completed = lesson.progress_status === "completed";
 
                 if (locked) {
+                  const reason = seq?.lockReason;
+                  const subtext =
+                    reason === "calendar"
+                      ? `Opens ${formatUnlockDate(seq?.unlockDate ?? null)}`
+                      : reason === "daily_cap"
+                      ? "Opens tomorrow"
+                      : `${lesson.estimated_minutes} min · ${lesson.standards_code}`;
                   return (
                     <div
                       key={lesson.id}
@@ -83,10 +117,10 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
                         <p className="font-semibold text-warm-gray text-sm flex items-center gap-2">
                           <span aria-hidden>🔒</span> {lesson.title}
                         </p>
-                        <p className="text-xs text-warm-gray-light">{lesson.estimated_minutes} min &middot; {lesson.standards_code}</p>
+                        <p className="text-xs text-warm-gray-light">{subtext}</p>
                       </div>
                       <span className="text-xs font-semibold rounded-full px-3 py-1 bg-border/40 text-warm-gray-light">
-                        Locked
+                        {reason === "calendar" ? "Scheduled" : reason === "daily_cap" ? "Come back tomorrow" : "Locked"}
                       </span>
                     </div>
                   );

@@ -4,6 +4,7 @@ import { isAdminAuthenticated } from "@/lib/adminAuth";
 import { db } from "@/lib/db";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import { AssignCoursesForm } from "@/components/AssignCoursesForm";
+import { ResetPasswordButton } from "@/components/ResetPasswordButton";
 
 export const dynamic = "force-dynamic";
 
@@ -64,6 +65,10 @@ export default async function AdminStudentDetailPage({
             <p className="text-warm-gray text-sm">Grade {student.grade_level} &middot; {student.email}{student.parent_email ? ` · Parent: ${student.parent_email}` : ""}</p>
           </div>
           <AdminLogoutButton />
+        </div>
+
+        <div className="mb-6">
+          <ResetPasswordButton studentId={student.id} studentEmail={student.email} />
         </div>
 
         <AssignCoursesForm

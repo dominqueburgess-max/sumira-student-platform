@@ -3,6 +3,12 @@ import { db } from "@/lib/db";
 import { getCurrentStudent } from "@/lib/auth";
 import { getLessonSequenceEntry } from "@/lib/lessonSequence";
 
+const LOCK_MESSAGES: Record<string, string> = {
+  prior_incomplete: "Complete the previous lesson first before moving on.",
+  calendar: "This lesson isn't scheduled to open yet. Check the course page for its unlock date.",
+  daily_cap: "You've already completed today's lesson(s) -- great work! Come back tomorrow to keep going, or check out today's enrichment challenge.",
+};
+
 export async function POST(req: NextRequest, { params }: { params: Promise<{ lessonId: string }> }) {
   const student = await getCurrentStudent();
   if (!student) return NextResponse.json({ error: "Not authenticated." }, { status: 401 });
@@ -10,13 +16,16 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ les
   const { lessonId } = await params;
   const id = Number(lessonId);
 
-  // Sequential gating: the previous lesson in this course must already be completed.
+  // Sequential + pacing gating: prior lesson complete, calendar date reached, and daily cap not hit.
   const { entry } = await getLessonSequenceEntry(id, student.id);
   if (!entry) {
     return NextResponse.json({ error: "Lesson not found." }, { status: 404 });
   }
   if (entry.locked) {
-    return NextResponse.json({ error: "Complete the previous lesson first before moving on." }, { status: 403 });
+    return NextResponse.json(
+      { error: LOCK_MESSAGES[entry.lockReason ?? "prior_incomplete"], lockReason: entry.lockReason },
+      { status: 403 }
+    );
   }
 
   // Require every question on this lesson to have a submitted answer.

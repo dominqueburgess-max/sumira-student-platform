@@ -27,7 +27,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   // Sequential gating: block direct URL access to a lesson the student hasn't unlocked yet.
   const { entry } = await getLessonSequenceEntry(Number(lessonId), student.id);
   if (entry?.locked) {
-    redirect(`/courses/${slug}?locked=1`);
+    redirect(`/courses/${slug}?locked=${entry.lockReason ?? "1"}`);
   }
 
   const questionRows = await db().sql`
