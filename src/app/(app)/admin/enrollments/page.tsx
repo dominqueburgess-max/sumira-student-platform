@@ -50,6 +50,7 @@ export default async function AdminEnrollmentsPage() {
         <div className="flex gap-4 mb-8 text-sm font-semibold">
           <span className="text-plum border-b-2 border-terracotta pb-1">Enrollment inquiries</span>
           <Link href="/admin/students" className="text-warm-gray hover:text-plum">Venture Studio students</Link>
+          <Link href="/admin/parents" className="text-warm-gray hover:text-plum">Parent accounts</Link>
         </div>
 
         {inquiries.length === 0 ? (
