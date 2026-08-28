@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { PasswordField } from "@/components/PasswordField";
 import { useRouter } from "next/navigation";
 
 const inputClass = "rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta w-full";
@@ -290,7 +291,7 @@ export function ParentEnrollForm() {
                 <input type="email" value={l.student_login_email} onChange={(e) => updateLearner(l.key, { student_login_email: e.target.value })} required className={inputClass} />
               </label>
               <label className={labelClass}>Student login password
-                <input type="password" minLength={8} value={l.student_login_password} onChange={(e) => updateLearner(l.key, { student_login_password: e.target.value })} required className={inputClass} />
+                <PasswordField minLength={8} value={l.student_login_password} onChange={(e) => updateLearner(l.key, { student_login_password: e.target.value })} required inputClassName={inputClass} />
               </label>
             </div>
           </div>

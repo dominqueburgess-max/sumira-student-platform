@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { PasswordField } from "@/components/PasswordField";
 import { useRouter } from "next/navigation";
 
 export function AdminLoginForm() {
@@ -47,11 +48,10 @@ export function AdminLoginForm() {
       </div>
       <div>
         <label className="text-sm font-semibold text-plum block mb-1">Admin password</label>
-        <input
-          type="password"
+        <PasswordField
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm"
+          inputClassName="w-full rounded-xl border border-border px-4 py-3 text-sm"
         />
       </div>
       {error && <p className="text-sm text-terracotta-dark font-semibold">{error}</p>}

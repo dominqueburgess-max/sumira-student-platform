@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PasswordField } from "@/components/PasswordField";
 import { useRouter } from "next/navigation";
 
 export function LoginForm() {
@@ -46,12 +47,11 @@ export function LoginForm() {
       </label>
       <label className="flex flex-col gap-1 text-sm font-semibold text-plum">
         Password
-        <input
-          type="password"
+        <PasswordField
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta"
+          inputClassName="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta"
         />
       </label>
       <button
@@ -136,8 +136,8 @@ export function SignupForm() {
       </label>
       <label className="flex flex-col gap-1 text-sm font-semibold text-plum">
         Password
-        <input type="password" required minLength={8} value={form.password} onChange={(e) => update("password", e.target.value)}
-          className="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta" />
+        <PasswordField required minLength={8} value={form.password} onChange={(e) => update("password", e.target.value)}
+          inputClassName="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta" />
       </label>
       <div className="grid grid-cols-2 gap-3">
         <label className="flex flex-col gap-1 text-sm font-semibold text-plum">

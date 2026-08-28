@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { PasswordField } from "@/components/PasswordField";
 import { useRouter } from "next/navigation";
 
 export function ParentSignupForm() {
@@ -39,8 +40,8 @@ export function ParentSignupForm() {
       </label>
       <label className="flex flex-col gap-1 text-sm font-semibold text-plum">
         Password
-        <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
-          className="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta" />
+        <PasswordField required value={password} onChange={(e) => setPassword(e.target.value)}
+          inputClassName="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta" />
       </label>
       <button type="submit" disabled={loading}
         className="mt-2 bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold rounded-full py-3 transition disabled:opacity-60">
@@ -86,8 +87,8 @@ export function ParentLoginForm() {
       </label>
       <label className="flex flex-col gap-1 text-sm font-semibold text-plum">
         Password
-        <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
-          className="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta" />
+        <PasswordField required value={password} onChange={(e) => setPassword(e.target.value)}
+          inputClassName="rounded-lg border border-border bg-ivory px-3 py-2 text-charcoal font-normal focus:outline-none focus:ring-2 focus:ring-terracotta" />
       </label>
       <button type="submit" disabled={loading}
         className="mt-2 bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold rounded-full py-3 transition disabled:opacity-60">
