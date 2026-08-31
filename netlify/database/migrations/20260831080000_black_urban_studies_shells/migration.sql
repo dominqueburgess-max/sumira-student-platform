@@ -1,0 +1,10 @@
+-- Black Urban Studies: an original, project-based Venture Studio elective spanning
+-- Grades 6-12, tracing Black history through the lens of the American city. Four
+-- course shells (no units/lessons yet) so admin can preview/plan the sequence;
+-- full content is authored course-by-course starting with Grades 6-7.
+INSERT INTO courses (slug, title, subject, studio, grade_level, description, source_attribution, color, position, status) VALUES
+('venture-black-urban-studies-1', 'Black Urban Studies I: Roots, Resistance & the Built Environment', 'Social Studies', 'venture', '6-7', 'From West African kingdoms through the Great Migration — every assignment is a produced project, not a quiz.', 'Su Mira original curriculum, aligned to the NC Standard Course of Study (Social Studies, Grades 6-7)', 'plum', 0, 'coming_soon'),
+('venture-black-urban-studies-2', 'Black Urban Studies II: Migration, Movements & the Modern City', 'Social Studies', 'venture', '8-9', 'The Great Migration, redlining, and the Civil Rights Movement through project-based research and design.', 'Su Mira original curriculum, aligned to the NC Standard Course of Study (Social Studies Grade 8 / American History I)', 'plum', 1, 'coming_soon'),
+('venture-black-urban-studies-3', 'Black Urban Studies III: Power, Policy & Political Life', 'Social Studies', 'venture', '10-11', 'Black political power, urban economics, and culture as resistance, capped by a policy memo & advocacy campaign.', 'Su Mira original curriculum, aligned to the NC Standard Course of Study (American History II / Founding Principles, Civics & Government)', 'plum', 2, 'coming_soon'),
+('venture-black-urban-studies-4', 'Black Urban Studies IV: Capstone — Research, Advocacy & Black Futures', 'Social Studies', 'venture', '12', 'A yearlong original research project profiling one city, culminating in a public policy and advocacy capstone showcase.', 'Su Mira original curriculum, aligned to the NC Standard Course of Study (American History II / Founding Principles, Civics & Government)', 'plum', 3, 'coming_soon')
+ON CONFLICT (slug) DO NOTHING;
