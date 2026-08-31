@@ -38,6 +38,14 @@ export default async function DashboardPage() {
   const achievements = await getAchievements(student.id);
   const parentToken = await getOrCreateParentToken(student.id);
 
+  const surveyFlagRows = await db().sql`
+    SELECT blueprint_survey_completed, elective_survey_completed FROM students WHERE id = ${student.id}
+  `;
+  const blueprintSurveyCompleted: boolean = surveyFlagRows[0]?.blueprint_survey_completed ?? false;
+  const electiveSurveyCompleted: boolean = surveyFlagRows[0]?.elective_survey_completed ?? false;
+  const isVenture = student.studio === "venture";
+  const surveysDone = blueprintSurveyCompleted && (!isVenture || electiveSurveyCompleted);
+
   const courses = await db().sql`
     SELECT c.id, c.slug, c.title, c.subject, c.description, c.color,
       COUNT(l.id)::int AS total_lessons,
@@ -81,6 +89,67 @@ export default async function DashboardPage() {
             Open Parent View →
           </a>
         </div>
+
+        {(!blueprintSurveyCompleted || (isVenture && !electiveSurveyCompleted)) && (
+          <div className="bg-ivory rounded-2xl card-shadow p-6 md:p-8 border border-border mb-8">
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+              <h2 className="text-lg text-plum font-semibold">Before Quarter 1 Starts</h2>
+              {surveysDone && (
+                <span className="text-xs font-semibold text-sage-dark bg-sage/10 rounded-full px-3 py-1">All done!</span>
+              )}
+            </div>
+            <p className="text-warm-gray text-sm mb-6">
+              Please complete these by <span className="font-semibold text-plum">Wednesday, September 2</span>.
+            </p>
+            <div className="space-y-4">
+              <Link
+                href="/dashboard/blueprint-survey"
+                className="flex items-center justify-between gap-4 rounded-2xl border border-border px-5 py-4 hover:border-terracotta transition"
+              >
+                <div className="flex items-center gap-4">
+                  <span
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
+                      blueprintSurveyCompleted ? "bg-sage/20 text-sage-dark" : "bg-terracotta/10 text-terracotta-dark"
+                    }`}
+                  >
+                    {blueprintSurveyCompleted ? "✓" : "1"}
+                  </span>
+                  <div className="text-left">
+                    <div className="font-semibold text-charcoal text-sm">Complete My Learning Blueprint</div>
+                    <div className="text-xs text-warm-gray">A few questions about you so we can build your personalized plan.</div>
+                  </div>
+                </div>
+                <span className="text-terracotta-dark text-sm font-semibold shrink-0">
+                  {blueprintSurveyCompleted ? "Review" : "Start now"} →
+                </span>
+              </Link>
+
+              {isVenture && (
+                <Link
+                  href="/dashboard/elective-survey"
+                  className="flex items-center justify-between gap-4 rounded-2xl border border-border px-5 py-4 hover:border-terracotta transition"
+                >
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
+                        electiveSurveyCompleted ? "bg-sage/20 text-sage-dark" : "bg-terracotta/10 text-terracotta-dark"
+                      }`}
+                    >
+                      {electiveSurveyCompleted ? "✓" : "2"}
+                    </span>
+                    <div className="text-left">
+                      <div className="font-semibold text-charcoal text-sm">Choose My Live Studio Elective</div>
+                      <div className="text-xs text-warm-gray">Pick your Quarter 1 Live Studio and a backup choice.</div>
+                    </div>
+                  </div>
+                  <span className="text-terracotta-dark text-sm font-semibold shrink-0">
+                    {electiveSurveyCompleted ? "Review" : "Start now"} →
+                  </span>
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
 
         <section className="mb-10">
           <h2 className="text-xl mb-4">Self-Paced Classes</h2>
