@@ -18,6 +18,7 @@ export const LIVE_STUDIO_OPTIONS: { title: string; description: string }[] = [
   { title: "Design, Fashion & Creative Arts Studio", description: "Fashion, graphic design, digital art, photography, interior design, merchandise creation, and other creative projects." },
   { title: "Sports & Wellness Studio", description: "Sports, fitness challenges, athlete development, sports media, nutrition, mental wellness, and the business of sports." },
   { title: "Real-World Life Studio", description: "The things you actually want to know for adulthood: getting a job, buying a car, credit, taxes, renting an apartment, college vs. career options, relationships, communication, and independent living." },
+  { title: "Urban History & Culture Studio", description: "Gentrification in the Black community, neighborhood change, and the history and culture behind the cities we live in." },
   { title: "Other — What studio would YOU create?", description: "Tell us your idea below." },
 ];
 
