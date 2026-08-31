@@ -39,12 +39,18 @@ export default async function DashboardPage() {
   const parentToken = await getOrCreateParentToken(student.id);
 
   const surveyFlagRows = await db().sql`
-    SELECT blueprint_survey_completed, elective_survey_completed FROM students WHERE id = ${student.id}
+    SELECT blueprint_survey_completed, elective_survey_completed, orientation_watched FROM students WHERE id = ${student.id}
   `;
   const blueprintSurveyCompleted: boolean = surveyFlagRows[0]?.blueprint_survey_completed ?? false;
   const electiveSurveyCompleted: boolean = surveyFlagRows[0]?.elective_survey_completed ?? false;
+  const orientationWatched: boolean = surveyFlagRows[0]?.orientation_watched ?? false;
   const isVenture = student.studio === "venture";
-  const surveysDone = blueprintSurveyCompleted && (!isVenture || electiveSurveyCompleted);
+  const surveysDone = blueprintSurveyCompleted && (!isVenture || (electiveSurveyCompleted && orientationWatched));
+
+  let stepCounter = 1;
+  const orientationStep = isVenture ? stepCounter++ : null;
+  const blueprintStep = stepCounter++;
+  const electiveStep = isVenture ? stepCounter++ : null;
 
   const courses = await db().sql`
     SELECT c.id, c.slug, c.title, c.subject, c.description, c.color,
@@ -90,7 +96,7 @@ export default async function DashboardPage() {
           </a>
         </div>
 
-        {(!blueprintSurveyCompleted || (isVenture && !electiveSurveyCompleted)) && (
+        {(!blueprintSurveyCompleted || (isVenture && (!electiveSurveyCompleted || !orientationWatched))) && (
           <div className="bg-ivory rounded-2xl card-shadow p-6 md:p-8 border border-border mb-8">
             <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
               <h2 className="text-lg text-plum font-semibold">Before Quarter 1 Starts</h2>
@@ -102,6 +108,30 @@ export default async function DashboardPage() {
               Please complete these by <span className="font-semibold text-plum">Wednesday, September 2</span>.
             </p>
             <div className="space-y-4">
+              {isVenture && (
+                <Link
+                  href="/dashboard/orientation"
+                  className="flex items-center justify-between gap-4 rounded-2xl border border-border px-5 py-4 hover:border-terracotta transition"
+                >
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
+                        orientationWatched ? "bg-sage/20 text-sage-dark" : "bg-terracotta/10 text-terracotta-dark"
+                      }`}
+                    >
+                      {orientationWatched ? "✓" : orientationStep}
+                    </span>
+                    <div className="text-left">
+                      <div className="font-semibold text-charcoal text-sm">Watch My Student Orientation</div>
+                      <div className="text-xs text-warm-gray">A quick walkthrough of your dashboard, Mira, and how classes work.</div>
+                    </div>
+                  </div>
+                  <span className="text-terracotta-dark text-sm font-semibold shrink-0">
+                    {orientationWatched ? "Rewatch" : "Watch now"} →
+                  </span>
+                </Link>
+              )}
+
               <Link
                 href="/dashboard/blueprint-survey"
                 className="flex items-center justify-between gap-4 rounded-2xl border border-border px-5 py-4 hover:border-terracotta transition"
@@ -112,7 +142,7 @@ export default async function DashboardPage() {
                       blueprintSurveyCompleted ? "bg-sage/20 text-sage-dark" : "bg-terracotta/10 text-terracotta-dark"
                     }`}
                   >
-                    {blueprintSurveyCompleted ? "✓" : "1"}
+                    {blueprintSurveyCompleted ? "✓" : blueprintStep}
                   </span>
                   <div className="text-left">
                     <div className="font-semibold text-charcoal text-sm">Complete My Learning Blueprint</div>
@@ -135,7 +165,7 @@ export default async function DashboardPage() {
                         electiveSurveyCompleted ? "bg-sage/20 text-sage-dark" : "bg-terracotta/10 text-terracotta-dark"
                       }`}
                     >
-                      {electiveSurveyCompleted ? "✓" : "2"}
+                      {electiveSurveyCompleted ? "✓" : electiveStep}
                     </span>
                     <div className="text-left">
                       <div className="font-semibold text-charcoal text-sm">Choose My Live Studio Elective</div>
