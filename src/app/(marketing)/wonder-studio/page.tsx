@@ -16,7 +16,12 @@ export default function Page() {
           <a href="/venture-studio">Venture Studio · Grades 6–12</a>
           <a href="/how-it-works">Live Learning</a>
           <a href="/meet-mira">Mira AI Guide</a>
-          <a href="/learning-blueprint">Learning Blueprint</a>
+        </div>
+      </li>
+      <li class="has-dropdown"><a href="/learning-blueprint">Learning Blueprint</a>
+        <div class="dropdown-menu">
+          <a href="/learning-blueprint/parents">For Parents</a>
+          <a href="/learning-blueprint/schools">For Schools</a>
         </div>
       </li>
       <li><a href="/how-it-works">How It Works</a></li>

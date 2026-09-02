@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'The Su Mira Learning Blueprint — Su Mira Learning Studio',
+  title: 'The Learning Blueprint for Families — Su Mira Learning',
 };
 
 export default function Page() {
@@ -24,7 +24,6 @@ export default function Page() {
           <a href="/learning-blueprint/schools">For Schools</a>
         </div>
       </li>
-      <li><a href="/how-it-works">How It Works</a></li>
       <li class="has-dropdown"><a href="/community">Community</a>
         <div class="dropdown-menu">
           <a href="/community#clubs">Student Clubs</a>
@@ -53,40 +52,50 @@ export default function Page() {
   </nav>
 </div>
 
-
-<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(59,31,61,0.86) 0%, rgba(42,21,48,0.92) 100%), url('https://images.pexels.com/photos/4260485/pexels-photo-4260485.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600');">
+<section class="page-hero photo-hero" style="background-image:linear-gradient(160deg, rgba(59,31,61,0.86) 0%, rgba(42,21,48,0.92) 100%), url('https://images.pexels.com/photos/4260485/pexels-photo-4260485.jpeg?auto=compress&cs=tinysrgb&w=1600');">
   <div class="container">
-    <span class="eyebrow" style="color:var(--amber);">The Su Mira Learning Blueprint</span>
-    <h1>A learning plan as unique as the learner.</h1>
-    <p class="lede">Every Su Mira learner begins with a personalized Learning Blueprint. The Blueprint helps families understand what the learner needs, what motivates them, where they are going and how Su Mira will support the journey.</p>
-    <a href="/enroll" class="btn btn-primary">Start Your Journey</a>
+    <span class="eyebrow" style="color:var(--amber);">Learning Blueprint &middot; For Families</span>
+    <h1>One learner. One AI-built plan, made just for them.</h1>
+    <p class="lede">Whether you are homeschooling, or supporting your child through public or private school, the Learning Blueprint starts with your child &mdash; their strengths, interests and goals &mdash; and builds a standards-aligned plan around them.</p>
+    <a href="/enroll" class="btn btn-primary">Start Your Learning Blueprint</a>
   </div>
 </section>
 
 <section>
+  <div class="container center" style="margin-bottom:20px;">
+    <span class="eyebrow">Our Approach</span>
+    <h2>How we build your child&rsquo;s Blueprint.</h2>
+  </div>
+  <div class="container journey">
+    <div class="journey-step"><div class="journey-num">1</div><div><h4>Tell us about your learner</h4><p>You and your child each answer a short Learning Blueprint survey: learning style, interests, strengths, growth areas, favorite and challenging subjects, motivation, tech access, and goals for the year.</p></div></div>
+    <div class="journey-step"><div class="journey-num">2</div><div><h4>Mira AI builds the plan</h4><p>Our AI turns those answers into a standards-aligned Blueprint: recommended courses, a weekly learning schedule, project ideas and support recommendations &mdash; specific to your one learner.</p></div></div>
+    <div class="journey-step"><div class="journey-num">3</div><div><h4>Your learner works the plan</h4><p>Self-paced lessons matched to the Blueprint, with audio narration for early readers, voice-in answers, adaptive practice, and Mira AI Guide available any time they get stuck.</p></div></div>
+    <div class="journey-step"><div class="journey-num">4</div><div><h4>You watch it happen</h4><p>Your parent dashboard shows the Blueprint itself, what is coming up this week, and your child&rsquo;s progress as they move through it.</p></div></div>
+    <div class="journey-step"><div class="journey-num">5</div><div><h4>It grows with your learner</h4><p>On our Growing and Guided plans, the Blueprint is revised each quarter or semester as strengths, interests and goals evolve &mdash; it is never a one-and-done document.</p></div></div>
+  </div>
+</section>
+
+<section class="section-alt">
   <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
     <div>
-      <span class="eyebrow">Blueprint Components</span>
-      <h2>What goes into every Blueprint.</h2>
+      <span class="eyebrow">What&rsquo;s In the Dashboard</span>
+      <h2>What you and your learner actually see.</h2>
+      <p style="margin-bottom:18px;">The Learning Blueprint is not just a document &mdash; it is the thing your family&rsquo;s dashboard is built around.</p>
+      <h4 style="color:var(--plum); margin-bottom:8px;">For you (the parent dashboard)</h4>
       <ul class="feature-list">
-        <li>Learner profile</li>
-        <li>Interests</li>
-        <li>Strengths</li>
-        <li>Current academic performance</li>
-        <li>Learning preferences</li>
-        <li>Family goals</li>
-        <li>Student goals</li>
-        <li>Recommended pathway</li>
-        <li>Recommended courses</li>
-        <li>Weekly learning schedule</li>
-        <li>Live learning recommendations</li>
-        <li>Project recommendations</li>
-        <li>Support recommendations</li>
-        <li>Accommodations</li>
-        <li>Portfolio milestones</li>
-        <li>Quarterly reflections</li>
-        <li>College, career or entrepreneurship goals</li>
-        <li>Parent notes &amp; educator observations</li>
+        <li>Your child&rsquo;s full Learning Blueprint, in plain language</li>
+        <li>Recommended courses and weekly schedule</li>
+        <li>Standards mastery tracking as work is completed</li>
+        <li>Digital portfolio of your learner&rsquo;s work</li>
+        <li>Achievement and badge tracking</li>
+        <li>A running Getting Started checklist for what is next</li>
+      </ul>
+      <h4 style="color:var(--plum); margin:18px 0 8px;">For your learner (the student dashboard)</h4>
+      <ul class="feature-list">
+        <li>Self-paced lessons organized around their Blueprint</li>
+        <li>Mira AI Learning Guide, available any time</li>
+        <li>Adaptive practice that adjusts to what they already know</li>
+        <li>Their own digital portfolio and achievements</li>
       </ul>
     </div>
     <div class="pillow">
@@ -102,11 +111,14 @@ export default function Page() {
   </div>
 </section>
 
-<section class="section-alt center">
-  <div class="container" style="max-width:760px;">
-    <h2>Every Blueprint grows with the learner.</h2>
-    <p class="lede center">Quarterly reflections keep the plan current &mdash; adjusting courses, projects, live sessions and support as strengths and goals evolve.</p>
-    <a href="/enroll" class="btn btn-primary">Start Your Journey</a>
+<section class="section-plum center">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--amber);">Begin the Journey</span>
+    <h2>Build your learner&rsquo;s Blueprint today.</h2>
+    <div class="btn-row center">
+      <a href="/enroll" class="btn btn-primary">Start a Learning Plan</a>
+      <a href="/personalized-learning-plans" class="btn btn-ghost">See Personalized Learning Plan Pricing</a>
+    </div>
   </div>
 </section>
 
@@ -115,7 +127,7 @@ export default function Page() {
     <div class="footer-grid">
       <div>
         <div class="logo" style="color:var(--ivory);">SU MIRA<span style="color:var(--amber);">LEARNING</span></div>
-        <p style="margin-top:14px; color:rgba(255,255,255,0.6); font-size:0.9rem;">Learning, designed around every learner. An educational program of Burbrella.</p>
+        <p style="margin-top:14px; color:rgba(255,255,255,0.6); font-size:0.9rem;">Personalized learning plans and Learning Studios, designed around every learner. An educational program of Burbrella.</p>
       </div>
       <div>
         <h5>Learning Studio</h5>
@@ -151,7 +163,6 @@ export default function Page() {
           <li><a href="/personalized-learning-plans">Personalized Learning Plans</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/funding">Funding by State</a></li>
-          <li><a href="/resources">Family Resources</a></li>
           <li><a href="/enroll">Enrollment</a></li>
         </ul>
       </div>
