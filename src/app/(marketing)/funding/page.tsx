@@ -83,6 +83,7 @@ export default function Page() {
     <table class="compare">
       <tr><th>State</th><th>Program</th><th>Status</th></tr>
       <tr><td>North Carolina</td><td>Education Student Accounts (ESA+) / Opportunity Scholarship</td><td>Pursuing approval</td></tr>
+      <tr><td>Alabama</td><td>The CHOOSE Act (Creating Hope and Opportunity for Our Students&rsquo; Education Act)</td><td>Pending</td></tr>
       <tr><td>Additional states</td><td>To be announced</td><td>Under review</td></tr>
     </table>
     <p style="margin-top:20px; max-width:760px;">Award amounts, eligibility requirements and covered expenses vary by state and are confirmed only once a program approval is finalized.</p>
