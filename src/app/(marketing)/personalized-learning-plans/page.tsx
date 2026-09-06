@@ -58,7 +58,7 @@ export default function Page() {
     <h1>An AI-generated learning plan, built around one learner at a time.</h1>
     <p class="lede">Whether you're homeschooling, supporting your child through public or private school, or designing individualized plans for a classroom of students, Su Mira's AI builds a standards-aligned, whole-child learning plan — then keeps it growing as the learner does.</p>
     <div class="btn-row">
-      <a href="/enroll" class="btn btn-primary">Start a Learning Plan</a>
+      <a href="/plp/signup" class="btn btn-primary">Start a Learning Plan</a>
       <a href="/learning-studio" class="btn btn-ghost">Pair With a Learning Studio</a>
     </div>
     <div class="hero-visual">
@@ -149,7 +149,7 @@ export default function Page() {
         <li>Mira AI Learning Guide</li>
         <li>Digital portfolio &amp; parent dashboard</li>
       </ul>
-      <a href="/enroll" class="btn btn-outline">Choose Essentials</a>
+      <a href="/plp/signup?plan=essentials" class="btn btn-outline">Choose Essentials</a>
     </div>
     <div class="price-card popular">
       <span class="price-tag">Most Popular</span>
@@ -163,7 +163,7 @@ export default function Page() {
         <li>Updated course recommendations &amp; schedule at every revision</li>
         <li>Priority email support from the Su Mira team</li>
       </ul>
-      <a href="/enroll" class="btn btn-primary">Choose Growing</a>
+      <a href="/plp/signup?plan=growing" class="btn btn-primary">Choose Growing</a>
     </div>
     <div class="price-card">
       <span class="eyebrow">Guided Plan</span>
@@ -177,7 +177,7 @@ export default function Page() {
         <li>Direct implementation support &mdash; scheduling, pacing, troubleshooting</li>
         <li>Priority scheduling for Su Mira Gatherings &amp; events</li>
       </ul>
-      <a href="/enroll" class="btn btn-outline">Choose Guided</a>
+      <a href="/plp/signup?plan=guided" class="btn btn-outline">Choose Guided</a>
     </div>
   </div>
   <div class="container center" style="margin-top:20px;">
@@ -190,7 +190,7 @@ export default function Page() {
     <span class="eyebrow" style="color:var(--amber);">Begin the Journey</span>
     <h2>Build a plan around your learner today.</h2>
     <div class="btn-row center">
-      <a href="/enroll" class="btn btn-primary">Start a Learning Plan</a>
+      <a href="/plp/signup" class="btn btn-primary">Start a Learning Plan</a>
       <a href="/learning-studio" class="btn btn-ghost">Explore Learning Studio</a>
     </div>
   </div>
