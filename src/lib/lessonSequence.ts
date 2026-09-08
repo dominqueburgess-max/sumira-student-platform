@@ -14,13 +14,16 @@ export type SequencedLesson = {
 /**
  * Returns every lesson in a course, in the order students must complete them
  * (unit position, then lesson position), each flagged with whether this
- * student has completed it and whether it's locked. As of Sept 2026 the only
- * lock reason enforced is:
+ * student has completed it and whether/why it's locked:
  *  - prior_incomplete: the previous lesson in the sequence isn't done yet
- * Calendar-date and daily-completion-cap locks (still defined in LockReason
- * for backward compatibility with the UI) are no longer applied -- Su Mira
- * is self-paced, and a student who finishes a lesson can move straight into
- * the next one any day, with no daily limit.
+ *  - calendar: this lesson's scheduled day (per its unlock_date, set daily
+ *    starting the first day of term) hasn't arrived yet, even though prior
+ *    lessons are complete
+ * The daily-completion-cap lock has been removed (Sept 2026) -- it applied
+ * globally across every course a student was in, so finishing one course's
+ * lesson for the day locked every OTHER course's lesson too. The daily
+ * calendar unlock_date already yields "one new lesson per course per day,"
+ * which is the intended pacing, without that cross-course side effect.
  */
 export async function getCourseLessonSequence(courseId: number, studentId: number): Promise<SequencedLesson[]> {
   const rows = (await db().sql`
@@ -32,15 +35,8 @@ export async function getCourseLessonSequence(courseId: number, studentId: numbe
     ORDER BY u.position ASC, l.position ASC
   `) as unknown as { id: number; unlock_date: string | null; progress_status: string | null; completed_at: string | null }[];
 
-  // Calendar- and daily-cap-based pacing locks have been disabled per product
-  // decision (Sept 2026): Su Mira is self-paced, and locking a finished-ahead
-  // student out of the next lesson until a calendar date or the next day was
-  // blocking real students from getting into their lessons. The only
-  // remaining gate is sequential completion -- finish the lesson before this
-  // one, then this one opens immediately, any day, no daily limit.
-  // `unlock_date` (on lessons) and `daily_lesson_cap` (on students) are still
-  // in the database and no longer queried here; both can be revived later if
-  // pacing safeguards are ever wanted again.
+  const todayStr = new Date().toISOString().slice(0, 10);
+
   let prevCompleted = true;
   return rows.map((r, idx) => {
     const completed = r.progress_status === "completed";
@@ -52,6 +48,9 @@ export async function getCourseLessonSequence(courseId: number, studentId: numbe
     if (!prevCompleted) {
       locked = true;
       lockReason = "prior_incomplete";
+    } else if (!completed && unlockDate && unlockDate > todayStr) {
+      locked = true;
+      lockReason = "calendar";
     }
 
     prevCompleted = completed;

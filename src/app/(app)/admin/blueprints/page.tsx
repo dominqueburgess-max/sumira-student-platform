@@ -105,6 +105,7 @@ export default async function AdminBlueprintsPage() {
           <Link href="/admin/students" className="text-warm-gray hover:text-plum">Venture Studio students</Link>
           <Link href="/admin/classes" className="text-warm-gray hover:text-plum">Classes &amp; electives</Link>
           <span className="text-plum border-b-2 border-terracotta pb-1">Learning Blueprints</span>
+          <Link href="/admin/submissions" className="text-warm-gray hover:text-plum">Submissions</Link>
           <Link href="/admin/parents" className="text-warm-gray hover:text-plum">Parent accounts</Link>
         </div>
 
