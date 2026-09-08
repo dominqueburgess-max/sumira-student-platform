@@ -134,7 +134,15 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
                   >
                     <div>
                       <p className="font-semibold text-plum text-sm">{lesson.title}</p>
-                      <p className="text-xs text-warm-gray-light">{lesson.estimated_minutes} min &middot; {lesson.standards_code}</p>
+                      <p className="text-xs text-warm-gray-light">
+                        {seq?.unlockDate && (
+                          <>
+                            <span className="text-terracotta-dark font-semibold">{formatUnlockDate(seq.unlockDate)}</span>
+                            {" · "}
+                          </>
+                        )}
+                        {lesson.estimated_minutes} min &middot; {lesson.standards_code}
+                      </p>
                     </div>
                     <span className={`text-xs font-semibold rounded-full px-3 py-1 ${
                       completed
