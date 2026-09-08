@@ -34,7 +34,13 @@ export async function getCourseLessonSequence(courseId: number, studentId: numbe
 
   return rows.map((r, idx) => {
     const completed = r.progress_status === "completed";
-    const unlockDate = r.unlock_date ? String(r.unlock_date).slice(0, 10) : null;
+    // The DB driver can hand back a DATE column as either an ISO-ish string
+    // or a native JS Date object -- String(aDateObject) yields something
+    // like "Tue Sep 08 2026 00:00:00 GMT+0000 (...)", whose first 10 chars
+    // are NOT "YYYY-MM-DD", so always normalize via toISOString() when it's
+    // a real Date.
+    const raw = r.unlock_date as unknown;
+    const unlockDate = raw ? (raw instanceof Date ? raw.toISOString().slice(0, 10) : String(raw).slice(0, 10)) : null;
     return { id: r.id, order: idx, completed, locked: false, lockReason: null, unlockDate };
   });
 }
