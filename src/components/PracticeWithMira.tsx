@@ -14,6 +14,7 @@ export function PracticeWithMira({ questionId }: { questionId: number }) {
   const [loading, setLoading] = useState(false);
   const [practice, setPractice] = useState<Practice | null>(null);
   const [picked, setPicked] = useState<number | null>(null);
+  const [gotItRight, setGotItRight] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleOpen() {
@@ -58,17 +59,19 @@ export function PracticeWithMira({ questionId }: { questionId: number }) {
           <div className="flex flex-col gap-2">
             {practice.options.map((opt, i) => {
               const isPicked = picked === i;
-              const showResult = picked !== null;
               return (
                 <button
                   key={i}
                   type="button"
-                  onClick={() => setPicked(i)}
-                  disabled={showResult}
+                  onClick={() => {
+                    setPicked(i);
+                    if (i === practice.correctIndex) setGotItRight(true);
+                  }}
+                  disabled={gotItRight}
                   className={`text-left rounded-lg border px-4 py-2 transition ${
-                    showResult && i === practice.correctIndex
+                    gotItRight && isPicked
                       ? "border-sage bg-sage/15"
-                      : showResult && isPicked
+                      : !gotItRight && isPicked
                       ? "border-terracotta bg-terracotta/10"
                       : "border-border bg-ivory hover:border-plum/40"
                   }`}
@@ -79,8 +82,8 @@ export function PracticeWithMira({ questionId }: { questionId: number }) {
             })}
           </div>
           {picked !== null && (
-            <p className={`mt-3 text-sm font-semibold ${picked === practice.correctIndex ? "text-sage-dark" : "text-terracotta-dark"}`}>
-              {picked === practice.correctIndex ? "✓ Great job! You've got it." : "Close — take a look at the highlighted answer above."}
+            <p className={`mt-3 text-sm font-semibold ${gotItRight ? "text-sage-dark" : "text-terracotta-dark"}`}>
+              {gotItRight ? "✓ Great job! You've got it." : "Not quite — give it another try!"}
             </p>
           )}
         </div>

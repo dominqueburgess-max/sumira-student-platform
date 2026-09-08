@@ -14,16 +14,13 @@ export type SequencedLesson = {
 /**
  * Returns every lesson in a course, in the order students must complete them
  * (unit position, then lesson position), each flagged with whether this
- * student has completed it and whether/why it's locked:
- *  - prior_incomplete: the previous lesson in the sequence isn't done yet
- *  - calendar: this lesson's scheduled day (per its unlock_date, set daily
- *    starting the first day of term) hasn't arrived yet, even though prior
- *    lessons are complete
- * The daily-completion-cap lock has been removed (Sept 2026) -- it applied
- * globally across every course a student was in, so finishing one course's
- * lesson for the day locked every OTHER course's lesson too. The daily
- * calendar unlock_date already yields "one new lesson per course per day,"
- * which is the intended pacing, without that cross-course side effect.
+ * student has completed it.
+ *
+ * All lesson locking has been disabled (Sept 2026, per explicit request --
+ * both the prior calendar-cadence lock and the older daily-completion-cap
+ * lock caused students to get stuck out of lessons). Every lesson in every
+ * course is always unlocked; `locked`/`lockReason` are kept on the type for
+ * backward compatibility with callers but are always false/null.
  */
 export async function getCourseLessonSequence(courseId: number, studentId: number): Promise<SequencedLesson[]> {
   const rows = (await db().sql`
@@ -35,26 +32,10 @@ export async function getCourseLessonSequence(courseId: number, studentId: numbe
     ORDER BY u.position ASC, l.position ASC
   `) as unknown as { id: number; unlock_date: string | null; progress_status: string | null; completed_at: string | null }[];
 
-  const todayStr = new Date().toISOString().slice(0, 10);
-
-  let prevCompleted = true;
   return rows.map((r, idx) => {
     const completed = r.progress_status === "completed";
     const unlockDate = r.unlock_date ? String(r.unlock_date).slice(0, 10) : null;
-
-    let locked = false;
-    let lockReason: LockReason = null;
-
-    if (!prevCompleted) {
-      locked = true;
-      lockReason = "prior_incomplete";
-    } else if (!completed && unlockDate && unlockDate > todayStr) {
-      locked = true;
-      lockReason = "calendar";
-    }
-
-    prevCompleted = completed;
-    return { id: r.id, order: idx, completed, locked, lockReason, unlockDate };
+    return { id: r.id, order: idx, completed, locked: false, lockReason: null, unlockDate };
   });
 }
 
