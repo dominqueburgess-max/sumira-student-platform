@@ -17,6 +17,15 @@ export type LessonContext = {
   contentBody: string;
   standardsCode: string | null;
   standardsDescription: string | null;
+  // When the submission is tied to a specific Classwork/Homework assignment
+  // (rather than just a lesson in general), grade against THAT assignment's
+  // own brief and rubric instead of the whole lesson's content.
+  assignment?: {
+    assignmentType: "classwork" | "homework";
+    title: string;
+    instructions: string;
+    rubric: string | null;
+  } | null;
 } | null;
 
 const FAILED_RESULT = (feedback: string): GradingResult => ({
@@ -29,6 +38,14 @@ const FAILED_RESULT = (feedback: string): GradingResult => ({
 });
 
 function buildContextBlock(title: string, notes: string | null, lessonContext: LessonContext): string {
+  if (lessonContext?.assignment) {
+    const a = lessonContext.assignment;
+    return `This submission is the student's ${a.assignmentType === "classwork" ? "Classwork" : "Homework"} assignment, "${a.title}", from the lesson "${lessonContext.title}".\nAssignment instructions given to the student:\n${a.instructions}${
+      a.rubric ? `\n\nWhat "done well" looks like (grade against this):\n${a.rubric}` : ""
+    }${
+      lessonContext.standardsCode ? `\nStandard: ${lessonContext.standardsCode}${lessonContext.standardsDescription ? " - " + lessonContext.standardsDescription : ""}` : ""
+    }`;
+  }
   if (lessonContext) {
     return `This submission is for the assignment/project "${lessonContext.title}".\nAssignment brief:\n${lessonContext.contentBody}${
       lessonContext.standardsCode ? `\nStandard: ${lessonContext.standardsCode}${lessonContext.standardsDescription ? " - " + lessonContext.standardsDescription : ""}` : ""

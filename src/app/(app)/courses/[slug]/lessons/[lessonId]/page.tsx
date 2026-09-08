@@ -8,6 +8,7 @@ import { MarkCompleteButton } from "@/components/MarkCompleteButton";
 import { LessonVideo } from "@/components/LessonVideo";
 import { LessonAudioPlayer } from "@/components/LessonAudioPlayer";
 import { LessonQuestions, LessonQuestion } from "@/components/LessonQuestions";
+import { LessonAssignments, LessonAssignment } from "@/components/LessonAssignments";
 import { getLessonSequenceEntry } from "@/lib/lessonSequence";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string; lessonId: string }> }) {
@@ -30,7 +31,30 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     redirect(`/courses/${slug}?locked=${entry.lockReason ?? "1"}`);
   }
 
-  const questionRows = await db().sql`
+  const assignmentRows = await db().sql`
+    SELECT a.id, a.assignment_type, a.title, a.instructions, a.rubric, a.estimated_minutes,
+           s.status AS prior_status
+    FROM lesson_assignments a
+    LEFT JOIN assignment_submissions s ON s.assignment_id = a.id AND s.student_id = ${student.id}
+    WHERE a.lesson_id = ${Number(lessonId)}
+    ORDER BY a.position ASC, a.id ASC
+  `;
+  const assignments: LessonAssignment[] = assignmentRows.map((a) => ({
+    id: a.id,
+    assignment_type: a.assignment_type,
+    title: a.title,
+    instructions: a.instructions,
+    rubric: a.rubric ?? null,
+    estimated_minutes: a.estimated_minutes ?? null,
+    priorStatus: a.prior_status ?? null,
+  }));
+
+  // Once a lesson has real Classwork/Homework assignments authored, those
+  // replace the old quick multiple-choice/short-answer quiz as the lesson's
+  // primary work -- rolling out course by course as content is authored.
+  const questionRows = assignments.length
+    ? []
+    : await db().sql`
     SELECT q.id, q.question_type, q.prompt, q.options, q.position,
            qr.selected_option_index AS prior_selected, qr.response_text AS prior_text, qr.is_correct AS prior_correct
     FROM questions q
@@ -56,19 +80,27 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
         <Link href={`/courses/${slug}`} className="text-sm text-terracotta-dark font-semibold">&larr; Back to Course</Link>
 
         <div className="bg-ivory rounded-2xl card-shadow border border-border p-8 mt-6">
-          {lesson.standards_code && (
-            <span className="inline-block text-xs font-semibold bg-cream text-warm-gray rounded-full px-3 py-1 mb-4">
-              {lesson.standards_code} &middot; {lesson.standards_description}
-            </span>
-          )}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            {lesson.week_number && (
+              <span className="inline-block text-xs font-bold uppercase tracking-wide bg-terracotta text-ivory rounded-full px-3 py-1">
+                Week {lesson.week_number}
+              </span>
+            )}
+            {lesson.standards_code && (
+              <span className="inline-block text-xs font-semibold bg-cream text-warm-gray rounded-full px-3 py-1">
+                {lesson.standards_code} &middot; {lesson.standards_description}
+              </span>
+            )}
+          </div>
 
           <LessonAudioPlayer lessonId={lesson.id} />
-          <LessonVideo videoCaption={lesson.video_caption ?? null} />
+          <LessonVideo videoUrl={lesson.video_url ?? null} videoCaption={lesson.video_caption ?? null} />
 
           <article className="prose prose-headings:font-serif prose-headings:text-plum prose-p:text-charcoal max-w-none">
             <ReactMarkdown>{lesson.content_body}</ReactMarkdown>
           </article>
 
+          <LessonAssignments assignments={assignments} />
           <LessonQuestions lessonId={lesson.id} questions={questions} />
 
           <div className="mt-8">

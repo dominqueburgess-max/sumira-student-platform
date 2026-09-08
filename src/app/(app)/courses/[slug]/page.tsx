@@ -133,14 +133,13 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
                     className="flex items-center justify-between bg-ivory border border-border rounded-xl px-5 py-4 hover:border-terracotta transition"
                   >
                     <div>
-                      <p className="font-semibold text-plum text-sm">{lesson.title}</p>
-                      <p className="text-xs text-warm-gray-light">
-                        {seq?.unlockDate && (
-                          <>
-                            <span className="text-terracotta-dark font-semibold">{formatUnlockDate(seq.unlockDate)}</span>
-                            {" · "}
-                          </>
+                      <p className="font-semibold text-plum text-sm">
+                        {lesson.week_number && (
+                          <span className="text-terracotta-dark">Week {lesson.week_number}: </span>
                         )}
+                        {lesson.title}
+                      </p>
+                      <p className="text-xs text-warm-gray-light">
                         {lesson.estimated_minutes} min &middot; {lesson.standards_code}
                       </p>
                     </div>

@@ -21,11 +21,12 @@ export async function GET() {
 
   const rows = await db().sql`
     SELECT s.id, s.title, s.notes, s.file_name, s.file_type, s.status, s.submitted_at,
-           s.staff_grade, s.staff_feedback,
-           l.title AS lesson_title, c.title AS course_title
+           s.staff_grade, s.staff_feedback, s.assignment_id,
+           l.title AS lesson_title, c.title AS course_title, a.assignment_type
     FROM assignment_submissions s
     LEFT JOIN lessons l ON l.id = s.lesson_id
     LEFT JOIN courses c ON c.id = s.course_id
+    LEFT JOIN lesson_assignments a ON a.id = s.assignment_id
     WHERE s.student_id = ${student.id}
     ORDER BY s.submitted_at DESC
   `;
@@ -42,6 +43,7 @@ export async function POST(req: NextRequest) {
     const title = String(formData.get("title") || "").trim();
     const notes = formData.get("notes") ? String(formData.get("notes")) : null;
     const lessonIdRaw = formData.get("lessonId");
+    const assignmentIdRaw = formData.get("assignmentId");
     const pastedText = formData.get("pastedText") ? String(formData.get("pastedText")) : null;
     const file = formData.get("file") as File | null;
 
@@ -85,8 +87,40 @@ export async function POST(req: NextRequest) {
     let lessonContext: LessonContext = null;
     let lessonId: number | null = null;
     let courseId: number | null = null;
+    let assignmentId: number | null = null;
 
-    if (lessonIdRaw) {
+    if (assignmentIdRaw) {
+      // Assignment-specific submission (Classwork/Homework card on a lesson
+      // page) -- security-checked the same way, via the student's own
+      // enrollment in the course the assignment's lesson belongs to.
+      const rows = await db().sql`
+        SELECT a.id AS assignment_id, a.assignment_type, a.title AS assignment_title, a.instructions, a.rubric,
+               l.id AS lesson_id, l.title AS lesson_title, l.content_body, l.standards_code, l.standards_description, u.course_id
+        FROM lesson_assignments a
+        JOIN lessons l ON l.id = a.lesson_id
+        JOIN units u ON u.id = l.unit_id
+        JOIN enrollments e ON e.course_id = u.course_id AND e.student_id = ${student.id}
+        WHERE a.id = ${Number(assignmentIdRaw)}
+      `;
+      if (rows.length) {
+        const r = rows[0];
+        assignmentId = r.assignment_id;
+        lessonId = r.lesson_id;
+        courseId = r.course_id;
+        lessonContext = {
+          title: r.lesson_title,
+          contentBody: r.content_body,
+          standardsCode: r.standards_code,
+          standardsDescription: r.standards_description,
+          assignment: {
+            assignmentType: r.assignment_type,
+            title: r.assignment_title,
+            instructions: r.instructions,
+            rubric: r.rubric,
+          },
+        };
+      }
+    } else if (lessonIdRaw) {
       const lessonRows = await db().sql`
         SELECT l.id, l.title, l.content_body, l.standards_code, l.standards_description, u.course_id
         FROM lessons l
@@ -108,8 +142,8 @@ export async function POST(req: NextRequest) {
     }
 
     const [submission] = await db().sql`
-      INSERT INTO assignment_submissions (student_id, lesson_id, course_id, title, notes, file_key, file_name, file_type, status)
-      VALUES (${student.id}, ${lessonId}, ${courseId}, ${title}, ${notes}, ${fileKey}, ${fileName}, ${fileType}, 'grading')
+      INSERT INTO assignment_submissions (student_id, lesson_id, course_id, assignment_id, title, notes, file_key, file_name, file_type, status)
+      VALUES (${student.id}, ${lessonId}, ${courseId}, ${assignmentId}, ${title}, ${notes}, ${fileKey}, ${fileName}, ${fileType}, 'grading')
       RETURNING id
     `;
 
