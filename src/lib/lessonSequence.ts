@@ -14,14 +14,13 @@ export type SequencedLesson = {
 /**
  * Returns every lesson in a course, in the order students must complete them
  * (unit position, then lesson position), each flagged with whether this
- * student has completed it and whether/why it's locked:
+ * student has completed it and whether it's locked. As of Sept 2026 the only
+ * lock reason enforced is:
  *  - prior_incomplete: the previous lesson in the sequence isn't done yet
- *  - calendar: this lesson's scheduled week (per the Fall 2026 pacing
- *    calendar) hasn't arrived yet, even though prior lessons are complete
- *  - daily_cap: the student already used up their new-lesson(s)-per-day
- *    allowance today, so this lesson (though otherwise eligible) waits
- *    until tomorrow -- this is what stops a fast student from blowing
- *    through the whole course in one sitting.
+ * Calendar-date and daily-completion-cap locks (still defined in LockReason
+ * for backward compatibility with the UI) are no longer applied -- Su Mira
+ * is self-paced, and a student who finishes a lesson can move straight into
+ * the next one any day, with no daily limit.
  */
 export async function getCourseLessonSequence(courseId: number, studentId: number): Promise<SequencedLesson[]> {
   const rows = (await db().sql`
@@ -33,24 +32,15 @@ export async function getCourseLessonSequence(courseId: number, studentId: numbe
     ORDER BY u.position ASC, l.position ASC
   `) as unknown as { id: number; unlock_date: string | null; progress_status: string | null; completed_at: string | null }[];
 
-  const studentRows = (await db().sql`
-    SELECT daily_lesson_cap FROM students WHERE id = ${studentId}
-  `) as unknown as { daily_lesson_cap: number }[];
-  const dailyCap = studentRows[0]?.daily_lesson_cap ?? 1;
-
-  // How many lessons (in ANY course) has this student already completed today?
-  const todayRows = (await db().sql`
-    SELECT COUNT(*)::int AS n
-    FROM lesson_progress
-    WHERE student_id = ${studentId}
-      AND status = 'completed'
-      AND completed_at::date = NOW()::date
-  `) as unknown as { n: number }[];
-  const completedToday = todayRows[0]?.n ?? 0;
-  const capReached = completedToday >= dailyCap;
-
-  const todayStr = new Date().toISOString().slice(0, 10);
-
+  // Calendar- and daily-cap-based pacing locks have been disabled per product
+  // decision (Sept 2026): Su Mira is self-paced, and locking a finished-ahead
+  // student out of the next lesson until a calendar date or the next day was
+  // blocking real students from getting into their lessons. The only
+  // remaining gate is sequential completion -- finish the lesson before this
+  // one, then this one opens immediately, any day, no daily limit.
+  // `unlock_date` (on lessons) and `daily_lesson_cap` (on students) are still
+  // in the database and no longer queried here; both can be revived later if
+  // pacing safeguards are ever wanted again.
   let prevCompleted = true;
   return rows.map((r, idx) => {
     const completed = r.progress_status === "completed";
@@ -62,12 +52,6 @@ export async function getCourseLessonSequence(courseId: number, studentId: numbe
     if (!prevCompleted) {
       locked = true;
       lockReason = "prior_incomplete";
-    } else if (!completed && unlockDate && unlockDate > todayStr) {
-      locked = true;
-      lockReason = "calendar";
-    } else if (!completed && capReached) {
-      locked = true;
-      lockReason = "daily_cap";
     }
 
     prevCompleted = completed;
