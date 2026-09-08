@@ -13,6 +13,6 @@ WITH ordered AS (
   JOIN units u ON u.id = l.unit_id
 )
 UPDATE lessons l
-SET unlock_date = DATE '2026-09-08' + (o.rn - 1)
+SET unlock_date = DATE '2026-09-08' + (o.rn - 1)::int
 FROM ordered o
 WHERE l.id = o.lesson_id;
