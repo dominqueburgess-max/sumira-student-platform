@@ -4,6 +4,7 @@ import { getCurrentStudent } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { StudentNav } from "@/components/StudentNav";
 import { getCourseLessonSequence, getEnrichmentForUnit } from "@/lib/lessonSequence";
+import { loadCrosswalkMap, resolveDisplayStandard } from "@/lib/standardsCrosswalk";
 
 function formatUnlockDate(dateStr: string | null): string {
   if (!dateStr) return "soon";
@@ -48,6 +49,8 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
   const pacedEntry = sequence.find((s) => !s.completed && (s.lockReason === "calendar" || s.lockReason === "daily_cap"));
   const pacedLesson = pacedEntry ? lessons.find((l) => l.id === pacedEntry.id) : null;
   const enrichment = pacedLesson ? await getEnrichmentForUnit(pacedLesson.unit_id) : null;
+
+  const crosswalkMap = await loadCrosswalkMap(student.home_state, lessons.map((l) => l.standards_code));
 
   const roadmap = await db().sql`
     SELECT * FROM curriculum_roadmap WHERE course_id = ${course.id} ORDER BY week_number
@@ -140,7 +143,7 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
                         {lesson.title}
                       </p>
                       <p className="text-xs text-warm-gray-light">
-                        {lesson.estimated_minutes} min &middot; {lesson.standards_code}
+                        {lesson.estimated_minutes} min &middot; {resolveDisplayStandard(student.home_state, lesson.standards_code, lesson.standards_description, crosswalkMap)?.code}
                       </p>
                     </div>
                     <span className={`text-xs font-semibold rounded-full px-3 py-1 ${

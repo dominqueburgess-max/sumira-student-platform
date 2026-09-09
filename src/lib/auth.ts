@@ -55,6 +55,7 @@ export type CurrentStudent = {
   studio: string;
   grade_level: string;
   avatar_color: string;
+  home_state: string;
 };
 
 export async function getCurrentStudent(): Promise<CurrentStudent | null> {
@@ -64,7 +65,7 @@ export async function getCurrentStudent(): Promise<CurrentStudent | null> {
 
   const tokenHash = hashToken(token);
   const rows = await db().sql`
-    SELECT s.id, s.first_name, s.last_name, s.email, s.studio, s.grade_level, s.avatar_color
+    SELECT s.id, s.first_name, s.last_name, s.email, s.studio, s.grade_level, s.avatar_color, s.home_state
     FROM sessions se
     JOIN students s ON s.id = se.student_id
     WHERE se.token_hash = ${tokenHash} AND se.expires_at > NOW()

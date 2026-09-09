@@ -3,6 +3,7 @@ import Link from "next/link";
 import { isAdminAuthenticated } from "@/lib/adminAuth";
 import { db } from "@/lib/db";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
+import { HomeStateSelect } from "@/components/HomeStateSelect";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,7 @@ type StudentRow = {
   studio: string;
   parent_email: string | null;
   assigned_count: number;
+  home_state: string;
 };
 
 export default async function AdminStudentsPage() {
@@ -22,7 +24,7 @@ export default async function AdminStudentsPage() {
   if (!authed) redirect("/admin/login");
 
   const students = (await db().sql`
-    SELECT s.id, s.first_name, s.last_name, s.email, s.grade_level, s.studio, s.parent_email,
+    SELECT s.id, s.first_name, s.last_name, s.email, s.grade_level, s.studio, s.parent_email, s.home_state,
       COUNT(e.id)::int AS assigned_count
     FROM students s
     LEFT JOIN enrollments e ON e.student_id = s.id
@@ -62,6 +64,7 @@ export default async function AdminStudentsPage() {
                 <tr className="bg-plum/5 text-left text-xs uppercase tracking-wide text-warm-gray">
                   <th className="px-5 py-3">Student</th>
                   <th className="px-5 py-3">Grade</th>
+                  <th className="px-5 py-3">Home State</th>
                   <th className="px-5 py-3">Parent email</th>
                   <th className="px-5 py-3">Courses assigned</th>
                   <th className="px-5 py-3"></th>
@@ -75,6 +78,9 @@ export default async function AdminStudentsPage() {
                       <div className="text-xs text-warm-gray-light">{s.email}</div>
                     </td>
                     <td className="px-5 py-4">{s.grade_level}</td>
+                    <td className="px-5 py-4">
+                      <HomeStateSelect studentId={s.id} currentState={s.home_state || "NC"} />
+                    </td>
                     <td className="px-5 py-4 text-warm-gray">{s.parent_email || "—"}</td>
                     <td className="px-5 py-4">
                       {s.assigned_count === 0 ? (

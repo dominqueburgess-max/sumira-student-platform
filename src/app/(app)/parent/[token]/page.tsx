@@ -1,6 +1,12 @@
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { PrintButton } from "@/components/PrintButton";
+import { loadCrosswalkMap, resolveDisplayStandard } from "@/lib/standardsCrosswalk";
+
+const STATE_STANDARD_NAMES: Record<string, string> = {
+  NC: "the NC Standard Course of Study / NC Early Learning and Development Standards",
+  GA: "the Georgia Standards of Excellence (GSE)",
+};
 
 export default async function ParentViewPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
@@ -36,6 +42,9 @@ export default async function ParentViewPage({ params }: { params: Promise<{ tok
     WHERE lp.student_id = ${student.id} AND lp.status = 'completed' AND l.standards_code IS NOT NULL
     ORDER BY c.subject, l.standards_code
   `;
+  const homeState: string = student.home_state || "NC";
+  const crosswalkMap = await loadCrosswalkMap(homeState, standards.map((s) => s.standards_code));
+  const standardsLabel = STATE_STANDARD_NAMES[homeState] || `${homeState}'s official state standards (where a Georgia-style crosswalk isn't authored yet for a code, the North Carolina standard is shown instead)`;
 
   const achievements = await db().sql`SELECT * FROM achievements WHERE student_id = ${student.id} ORDER BY earned_at`;
   const portfolio = await db().sql`SELECT * FROM portfolio_items WHERE student_id = ${student.id} ORDER BY created_at DESC LIMIT 12`;
@@ -76,8 +85,8 @@ export default async function ParentViewPage({ params }: { params: Promise<{ tok
         </section>
 
         <section className="mb-8">
-          <h2 className="text-xl mb-4">NC Standards Mastery Report</h2>
-          <p className="text-sm text-warm-gray mb-4">Standards below reflect lessons {student.first_name} has completed, tagged to the NC Standard Course of Study / NC Early Learning and Development Standards.</p>
+          <h2 className="text-xl mb-4">{homeState} Standards Mastery Report</h2>
+          <p className="text-sm text-warm-gray mb-4">Standards below reflect lessons {student.first_name} has completed, tagged to {standardsLabel}.</p>
           {standards.length === 0 ? (
             <p className="text-sm text-warm-gray-light italic">No standards recorded yet — check back after a few lessons are complete.</p>
           ) : (
@@ -91,13 +100,21 @@ export default async function ParentViewPage({ params }: { params: Promise<{ tok
                   </tr>
                 </thead>
                 <tbody>
-                  {standards.map((s, i) => (
-                    <tr key={i} className="border-t border-border">
-                      <td className="px-4 py-2 text-warm-gray">{s.subject}</td>
-                      <td className="px-4 py-2 font-semibold text-terracotta-dark whitespace-nowrap">{s.standards_code}</td>
-                      <td className="px-4 py-2 text-charcoal">{s.standards_description}</td>
-                    </tr>
-                  ))}
+                  {standards.map((s, i) => {
+                    const display = resolveDisplayStandard(homeState, s.standards_code, s.standards_description, crosswalkMap);
+                    return (
+                      <tr key={i} className="border-t border-border">
+                        <td className="px-4 py-2 text-warm-gray">{s.subject}</td>
+                        <td className="px-4 py-2 font-semibold text-terracotta-dark whitespace-nowrap">{display?.code}</td>
+                        <td className="px-4 py-2 text-charcoal">
+                          {display?.description}
+                          {!display?.isHomeState && homeState !== "NC" && (
+                            <span className="block text-xs text-warm-gray-light mt-0.5">(NC standard shown — {homeState} mapping coming soon)</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

@@ -10,6 +10,8 @@ import { LessonAudioPlayer } from "@/components/LessonAudioPlayer";
 import { LessonQuestions, LessonQuestion } from "@/components/LessonQuestions";
 import { LessonAssignments, LessonAssignment } from "@/components/LessonAssignments";
 import { getLessonSequenceEntry } from "@/lib/lessonSequence";
+import { loadCrosswalkMap, resolveDisplayStandard } from "@/lib/standardsCrosswalk";
+import { StandardBadge } from "@/components/StandardBadge";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string; lessonId: string }> }) {
   const { slug, lessonId } = await params;
@@ -30,6 +32,9 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   if (entry?.locked) {
     redirect(`/courses/${slug}?locked=${entry.lockReason ?? "1"}`);
   }
+
+  const crosswalkMap = await loadCrosswalkMap(student.home_state, [lesson.standards_code]);
+  const displayStandard = resolveDisplayStandard(student.home_state, lesson.standards_code, lesson.standards_description, crosswalkMap);
 
   const assignmentRows = await db().sql`
     SELECT a.id, a.assignment_type, a.title, a.instructions, a.rubric, a.estimated_minutes,
@@ -86,11 +91,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                 Week {lesson.week_number}
               </span>
             )}
-            {lesson.standards_code && (
-              <span className="inline-block text-xs font-semibold bg-cream text-warm-gray rounded-full px-3 py-1">
-                {lesson.standards_code} &middot; {lesson.standards_description}
-              </span>
-            )}
+            <StandardBadge standard={displayStandard} />
           </div>
 
           <LessonAudioPlayer lessonId={lesson.id} />
