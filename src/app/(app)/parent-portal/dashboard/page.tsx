@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { getCurrentParent } from "@/lib/parentAuth";
 import { ParentLogoutButton } from "@/components/ParentLogoutButton";
 import { db } from "@/lib/db";
+import { getStudentReport } from "@/lib/studentReport";
+import { StudentReportView } from "@/components/StudentReportView";
 
 export default async function ParentDashboardPage() {
   const parent = await getCurrentParent();
@@ -14,12 +16,13 @@ export default async function ParentDashboardPage() {
     ORDER BY id ASC
   `) as unknown as { id: number; first_name: string; last_name: string }[];
 
-  const hasChecklist = studioLearners.length > 0;
+  const reports = await Promise.all(studioLearners.map((s) => getStudentReport(s.id)));
+
   const checklistDone = parent.orientation_watched && parent.learning_blueprint_completed;
 
   return (
     <main className="flex-1 bg-cream min-h-screen px-6 py-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
           <div>
             <div className="font-serif font-bold text-2xl text-plum">SU MIRA</div>
@@ -28,38 +31,16 @@ export default async function ParentDashboardPage() {
           <ParentLogoutButton />
         </div>
 
-        <div className="bg-ivory rounded-3xl border border-border card-shadow p-10 text-center">
-          <div className="w-14 h-14 rounded-full bg-terracotta/10 text-terracotta-dark flex items-center justify-center text-2xl mx-auto mb-4">✓</div>
-          <h1 className="text-xl text-plum mb-2">Thanks, {parent.email}!</h1>
-          <p className="text-warm-gray max-w-md mx-auto">
-            Your family&rsquo;s enrollment information has been received, and your student&rsquo;s Su Mira
-            account has been created using the login you set up. Your parent dashboard with your
-            child&rsquo;s progress, standards mastery and updates is coming soon — a Su Mira team member
-            will also follow up by email with next steps.
-          </p>
-          <p className="text-sm text-warm-gray-light max-w-md mx-auto mt-4">
-            Your student can log in any time at <span className="font-semibold text-plum">sumirastudio.com/login</span> with
-            the email and password you just created for them.
-          </p>
-          {!parent.email_verified && (
-            <div className="mt-6 bg-cream border border-border rounded-xl px-5 py-3 inline-block">
-              <p className="text-sm text-warm-gray">
-                We&rsquo;ve also sent a verification email to {parent.email} — no rush, but it helps confirm this account is really yours.
-              </p>
-            </div>
-          )}
-          <div className="mt-8 pt-6 border-t border-border">
-            <a
-              href="/parent-portal/enroll"
-              className="inline-block rounded-full bg-terracotta text-white font-semibold text-sm px-6 py-3 hover:bg-terracotta-dark transition"
-            >
-              + Add another learner
-            </a>
+        {!parent.email_verified && (
+          <div className="mb-8 bg-ivory border border-border rounded-xl px-5 py-3">
+            <p className="text-sm text-warm-gray">
+              We&rsquo;ve also sent a verification email to {parent.email} — no rush, but it helps confirm this account is really yours.
+            </p>
           </div>
-        </div>
+        )}
 
-        {hasChecklist && (
-          <div className="bg-ivory rounded-3xl border border-border card-shadow p-8 md:p-10 mt-8">
+        {studioLearners.length > 0 && (
+          <div className="bg-ivory rounded-3xl border border-border card-shadow p-8 md:p-10 mb-8">
             <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
               <h2 className="text-lg text-plum font-semibold">Getting Started Checklist</h2>
               {checklistDone && (
@@ -121,6 +102,43 @@ export default async function ParentDashboardPage() {
             </div>
           </div>
         )}
+
+        {studioLearners.length === 0 ? (
+          <div className="bg-ivory rounded-3xl border border-border card-shadow p-10 text-center">
+            <div className="w-14 h-14 rounded-full bg-terracotta/10 text-terracotta-dark flex items-center justify-center text-2xl mx-auto mb-4">✓</div>
+            <h1 className="text-xl text-plum mb-2">Thanks, {parent.email}!</h1>
+            <p className="text-warm-gray max-w-md mx-auto">
+              Your family&rsquo;s enrollment information has been received. Once your learner is set up in a
+              Learning Studio course, their progress, standards mastery, and portfolio will appear right here.
+            </p>
+            <p className="text-sm text-warm-gray-light max-w-md mx-auto mt-4">
+              Your student can log in any time at <span className="font-semibold text-plum">sumirastudio.com/login</span> with
+              the email and password you just created for them.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            {studioLearners.map((learner, i) => {
+              const report = reports[i];
+              if (!report) return null;
+              return (
+                <div key={learner.id} className="bg-ivory rounded-3xl border border-border card-shadow p-8 md:p-10">
+                  <h2 className="text-xl text-plum mb-6">{learner.first_name} {learner.last_name}</h2>
+                  <StudentReportView report={report} />
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="mt-8 text-center">
+          <a
+            href="/parent-portal/enroll"
+            className="inline-block rounded-full bg-terracotta text-white font-semibold text-sm px-6 py-3 hover:bg-terracotta-dark transition"
+          >
+            + Add another learner
+          </a>
+        </div>
       </div>
     </main>
   );
