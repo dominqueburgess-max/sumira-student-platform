@@ -101,6 +101,16 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             <ReactMarkdown>{lesson.content_body}</ReactMarkdown>
           </article>
 
+          <Link
+            href={`/coach?lessonId=${lesson.id}`}
+            className="mt-6 flex items-center justify-between gap-3 bg-plum/5 border border-plum/20 rounded-xl px-5 py-3 hover:border-plum/40 transition"
+          >
+            <span className="text-sm text-plum">
+              <span className="font-semibold">🤔 Stuck or confused?</span> Ask Mira about this exact lesson.
+            </span>
+            <span className="text-xs font-semibold text-terracotta-dark shrink-0">Ask Mira →</span>
+          </Link>
+
           <LessonAssignments assignments={assignments} />
           <LessonQuestions lessonId={lesson.id} questions={questions} />
 

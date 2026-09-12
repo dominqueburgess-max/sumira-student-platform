@@ -4,11 +4,28 @@ import { useState, useRef, useEffect } from "react";
 
 type Message = { role: "user" | "assistant"; content: string };
 
-export function CoachChat({ firstName, initialMessages }: { firstName: string; initialMessages: Message[] }) {
+export function CoachChat({
+  firstName,
+  initialMessages,
+  lessonId,
+  lessonTitle,
+}: {
+  firstName: string;
+  initialMessages: Message[];
+  lessonId?: string | null;
+  lessonTitle?: string | null;
+}) {
   const [messages, setMessages] = useState<Message[]>(
     initialMessages.length
       ? initialMessages
-      : [{ role: "assistant", content: `Hi, ${firstName}! I'm Mira. I can help you understand your lessons, plan what to do next, or just chat about what you're learning. What would you like to talk about today?` }]
+      : [
+          {
+            role: "assistant",
+            content: lessonTitle
+              ? `Hi, ${firstName}! I see you're working on "${lessonTitle}". What part is tripping you up?`
+              : `Hi, ${firstName}! I can help you understand your lessons, plan what to do next, or just chat about what you're learning. What would you like to talk about today?`,
+          },
+        ]
   );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,7 +45,7 @@ export function CoachChat({ firstName, initialMessages }: { firstName: string; i
     const res = await fetch("/api/coach", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text }),
+      body: JSON.stringify({ message: text, lessonId: lessonId || undefined }),
     });
     const data = await res.json();
     setLoading(false);
@@ -41,7 +58,7 @@ export function CoachChat({ firstName, initialMessages }: { firstName: string; i
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm ${
+            className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm whitespace-pre-line ${
               m.role === "assistant"
                 ? "bg-plum text-ivory self-start rounded-bl-sm"
                 : "bg-cream text-charcoal self-end rounded-br-sm"
