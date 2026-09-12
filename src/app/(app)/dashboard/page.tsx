@@ -5,6 +5,8 @@ import { db } from "@/lib/db";
 import { StudentNav } from "@/components/StudentNav";
 import { checkAndAwardAchievements, getAchievements } from "@/lib/achievements";
 import { getOrCreateParentToken } from "@/lib/parentAccess";
+import { getDailyPlan } from "@/lib/dailyPlan";
+import { DailyPlan } from "@/components/DailyPlan";
 
 async function ensureEnrollments(studentId: number, studio: string, gradeLevel: string) {
   // Venture Studio (grades 6-12) courses are assigned individually by an
@@ -37,6 +39,7 @@ export default async function DashboardPage() {
   await checkAndAwardAchievements(student.id);
   const achievements = await getAchievements(student.id);
   const parentToken = await getOrCreateParentToken(student.id);
+  const dailyPlan = await getDailyPlan(student.id);
 
   const surveyFlagRows = await db().sql`
     SELECT blueprint_survey_completed, elective_survey_completed, orientation_watched FROM students WHERE id = ${student.id}
@@ -180,6 +183,8 @@ export default async function DashboardPage() {
             </div>
           </div>
         )}
+
+        <DailyPlan entries={dailyPlan} />
 
         <section className="mb-10">
           <h2 className="text-xl mb-4">Self-Paced Classes</h2>
