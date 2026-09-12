@@ -8,16 +8,59 @@ const SUBMISSION_BADGE: Record<string, { label: string; classes: string }> = {
   grading_failed: { label: "Submitted — awaiting teacher review", classes: "bg-amber/20 text-terracotta-dark" },
 };
 
+const PACING_BADGE: Record<string, { label: (weeksBehind: number) => string; classes: string }> = {
+  ahead: { label: () => "🚀 Ahead of pace", classes: "bg-sage/20 text-sage-dark" },
+  on_pace: { label: () => "✓ On pace", classes: "bg-sage/20 text-sage-dark" },
+  behind: {
+    label: (w) => `${w} week${w === 1 ? "" : "s"} behind`,
+    classes: "bg-terracotta/15 text-terracotta-dark",
+  },
+  not_started: { label: () => "Not started yet", classes: "bg-cream text-warm-gray" },
+};
+
 /**
- * Read-only rollup of one learner's course progress, standards mastery,
- * achievements, and portfolio/homework submissions. Used on the parent
- * portal dashboard (one per enrolled child) and the magic-link parent view.
+ * Read-only rollup of one learner's course progress, live pacing check,
+ * standards mastery, achievements, and portfolio/homework submissions. Used
+ * on the parent portal dashboard (one per enrolled child) and the
+ * magic-link parent view.
  */
 export function StudentReportView({ report }: { report: StudentReport }) {
-  const { student, courses, standards, standardsLabel, homeState, achievements, portfolioItems, submissions } = report;
+  const { student, courses, pacing, standards, standardsLabel, homeState, achievements, portfolioItems, submissions } = report;
 
   return (
     <div>
+      {pacing.length > 0 && (
+        <section className="mb-8">
+          <h3 className="text-lg text-plum font-semibold mb-1">Pacing Check</h3>
+          <p className="text-sm text-warm-gray mb-3">
+            Most students complete one lesson per subject each week. Here&rsquo;s the week {student.first_name} should be on
+            versus the week they&rsquo;re actually on, subject by subject.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {pacing.map((p) => {
+              const badge = PACING_BADGE[p.status];
+              return (
+                <div key={p.courseId} className="bg-cream rounded-xl border border-border p-5">
+                  {p.subject && <span className="text-xs uppercase tracking-wider font-bold text-terracotta-dark">{p.subject}</span>}
+                  <h4 className="text-base text-charcoal mb-2">{p.courseTitle}</h4>
+                  <p className="text-xs text-warm-gray-light mb-1">Should be on: Week {p.expectedWeek}</p>
+                  <p className="text-xs text-warm-gray-light mb-3">
+                    {p.allCompleted
+                      ? "Currently on: all lessons complete"
+                      : p.currentWeek !== null
+                      ? `Currently on: Week ${p.currentWeek}${p.currentLessonTitle ? ` — ${p.currentLessonTitle}` : ""}`
+                      : "Currently on: not started"}
+                  </p>
+                  <span className={`inline-block text-xs font-semibold rounded-full px-3 py-1 ${badge.classes}`}>
+                    {badge.label(p.weeksBehind)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       <section className="mb-8">
         <h3 className="text-lg text-plum font-semibold mb-3">Course Progress</h3>
         {courses.length === 0 ? (
