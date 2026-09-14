@@ -41,6 +41,15 @@ export default async function DashboardPage() {
   const parentToken = await getOrCreateParentToken(student.id);
   const dailyPlan = await getDailyPlan(student.id);
 
+  const pendingDiagnostics = await db().sql`
+    SELECT d.id, d.period, c.title AS course_title
+    FROM diagnostics d
+    JOIN courses c ON c.id = d.course_id
+    WHERE d.student_id = ${student.id} AND d.status <> 'completed'
+    ORDER BY d.period, c.subject
+  `;
+  const PERIOD_LABEL: Record<string, string> = { BOY: "Beginning of Year", MOY: "Middle of Year" };
+
   const surveyFlagRows = await db().sql`
     SELECT blueprint_survey_completed, elective_survey_completed, orientation_watched FROM students WHERE id = ${student.id}
   `;
@@ -181,6 +190,22 @@ export default async function DashboardPage() {
                 </Link>
               )}
             </div>
+          </div>
+        )}
+
+        {pendingDiagnostics.length > 0 && (
+          <div className="bg-amber/10 border border-amber/30 rounded-xl px-5 py-4 mb-8 flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <p className="text-sm font-semibold text-charcoal mb-0.5">
+                {pendingDiagnostics.length === 1 ? "You have a check-in ready" : `You have ${pendingDiagnostics.length} check-ins ready`}
+              </p>
+              <p className="text-xs text-warm-gray">
+                {pendingDiagnostics.map((d) => `${PERIOD_LABEL[d.period]} — ${d.course_title}`).join(" · ")}
+              </p>
+            </div>
+            <Link href="/diagnostics" className="text-sm font-semibold text-terracotta-dark underline shrink-0">
+              Start now →
+            </Link>
           </div>
         )}
 

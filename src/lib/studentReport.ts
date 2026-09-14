@@ -13,7 +13,7 @@ export const STATE_STANDARD_NAMES: Record<string, string> = {
 // migration (1 lesson per subject = 1 week, purely a display/pacing label,
 // not a lock). Update this constant if a future school year's start date
 // changes.
-const SCHOOL_YEAR_START = "2026-09-08";
+export const SCHOOL_YEAR_START = "2026-09-08";
 
 /** Which week of the term "today" falls in, 1-indexed, never below 1. */
 export function expectedWeekNumber(today: Date = new Date()): number {
@@ -57,6 +57,17 @@ export type StudentReport = {
   }[];
   standardsLabel: string;
   homeState: string;
+  diagnostics: {
+    id: number;
+    period: "BOY" | "MOY";
+    courseTitle: string;
+    subject: string | null;
+    status: string;
+    correctCount: number | null;
+    totalQuestions: number;
+    aiSummary: string | null;
+    completedAt: string | null;
+  }[];
   achievements: { id: number; icon: string; title: string }[];
   portfolioItems: { id: number; title: string; description: string | null; media_url: string | null }[];
   submissions: {
@@ -206,5 +217,28 @@ export async function getStudentReport(studentId: number): Promise<StudentReport
     LIMIT 20
   `) as unknown as StudentReport["submissions"];
 
-  return { student, courses, pacing, standards, standardsLabel, homeState, achievements, portfolioItems, submissions };
+  const diagnosticRows = (await db().sql`
+    SELECT d.id, d.period, d.status, d.correct_count, d.total_questions, d.ai_summary, d.completed_at,
+           c.title AS course_title, c.subject
+    FROM diagnostics d
+    JOIN courses c ON c.id = d.course_id
+    WHERE d.student_id = ${studentId}
+    ORDER BY d.generated_at DESC
+  `) as unknown as {
+    id: number; period: "BOY" | "MOY"; status: string; correct_count: number | null; total_questions: number;
+    ai_summary: string | null; completed_at: string | null; course_title: string; subject: string | null;
+  }[];
+  const diagnostics: StudentReport["diagnostics"] = diagnosticRows.map((d) => ({
+    id: d.id,
+    period: d.period,
+    courseTitle: d.course_title,
+    subject: d.subject,
+    status: d.status,
+    correctCount: d.correct_count,
+    totalQuestions: d.total_questions,
+    aiSummary: d.ai_summary,
+    completedAt: d.completed_at,
+  }));
+
+  return { student, courses, pacing, standards, standardsLabel, homeState, achievements, portfolioItems, submissions, diagnostics };
 }

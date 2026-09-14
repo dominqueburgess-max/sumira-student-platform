@@ -6,6 +6,8 @@ import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import { AssignCoursesForm } from "@/components/AssignCoursesForm";
 import { ResetPasswordButton } from "@/components/ResetPasswordButton";
 import { EditStudentEmailButton } from "@/components/EditStudentEmailButton";
+import { DiagnosticsPanel, type DiagnosticCourseRow } from "@/components/DiagnosticsPanel";
+import { currentSchoolYearLabel } from "@/lib/diagnostics";
 
 export const dynamic = "force-dynamic";
 
@@ -56,6 +58,34 @@ export default async function AdminStudentDetailPage({
     bySubject.get(c.subject)!.push(c);
   }
 
+  // Beginning/Middle-of-Year diagnostics only apply to the student's
+  // enrolled Math + English courses (end-of-year stays external/standardized).
+  const diagnosticCourses = (await db().sql`
+    SELECT c.id, c.title, c.subject
+    FROM enrollments e
+    JOIN courses c ON c.id = e.course_id
+    WHERE e.student_id = ${id} AND c.subject IN ('Math', 'ELA')
+    ORDER BY c.subject, c.position
+  `) as unknown as { id: number; title: string; subject: string }[];
+
+  const diagnosticRows = (await db().sql`
+    SELECT id, course_id, period, status, correct_count, total_questions
+    FROM diagnostics
+    WHERE student_id = ${id} AND school_year = ${currentSchoolYearLabel()}
+  `) as unknown as { id: number; course_id: number; period: "BOY" | "MOY"; status: string; correct_count: number | null; total_questions: number }[];
+
+  const diagnosticPanelRows: DiagnosticCourseRow[] = diagnosticCourses.map((c) => {
+    const boyRow = diagnosticRows.find((d) => d.course_id === c.id && d.period === "BOY");
+    const moyRow = diagnosticRows.find((d) => d.course_id === c.id && d.period === "MOY");
+    return {
+      courseId: c.id,
+      courseTitle: c.title,
+      subject: c.subject,
+      boy: boyRow ? { id: boyRow.id, status: boyRow.status, correctCount: boyRow.correct_count, totalQuestions: boyRow.total_questions } : null,
+      moy: moyRow ? { id: moyRow.id, status: moyRow.status, correctCount: moyRow.correct_count, totalQuestions: moyRow.total_questions } : null,
+    };
+  });
+
   return (
     <main className="flex-1 bg-cream min-h-screen px-6 py-10">
       <div className="max-w-3xl mx-auto">
@@ -78,6 +108,14 @@ export default async function AdminStudentDetailPage({
           bySubject={Array.from(bySubject.entries()).map(([subject, list]) => ({ subject, courses: list }))}
           assignedIds={assignedIds}
         />
+
+        <div className="mt-10">
+          <h2 className="text-lg font-serif text-plum mb-1">Beginning / Middle of Year Check-Ins</h2>
+          <p className="text-sm text-warm-gray mb-3">
+            In-house diagnostics for Math + English, standards- and grade-level-based. End-of-year stays standardized/external.
+          </p>
+          <DiagnosticsPanel studentId={student.id} rows={diagnosticPanelRows} />
+        </div>
       </div>
     </main>
   );

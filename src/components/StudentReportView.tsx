@@ -24,8 +24,10 @@ const PACING_BADGE: Record<string, { label: (weeksBehind: number) => string; cla
  * on the parent portal dashboard (one per enrolled child) and the
  * magic-link parent view.
  */
+const DIAGNOSTIC_PERIOD_LABEL: Record<string, string> = { BOY: "Beginning of Year", MOY: "Middle of Year" };
+
 export function StudentReportView({ report }: { report: StudentReport }) {
-  const { student, courses, pacing, standards, standardsLabel, homeState, achievements, portfolioItems, submissions } = report;
+  const { student, courses, pacing, standards, standardsLabel, homeState, achievements, portfolioItems, submissions, diagnostics } = report;
 
   return (
     <div>
@@ -57,6 +59,38 @@ export function StudentReportView({ report }: { report: StudentReport }) {
                 </div>
               );
             })}
+          </div>
+        </section>
+      )}
+
+      {diagnostics.length > 0 && (
+        <section className="mb-8">
+          <h3 className="text-lg text-plum font-semibold mb-1">Beginning / Middle of Year Check-Ins</h3>
+          <p className="text-sm text-warm-gray mb-3">
+            Short in-house diagnostics in Math and English, built from {student.first_name}&rsquo;s actual grade-level standards. End-of-year assessment is separate, standardized testing.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {diagnostics.map((d) => (
+              <div key={d.id} className="bg-cream rounded-xl border border-border p-5">
+                <span className="text-xs uppercase tracking-wider font-bold text-terracotta-dark">
+                  {DIAGNOSTIC_PERIOD_LABEL[d.period]} {d.subject ? `· ${d.subject}` : ""}
+                </span>
+                <h4 className="text-base text-charcoal mb-2">{d.courseTitle}</h4>
+                {d.status === "completed" ? (
+                  <>
+                    <p className="text-xs text-warm-gray-light mb-2">
+                      Scored {d.correctCount}/{d.totalQuestions}
+                      {d.completedAt ? ` on ${new Date(d.completedAt).toLocaleDateString()}` : ""}
+                    </p>
+                    {d.aiSummary && <p className="text-sm text-charcoal whitespace-pre-line">{d.aiSummary}</p>}
+                  </>
+                ) : (
+                  <span className="inline-block text-xs font-semibold rounded-full px-3 py-1 bg-amber/20 text-terracotta-dark">
+                    Not completed yet
+                  </span>
+                )}
+              </div>
+            ))}
           </div>
         </section>
       )}
