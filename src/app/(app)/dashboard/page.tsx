@@ -79,7 +79,8 @@ export default async function DashboardPage() {
   `;
 
   const liveClasses = await db().sql`
-    SELECT lc.id, lc.title, lc.description, lc.schedule_text, lc.teacher_name, lc.color
+    SELECT lc.id, lc.title, lc.description, lc.schedule_text, lc.teacher_name, lc.color,
+           lc.join_url, lc.meeting_id, lc.passcode
     FROM live_class_enrollments lce
     JOIN live_classes lc ON lc.id = lce.live_class_id
     WHERE lce.student_id = ${student.id}
@@ -263,6 +264,25 @@ export default async function DashboardPage() {
                 <p className="text-xs text-warm-gray mb-3">{lc.description}</p>
                 <p className="text-sm font-semibold text-plum">{lc.schedule_text}</p>
                 <p className="text-xs text-warm-gray-light mt-1">with {lc.teacher_name}</p>
+                {lc.join_url && (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <a
+                      href={lc.join_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-block bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold rounded-full px-4 py-2 text-xs transition"
+                    >
+                      Join Zoom Meeting →
+                    </a>
+                    {(lc.meeting_id || lc.passcode) && (
+                      <p className="text-xs text-warm-gray-light mt-2">
+                        {lc.meeting_id && <>Meeting ID: {lc.meeting_id}</>}
+                        {lc.meeting_id && lc.passcode && <> · </>}
+                        {lc.passcode && <>Passcode: {lc.passcode}</>}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
