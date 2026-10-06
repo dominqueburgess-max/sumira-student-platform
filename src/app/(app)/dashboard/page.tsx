@@ -22,12 +22,11 @@ async function ensureEnrollments(studentId: number, studio: string, gradeLevel: 
       }
     }
   }
-  const liveCount = await db().sql`SELECT COUNT(*)::int AS n FROM live_class_enrollments WHERE student_id = ${studentId}`;
-  if (liveCount[0].n === 0) {
-    const liveClasses = await db().sql`SELECT id FROM live_classes WHERE studio = ${studio}`;
-    for (const lc of liveClasses) {
-      await db().sql`INSERT INTO live_class_enrollments (student_id, live_class_id) VALUES (${studentId}, ${lc.id}) ON CONFLICT DO NOTHING`;
-    }
+  // Enroll in every live class for this studio that the student isn't in yet,
+  // so classes added later (e.g. new electives) show up for existing students.
+  const liveClasses = await db().sql`SELECT id FROM live_classes WHERE studio = ${studio}`;
+  for (const lc of liveClasses) {
+    await db().sql`INSERT INTO live_class_enrollments (student_id, live_class_id) VALUES (${studentId}, ${lc.id}) ON CONFLICT DO NOTHING`;
   }
 }
 
